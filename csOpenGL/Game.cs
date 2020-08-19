@@ -16,7 +16,7 @@ namespace FairyJam
         private Hotkey up = new Hotkey(true).AddKey(Key.W).AddKey(Key.Up);
         private Hotkey down = new Hotkey(true).AddKey(Key.S).AddKey(Key.Down);
 
-        private Sprite s = new Sprite(Globals.Width, Globals.Height, 0, Textures.Get(Textures.test));
+        private Sprite s = new Sprite(1920, 1080, 0, Textures.Get(Textures.test));
         public List<DrawnButton> buttons = new List<DrawnButton>();
 
         public Game(Window window)
