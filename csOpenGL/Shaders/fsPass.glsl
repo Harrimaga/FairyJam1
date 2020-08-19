@@ -8,5 +8,5 @@ uniform ivec2 screenSize;
 
 void main() 
 {
-    color = vec4(imageLoad(prev, ivec2((UV.x+1)*screenSize.x/2, (UV.y+1)*screenSize.y/2)));
+    color = imageLoad(prev, ivec2((UV.x+1)*screenSize.x/2, (UV.y+1)*screenSize.y/2));
 }

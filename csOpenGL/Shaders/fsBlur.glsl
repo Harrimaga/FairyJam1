@@ -3,7 +3,6 @@
 
 in vec2 UV;
 layout(rgba8, bindless_image) uniform image2D prev;
-out vec4 color;
 uniform ivec2 screenSize;
 
 void main() 
@@ -24,9 +23,9 @@ void main()
 	}
 	if(num > 0) 
 	{
-		color = vec4(colour/num, 1);
+		gl_FragColor = vec4(colour/num, 1);
 	}
 	else {
-		color = vec4(0 ,0, 0, 0);
+		gl_FragColor = vec4(0 ,0, 0, 0);
 	}
 }
