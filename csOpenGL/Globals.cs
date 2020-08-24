@@ -11,7 +11,7 @@ namespace FairyJam
     class Globals
     {
         public static int Width, Height;
-        public static int TileWidth = 128, TileHeight = 95;
+        public static int TileWidth = 512, TileHeight = 240;
         public static Map map { get; set; }
         public static double DeltaTime;
         public static GameState currentState;

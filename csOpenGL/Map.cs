@@ -32,6 +32,7 @@ namespace FairyJam
 
         public bool ConContains(Tile from, Tile to)
         {
+            if (!from.HasSystem() || !to.HasSystem()) return true;
             foreach (StarConnection sc in connections)
             {
                 if (from.x == sc.from.x && from.y == sc.from.y && to.x == sc.to.x && to.y == sc.to.y ||
@@ -51,8 +52,6 @@ namespace FairyJam
             }
             foreach (var hex in grid)
             {
-               
-
                 // Find if even/uneven:
                 if (hex.y % 2 == 1)
                 {
@@ -73,8 +72,6 @@ namespace FairyJam
                             StarConnection c = new StarConnection(hex, grid[hex.x, hex.y - 1], false);
                             connections.Add(c);
                         }
-
-                        
                     }
 
                     if (hex.y - 1 >= 0 && hex.x + 1 < grid.GetLength(0))

@@ -19,8 +19,7 @@ namespace FairyJam
         {
             this.from = from;
             this.to = to;
-            this.oneway = oneway;
-            
+            this.oneway = oneway;            
 
             origin = new Vector2(from.x * Globals.TileWidth - 2 * from.x + Globals.TileWidth / 2 + from.psOffsetX, from.y * Globals.TileHeight + Globals.TileWidth / 2 + from.psOffsetY);
             end = new Vector2(to.x * Globals.TileWidth - 2 * to.x + Globals.TileWidth / 2 + to.psOffsetX, to.y * Globals.TileHeight + Globals.TileWidth / 2 + to.psOffsetY);
@@ -34,7 +33,7 @@ namespace FairyJam
                 end = new Vector2(end.X + Globals.TileWidth / 2, end.Y);
             }
 
-            sprite = new Sprite(5, (int)(origin - end).Length(), 0, Textures.Get(Textures.pixel));
+            sprite = new Sprite(1, (int)(origin - end).Length(), 0, Textures.Get(Textures.pixel));
         }
 
         static double speedToRot(Vector2 v2)
@@ -57,7 +56,7 @@ namespace FairyJam
         public void Draw()
         {
             Vector2 mid = (origin + end) / 2;
-            sprite.Draw(mid.X - 3, mid.Y - (origin - end).Length()/2, true, (float)speedToRot(end - origin), 1, 1, 1);
+            sprite.Draw(mid.X - 1, mid.Y - (origin - end).Length()/2, true, (float)speedToRot(end - origin), 1, 1, 1);
         }
     }
 }

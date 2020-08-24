@@ -27,10 +27,23 @@ namespace FairyJam
 
         public void GenerateSystem()
         {
+            if (Globals.random.Next(0,100) > 80)
+            {
+                return;
+            }
             ps = new PlanetarySystem();
             ps.Generate(Globals.random.Next(3, 12));
             psOffsetX = Globals.random.Next(-Globals.TileWidth / 4, Globals.TileWidth / 4);
             psOffsetY = Globals.random.Next(-Globals.TileWidth / 4, Globals.TileWidth / 4);
+        }
+
+        public bool HasSystem()
+        {
+            if (ps == null)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void Draw()
@@ -41,10 +54,9 @@ namespace FairyJam
             {
                 drawX += Globals.TileWidth / 2;
             }
-            sprite.Draw(drawX, drawY);
-
+            //sprite.Draw(drawX, drawY);
+            if (!HasSystem()) return; 
             ps.DrawMap(drawX + Globals.TileWidth / 2 + psOffsetX, drawY + Globals.TileWidth / 2 + psOffsetY);
         }
-
     }
 }
