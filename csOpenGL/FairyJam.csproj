@@ -145,7 +145,8 @@
     <Compile Include="Orbitals\Orbital.cs" />
     <Compile Include="Orbitals\Planet.cs" />
     <Compile Include="Orbitals\PlanetarySystem.cs" />
-    <Compile Include="Orbitals\StarMap.cs" />
+    <Compile Include="StarConnection.cs" />
+    <Compile Include="StarMap.cs" />
     <Compile Include="Orbitals\Sun.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

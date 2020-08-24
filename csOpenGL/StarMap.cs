@@ -1,10 +1,11 @@
-﻿using System;
+﻿using FairyJam.Orbitals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FairyJam.Orbitals
+namespace FairyJam
 {
     public class StarMap
     {
@@ -15,12 +16,15 @@ namespace FairyJam.Orbitals
 
         public StarMap()
         {
-
+            stars = new List<PlanetarySystem>();
         }
 
         public void Generate(int starAmount)
         {
             stars.Add(new PlanetarySystem());
+            int amount = 1;
+
+
 
         }
     }
