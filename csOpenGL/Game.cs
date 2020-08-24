@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Secretary;
 
 namespace FairyJam
 {
@@ -23,12 +24,56 @@ namespace FairyJam
         {
             this.window = window;
             OnLoad();
+            ReadFiles();
         }
 
         public void OnLoad()
         {
             buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
             buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
+        }
+
+        private void ReadFiles()
+        {
+            try
+            {
+                string[] traitLines = FileHandler.Read("People/traits.txt");
+                Globals.possibleTraits = ParseTraits(traitLines);
+            } catch (Exception) {}
+            
+        }
+
+        private Trait[] ParseTraits(string[] lines)
+        {
+            List<Trait> list = new List<Trait>();
+            Trait trait = new Trait();
+
+            foreach (string line in lines)
+            {
+                line.Trim();
+
+                if (line == "{")
+                {
+                    trait = new Trait();
+                } else if (line == "}")
+                {
+                    list.Add(trait);
+                }else
+                {
+                    string[] words = line.Split('=');
+                    switch (words[0])
+                    {
+                        case "population_growth":
+                            Console.WriteLine("Not yet implemented");
+                            break;
+                        default:
+                            Globals.logger.Log("Trait action was unknown", LogLevel.WARNING);
+                            break;
+                    }
+                }
+            }
+
+            return list.ToArray();
         }
 
         public void Update(double delta)

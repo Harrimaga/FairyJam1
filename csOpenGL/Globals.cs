@@ -1,4 +1,5 @@
 ﻿using QuickFont;
+using Secretary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace FairyJam
 
         public static int Width, Height;
         public static QFont buttonFont = new QFont("Fonts/arial.ttf", 16, new QuickFont.Configuration.QFontBuilderConfiguration(true));
+        public static Random random = new Random();
+        public static Logger logger = new Logger("log.txt");
+        public static Trait[] possibleTraits= { };
 
         public static bool checkCol(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2)
         {
