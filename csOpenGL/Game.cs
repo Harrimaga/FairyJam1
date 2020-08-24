@@ -21,8 +21,6 @@ namespace FairyJam
 
         public List<DrawnButton> buttons = new List<DrawnButton>();
 
-        private PlanetarySystem ps = new PlanetarySystem();
-
         public Game(Window window)
         {
             this.window = window;
@@ -34,6 +32,7 @@ namespace FairyJam
         public void OnLoad()
         {
             Globals.map = new Map(100, 100);
+            Globals.map.Generate();
 
             buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
             buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
@@ -43,8 +42,6 @@ namespace FairyJam
             //buttons.Add(new DrawnButton("Tutorial", 1920 / 2 - 100, 1080 / 2 + 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
             //buttons.Add(new DrawnButton("Settings", 1920 / 2 - 100, 1080 / 2 + 180, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
             //buttons.Add(new DrawnButton("Quit", 1920 / 2 - 100, 1080 / 2 + 300, 200, 100, () => { window.Exit(); }, 0.5f, 0.5f, 0.5f));
-
-            ps.Generate(Globals.random.Next(1,10));
         }
 
         private void ReadFiles()
@@ -120,8 +117,6 @@ namespace FairyJam
             if (right.IsDown()) Window.camX += (float)(10 * delta);
             if (up.IsDown()) Window.camY -= (float)(10 * delta);
             if (down.IsDown()) Window.camY += (float)(10 * delta);
-
-            ps.Update();
         }
 
         public void Draw()
@@ -134,8 +129,6 @@ namespace FairyJam
             {
                 button.Draw();
             }
-
-            ps.Draw();
         }
 
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)

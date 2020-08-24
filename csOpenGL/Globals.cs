@@ -14,7 +14,6 @@ namespace FairyJam
         public static int TileWidth = 128, TileHeight = 95;
         public static Map map { get; set; }
         public static double DeltaTime;
-        public static Random random = new Random();
         public static GameState currentState;
         public static QFont buttonFont = new QFont("Fonts/arial.ttf", 16, new QuickFont.Configuration.QFontBuilderConfiguration(true));
         public static Random random = new Random();

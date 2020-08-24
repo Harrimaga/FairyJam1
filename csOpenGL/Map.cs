@@ -27,6 +27,14 @@ namespace FairyJam
             }
         }
 
+        public void Generate()
+        {
+            foreach (var hex in grid)
+            {
+                hex.GenerateSystem();
+            }
+        }
+
         public void Draw()
         {
             for(int i = 0; i < mapWidth; i++)

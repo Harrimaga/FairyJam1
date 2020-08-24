@@ -150,7 +150,6 @@
     <Compile Include="Orbitals\Planet.cs" />
     <Compile Include="Orbitals\PlanetarySystem.cs" />
     <Compile Include="StarConnection.cs" />
-    <Compile Include="StarMap.cs" />
     <Compile Include="Orbitals\Sun.cs" />
     <Compile Include="Leader.cs" />
     <Compile Include="Person.cs" />
@@ -227,7 +226,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="People\traits.txt" />
+    <Content Include="People\traits.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Textures\Pixel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

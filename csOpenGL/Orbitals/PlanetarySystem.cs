@@ -13,6 +13,7 @@ namespace FairyJam.Orbitals
         private Sun sun; //pls maar 1 sun
         private List<Planet> planets;
         private Vector2 position = new Vector2(1920 / 2, 1080 / 2);
+        private Sprite mapSprite = new Sprite(5, 5, 0, Textures.Get(Textures.pixel));
 
         public PlanetarySystem()
         {
@@ -37,6 +38,11 @@ namespace FairyJam.Orbitals
             {
                 planet.Draw();
             }
+        }
+
+        public void DrawMap(int x, int y)
+        {
+            mapSprite.Draw(x, y, true, 0, 1, 0, 0);
         }
 
         public void Update()
