@@ -16,9 +16,7 @@ namespace FairyJam
         private Hotkey up = new Hotkey(true).AddKey(Key.W).AddKey(Key.Up);
         private Hotkey down = new Hotkey(true).AddKey(Key.S).AddKey(Key.Down);
 
-        private Sprite s = new Sprite(Globals.Width, Globals.Height, 0, Textures.Get(Textures.test));
         public List<DrawnButton> buttons = new List<DrawnButton>();
-        public Map m = new Map(20, 20);
 
         public Game(Window window)
         {
@@ -28,6 +26,8 @@ namespace FairyJam
 
         public void OnLoad()
         {
+            Globals.map = new Map(100, 100);
+
             buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
             buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
         }
@@ -45,12 +45,13 @@ namespace FairyJam
         public void Draw()
         {
             //Do all you draw calls here
-            s.Draw(0, 0);
+            Globals.map.Draw();
+
+
             foreach (DrawnButton button in buttons)
             {
                 button.Draw();
             }
-            m.Draw();
         }
 
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)
