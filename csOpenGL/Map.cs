@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenTK.Graphics.ES11;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,19 @@ namespace FairyJam
             connections = new List<StarConnection>();
         }
 
+        public bool ConContains(Tile from, Tile to)
+        {
+            foreach (StarConnection sc in connections)
+            {
+                if (from.x == sc.from.x && from.y == sc.from.y && to.x == sc.to.x && to.y == sc.to.y ||
+                    from.x == sc.to.x && from.y == sc.to.y && to.x == sc.from.x && to.y == sc.from.y)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public void Generate()
         {
             foreach (var hex in grid)
@@ -36,7 +50,7 @@ namespace FairyJam
                 hex.GenerateSystem();
 
                 // Find if even/uneven:
-                if (hex.y % 2 == 0)
+                if (hex.y % 2 == 1)
                 {
                     // even:
                     //  - y=-1
@@ -49,68 +63,57 @@ namespace FairyJam
                     // Find neighbours
                     if (hex.y - 1 >= 0)
                     {
-                        // Get possible connections
-                        StarConnection c = new StarConnection(hex, grid[hex.x, hex.y - 1], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x, hex.y - 1], hex, false);
-
                         // Add if connection doesn't exist
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x, hex.y - 1]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x, hex.y - 1], false);
                             connections.Add(c);
                         }
+
+                        
                     }
 
                     if (hex.y - 1 >= 0 && hex.x + 1 < grid.GetLength(0))
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y - 1], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x + 1, hex.y - 1], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x + 1, hex.y - 1]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y - 1], false);
                             connections.Add(c);
                         }
                     }
 
                     if (hex.x + 1 < grid.GetLength(0))
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x + 1, hex.y], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x + 1, hex.y]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y], false);
                             connections.Add(c);
                         }
                     }
 
                     if (hex.y + 1 < grid.GetLength(1) && hex.x + 1 < grid.GetLength(0))
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y + 1], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x + 1, hex.y + 1], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x + 1, hex.y + 1]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y + 1], false);
                             connections.Add(c);
                         }
                     }
 
                     if (hex.y + 1 < grid.GetLength(1))
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x, hex.y + 1], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x, hex.y + 1], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x, hex.y + 1]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x, hex.y + 1], false);
                             connections.Add(c);
                         }
                     }
 
                     if (hex.x - 1 >= 0)
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x - 1, hex.y], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x - 1, hex.y]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y], false);
                             connections.Add(c);
                         }
                     }
@@ -127,66 +130,54 @@ namespace FairyJam
 
                     if (hex.y - 1 >= 0 && hex.x - 1 >= 0)
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y - 1], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x - 1, hex.y - 1], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x - 1, hex.y - 1]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y - 1], false);
                             connections.Add(c);
                         }
                     }
 
                     if (hex.y - 1 >= 0)
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x, hex.y - 1], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x, hex.y - 1], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x, hex.y - 1]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x, hex.y - 1], false);
                             connections.Add(c);
                         }
                     }
 
                     if (hex.x + 1 < grid.GetLength(0))
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x + 1, hex.y], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x + 1, hex.y]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y], false);
                             connections.Add(c);
                         }
                     }
 
                     if (hex.y + 1 < grid.GetLength(0))
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x, hex.y + 1], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x, hex.y + 1], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x, hex.y + 1]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x, hex.y + 1], false);
                             connections.Add(c);
                         }
                     }
 
                     if (hex.x - 1 >= 0 && hex.y + 1 < grid.GetLength(0))
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y + 1], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x - 1, hex.y + 1], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x - 1, hex.y + 1]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y + 1], false);
                             connections.Add(c);
                         }
                     }
 
                     if (hex.x - 1 >= 0)
                     {
-                        StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y], false);
-                        StarConnection c2 = new StarConnection(grid[hex.x - 1, hex.y], hex, false);
-
-                        if (!connections.Contains(c) && !connections.Contains(c2))
+                        if (!ConContains(hex, grid[hex.x - 1, hex.y]))
                         {
+                            StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y], false);
                             connections.Add(c);
                         }
                     }
