@@ -33,12 +33,13 @@ namespace FairyJam
 
         public void Update(double delta)
         {
+            Globals.DeltaTime = delta;
+
             //Updating logic
             if (left.IsDown()) Window.camX -= (float)(10 * delta);
             if (right.IsDown()) Window.camX += (float)(10 * delta);
             if (up.IsDown()) Window.camY -= (float)(10 * delta);
             if (down.IsDown()) Window.camY += (float)(10 * delta);
-
         }
 
         public void Draw()
