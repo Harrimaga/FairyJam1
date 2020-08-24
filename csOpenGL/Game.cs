@@ -18,6 +18,7 @@ namespace FairyJam
 
         private Sprite s = new Sprite(Globals.Width, Globals.Height, 0, Textures.Get(Textures.test));
         public List<DrawnButton> buttons = new List<DrawnButton>();
+        public Map m = new Map(20, 20);
 
         public Game(Window window)
         {
@@ -49,6 +50,7 @@ namespace FairyJam
             {
                 button.Draw();
             }
+            m.Draw();
         }
 
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)
