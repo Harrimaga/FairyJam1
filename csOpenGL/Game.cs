@@ -40,7 +40,9 @@ namespace FairyJam
             {
                 string[] traitLines = FileHandler.Read("People/traits.txt");
                 Globals.possibleTraits = ParseTraits(traitLines);
-            } catch (Exception) {}
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
             
         }
 
@@ -62,6 +64,10 @@ namespace FairyJam
                 }else
                 {
                     string[] words = line.Split('=');
+                    foreach(string word in words)
+                    {
+                        word.Trim();
+                    }
                     switch (words[0])
                     {
                         case "population_growth":
