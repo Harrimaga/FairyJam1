@@ -93,6 +93,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
@@ -101,6 +102,9 @@
     </Reference>
     <Reference Include="QuickFont.ES20, Version=4.5.7053.25690, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QuickFont.ES20.4.5.7053.25690\lib\net45\QuickFont.ES20.dll</HintPath>
+    </Reference>
+    <Reference Include="Secretary">
+      <HintPath>..\packages\Secretary_v0.2.0\Secretary.dll</HintPath>
     </Reference>
     <Reference Include="SharpFont, Version=4.0.1.200, Culture=neutral, PublicKeyToken=48add4c483071cdf, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpFont.4.0.1\lib\net45\SharpFont.dll</HintPath>
@@ -148,6 +152,10 @@
     <Compile Include="StarConnection.cs" />
     <Compile Include="StarMap.cs" />
     <Compile Include="Orbitals\Sun.cs" />
+    <Compile Include="Leader.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="Nation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shader.cs" />
@@ -157,7 +165,9 @@
     <Compile Include="SoundManager.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="Texture.cs" />
+    <Compile Include="Trait.cs" />
     <Compile Include="Timer.cs" />
+    <Compile Include="Tile.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -217,10 +227,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="People\traits.txt" />
     <Content Include="Textures\Pixel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Test.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\TestTile.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

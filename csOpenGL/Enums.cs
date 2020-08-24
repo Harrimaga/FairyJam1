@@ -6,13 +6,22 @@ using System.Threading.Tasks;
 
 namespace FairyJam
 {
-    public enum GameState
+    class Enums
     {
-        MAINMENU,
-        TUTORIAL,
-        SETTINGS,
-        MINUTE,
-        PAUSED,
-        PLAYING
+        public enum LeaderTitle
+        {
+            Admiral, Governor, Merchant, Diplomat, Magnate
+        }
+
+        public enum GameState
+        {
+            MAINMENU,
+            TUTORIAL,
+            SETTINGS,
+            MINUTE,
+            PAUSED,
+            PLAYING
+        }
     }
+}
 }

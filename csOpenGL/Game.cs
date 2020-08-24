@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Secretary;
 
 namespace FairyJam
 {
@@ -18,7 +19,6 @@ namespace FairyJam
         private Hotkey up = new Hotkey(true).AddKey(Key.W).AddKey(Key.Up);
         private Hotkey down = new Hotkey(true).AddKey(Key.S).AddKey(Key.Down);
 
-        private Sprite s = new Sprite(1920, 1080, 0, Textures.Get(Textures.test));
         public List<DrawnButton> buttons = new List<DrawnButton>();
 
         private PlanetarySystem ps = new PlanetarySystem();
@@ -28,10 +28,13 @@ namespace FairyJam
             this.window = window;
             this.timer = new Timer(60000);
             OnLoad();
+            ReadFiles();
         }
 
         public void OnLoad()
         {
+            Globals.map = new Map(100, 100);
+
             buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
             buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
             Globals.currentState = GameState.MAINMENU;
@@ -42,6 +45,64 @@ namespace FairyJam
             //buttons.Add(new DrawnButton("Quit", 1920 / 2 - 100, 1080 / 2 + 300, 200, 100, () => { window.Exit(); }, 0.5f, 0.5f, 0.5f));
 
             ps.Generate(Globals.random.Next(1,10));
+        }
+
+        private void ReadFiles()
+        {
+            try
+            {
+                string[] traitLines = FileHandler.Read("People/traits.txt");
+                Globals.possibleTraits = ParseTraits(traitLines);
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+
+            Person[] possiblePeople = new Leader[25];
+            for(int i = 0; i < 25; i++)
+            {
+                Trait trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)];
+                List<Trait> traitsToAdd = new List<Trait>();
+                traitsToAdd.Add(trait);
+                possiblePeople[i] = new Leader(100, "Yu Ri", "Kwon", Enums.LeaderTitle.Admiral, traitsToAdd, true);
+            }
+            int t = possiblePeople.Length;
+
+        }
+
+        private Trait[] ParseTraits(string[] lines)
+        {
+            List<Trait> list = new List<Trait>();
+            Trait trait = new Trait();
+
+            foreach (string line in lines)
+            {
+                line.Trim();
+
+                if (line == "{")
+                {
+                    trait = new Trait();
+                } else if (line == "}")
+                {
+                    list.Add(trait);
+                }else
+                {
+                    string[] words = line.Split('=');
+                    switch (words[0].Trim())
+                    {
+                        case "name":
+                            trait.Name = words[1].Trim();
+                            break;
+                        case "population_growth":
+                            Globals.logger.Log("Trait action `" + words[0] + "` is not yet implemented", LogLevel.DEBUG);
+                            break;
+                        default:
+                            Globals.logger.Log("Trait action `"+ words[0] +"` was unknown", LogLevel.WARNING);
+                            break;
+                    }
+                }
+            }
+
+            return list.ToArray();
         }
 
         public void Update(double delta)
@@ -66,7 +127,9 @@ namespace FairyJam
         public void Draw()
         {
             //Do all you draw calls here
-            s.Draw(0, 0);
+            Globals.map.Draw();
+
+
             foreach (DrawnButton button in buttons)
             {
                 button.Draw();
