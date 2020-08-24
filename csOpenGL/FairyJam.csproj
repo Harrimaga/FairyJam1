@@ -147,6 +147,7 @@
     <Compile Include="Hotkey.cs" />
     <Compile Include="Leader.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shader.cs" />
@@ -157,6 +158,8 @@
     <Compile Include="Sprite.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Trait.cs" />
+    <Compile Include="Timer.cs" />
+    <Compile Include="Tile.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +223,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Test.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\TestTile.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
