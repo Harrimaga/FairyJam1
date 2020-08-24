@@ -128,14 +128,14 @@ namespace FairyJam
 
             int rt = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, rt);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba8, Width, Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, new IntPtr());
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba32f, Width, Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, new IntPtr());
 
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, 0x2601);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, 0x2601);
 
             GL.FramebufferTexture(FramebufferTarget.Framebuffer, fba, rt, 0);
 
-            rtHandler = GL.Arb.GetImageHandle(rt, 0, false, 0, (PixelFormat)0x8058);
+            rtHandler = GL.Arb.GetImageHandle(rt, 0, false, 0, (PixelFormat)0x8814);
 
             return fb;
         }
@@ -317,6 +317,7 @@ namespace FairyJam
         {
             AddShader(new BasicPostShader());
             AddShader(new BlurShader());
+            AddShader(new BloomShader());
         }
 
     }

@@ -11,7 +11,7 @@ namespace FairyJam
 
     class Shaders
     {
-        public const int basic = 1, blur = 2;
+        public const int basic = 1, blur = 2, bloom = 3;
     }
 
     class Shader

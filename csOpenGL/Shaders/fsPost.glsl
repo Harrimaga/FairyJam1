@@ -2,7 +2,7 @@
 #extension GL_ARB_bindless_texture : require
 
 in vec2 UV;
-layout(rgba8, bindless_image) uniform image2D prev;
+layout(rgba32f, bindless_image) uniform image2D prev;
 uniform ivec2 screenSize;
 
 void main() 
