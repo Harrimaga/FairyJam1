@@ -147,6 +147,7 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Hotkey.cs" />
     <Compile Include="Leader.cs" />
+    <Compile Include="Namelist.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Nation.cs" />
@@ -221,6 +222,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="People\namelist.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="People\traits.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

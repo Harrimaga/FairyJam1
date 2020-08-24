@@ -19,6 +19,7 @@ namespace FairyJam
         public static Random random = new Random();
         public static Logger logger = new Logger("logs/log.txt");
         public static Trait[] possibleTraits= { };
+        public static Namelist[] nameLists = { };
 
         public static bool checkCol(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2)
         {
