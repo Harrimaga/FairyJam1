@@ -11,6 +11,7 @@ namespace FairyJam
     {
         public static int Width, Height;
         public static double DeltaTime;
+        public static Random random = new Random();
         public static GameState currentState;
         public static QFont buttonFont = new QFont("Fonts/arial.ttf", 16, new QuickFont.Configuration.QFontBuilderConfiguration(true));
 

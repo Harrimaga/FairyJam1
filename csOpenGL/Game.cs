@@ -1,4 +1,5 @@
-﻿using OpenTK.Input;
+﻿using FairyJam.Orbitals;
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace FairyJam
         private Sprite s = new Sprite(1920, 1080, 0, Textures.Get(Textures.test));
         public List<DrawnButton> buttons = new List<DrawnButton>();
 
+        private PlanetarySystem ps = new PlanetarySystem();
+
         public Game(Window window)
         {
             this.window = window;
@@ -33,10 +36,12 @@ namespace FairyJam
             buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
             Globals.currentState = GameState.MAINMENU;
 
-            buttons.Add(new DrawnButton("Play", 1920 / 2 - 100, 1080 / 2 - 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
-            buttons.Add(new DrawnButton("Tutorial", 1920 / 2 - 100, 1080 / 2 + 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
-            buttons.Add(new DrawnButton("Settings", 1920 / 2 - 100, 1080 / 2 + 180, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
-            buttons.Add(new DrawnButton("Quit", 1920 / 2 - 100, 1080 / 2 + 300, 200, 100, () => { window.Exit(); }, 0.5f, 0.5f, 0.5f));
+            //buttons.Add(new DrawnButton("Play", 1920 / 2 - 100, 1080 / 2 - 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
+            //buttons.Add(new DrawnButton("Tutorial", 1920 / 2 - 100, 1080 / 2 + 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
+            //buttons.Add(new DrawnButton("Settings", 1920 / 2 - 100, 1080 / 2 + 180, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
+            //buttons.Add(new DrawnButton("Quit", 1920 / 2 - 100, 1080 / 2 + 300, 200, 100, () => { window.Exit(); }, 0.5f, 0.5f, 0.5f));
+
+            ps.Generate(Globals.random.Next(1,10));
         }
 
         public void Update(double delta)
@@ -54,6 +59,8 @@ namespace FairyJam
             if (right.IsDown()) Window.camX += (float)(10 * delta);
             if (up.IsDown()) Window.camY -= (float)(10 * delta);
             if (down.IsDown()) Window.camY += (float)(10 * delta);
+
+            ps.Update();
         }
 
         public void Draw()
@@ -64,6 +71,8 @@ namespace FairyJam
             {
                 button.Draw();
             }
+
+            ps.Draw();
         }
 
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)
