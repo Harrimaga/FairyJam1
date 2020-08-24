@@ -16,6 +16,7 @@ namespace FairyJam
         private Sprite sprite;
 
         private PlanetarySystem ps;
+        private int psOffsetX, psOffsetY;
 
         public Tile(int x, int y)
         {
@@ -28,6 +29,8 @@ namespace FairyJam
         {
             ps = new PlanetarySystem();
             ps.Generate(Globals.random.Next(3, 12));
+            psOffsetX = Globals.random.Next(-Globals.TileWidth / 4, Globals.TileWidth / 4);
+            psOffsetY = Globals.random.Next(-Globals.TileWidth / 4, Globals.TileWidth / 4);
         }
 
         public void Draw()
@@ -40,7 +43,7 @@ namespace FairyJam
             }
             sprite.Draw(drawX, drawY);
 
-            ps.DrawMap(drawX + Globals.TileWidth / 2, drawY + Globals.TileWidth / 2);
+            ps.DrawMap(drawX + Globals.TileWidth / 2 + psOffsetX, drawY + Globals.TileWidth / 2 + psOffsetY);
         }
 
     }
