@@ -41,8 +41,20 @@ namespace FairyJam
             {
                 string[] traitLines = FileHandler.Read("People/traits.txt");
                 Globals.possibleTraits = ParseTraits(traitLines);
-            } catch (Exception) {}
-            
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+
+            Person[] possiblePeople = new Leader[25];
+            for(int i = 0; i < 25; i++)
+            {
+                Trait trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)];
+                List<Trait> traitsToAdd = new List<Trait>();
+                traitsToAdd.Add(trait);
+                possiblePeople[i] = new Leader(100, "Yu Ri", "Kwon", Enums.LeaderTitle.Admiral, traitsToAdd, true);
+            }
+            int t = possiblePeople.Length;
+
         }
 
         private Trait[] ParseTraits(string[] lines)
@@ -63,13 +75,16 @@ namespace FairyJam
                 }else
                 {
                     string[] words = line.Split('=');
-                    switch (words[0])
+                    switch (words[0].Trim())
                     {
+                        case "name":
+                            trait.Name = words[1].Trim();
+                            break;
                         case "population_growth":
-                            Console.WriteLine("Not yet implemented");
+                            Globals.logger.Log("Trait action `" + words[0] + "` is not yet implemented", LogLevel.DEBUG);
                             break;
                         default:
-                            Globals.logger.Log("Trait action was unknown", LogLevel.WARNING);
+                            Globals.logger.Log("Trait action `"+ words[0] +"` was unknown", LogLevel.WARNING);
                             break;
                     }
                 }
