@@ -102,6 +102,9 @@
     <Reference Include="QuickFont.ES20, Version=4.5.7053.25690, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QuickFont.ES20.4.5.7053.25690\lib\net45\QuickFont.ES20.dll</HintPath>
     </Reference>
+    <Reference Include="Secretary">
+      <HintPath>..\..\..\..\Downloads\Secretary_v0.2.0\Secretary.dll</HintPath>
+    </Reference>
     <Reference Include="SharpFont, Version=4.0.1.200, Culture=neutral, PublicKeyToken=48add4c483071cdf, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpFont.4.0.1\lib\net45\SharpFont.dll</HintPath>
     </Reference>
@@ -138,9 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawnButton.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Hotkey.cs" />
+    <Compile Include="Leader.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Nation.cs" />
     <Compile Include="Program.cs" />
@@ -152,6 +158,7 @@
     <Compile Include="SoundManager.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="Texture.cs" />
+    <Compile Include="Trait.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Window.cs" />
@@ -224,6 +231,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="People\" />
     <Folder Include="Sound\" />
   </ItemGroup>
   <ItemGroup>
