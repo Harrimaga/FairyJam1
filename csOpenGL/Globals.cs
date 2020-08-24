@@ -9,7 +9,6 @@ namespace FairyJam
 {
     class Globals
     {
-
         public static int Width, Height;
         public static double DeltaTime;
         public static GameState currentState;
