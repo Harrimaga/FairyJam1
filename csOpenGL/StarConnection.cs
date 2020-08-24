@@ -22,7 +22,7 @@ namespace FairyJam
             this.oneway = oneway;
             
 
-            origin = new Vector2(from.x * Globals.TileWidth - 2 * from.x + Globals.TileWidth / 2 + from.psOffsetX, from.y * Globals.TileHeight + Globals.TileWidth / 2 + from.psOffsetX);
+            origin = new Vector2(from.x * Globals.TileWidth - 2 * from.x + Globals.TileWidth / 2 + from.psOffsetX, from.y * Globals.TileHeight + Globals.TileWidth / 2 + from.psOffsetY);
             end = new Vector2(to.x * Globals.TileWidth - 2 * to.x + Globals.TileWidth / 2 + to.psOffsetX, to.y * Globals.TileHeight + Globals.TileWidth / 2 + to.psOffsetY);
 
             if (from.y % 2 == 1)
@@ -34,9 +34,27 @@ namespace FairyJam
             sprite = new Sprite(5, (int)(origin - end).Length(), 0, Textures.Get(Textures.pixel));
         }
 
+        static double speedToRot(Vector2 v2)
+        {
+            double xs = v2.X;
+            double ys = v2.Y;
+            double dir = 3.141592654 * 0.5;
+            if (xs > 0)
+            {
+                dir += Math.Asin(ys / Math.Sqrt(xs * xs + ys * ys));
+            }
+            else
+            {
+                dir = 3.141592654 * 1.5;
+                dir -= Math.Asin(ys / Math.Sqrt(xs * xs + ys * ys));
+            }
+            return dir;
+        }
+
         public void Draw()
         {
-            sprite.Draw(origin.X, origin.Y, true, (float)Math.Cos((origin - end).Y / (origin - end).Length()), 1, 1, 1);
+            Vector2 mid = (origin + end) / 2;
+            sprite.Draw(mid.X - 3, mid.Y - (origin - end).Length()/2, true, (float)speedToRot(origin-end), 1, 1, 1);
         }
     }
 }
