@@ -28,6 +28,9 @@ namespace FairyJam
             if (from.y % 2 == 1)
             {
                 origin = new Vector2(origin.X + Globals.TileWidth / 2, origin.Y);
+            }
+            if(to.y % 2 == 1)
+            {
                 end = new Vector2(end.X + Globals.TileWidth / 2, end.Y);
             }
 
@@ -54,7 +57,7 @@ namespace FairyJam
         public void Draw()
         {
             Vector2 mid = (origin + end) / 2;
-            sprite.Draw(mid.X - 3, mid.Y - (origin - end).Length()/2, true, (float)speedToRot(origin-end), 1, 1, 1);
+            sprite.Draw(mid.X - 3, mid.Y - (origin - end).Length()/2, true, (float)speedToRot(end - origin), 1, 1, 1);
         }
     }
 }

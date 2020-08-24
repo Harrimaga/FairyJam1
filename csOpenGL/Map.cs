@@ -45,9 +45,13 @@ namespace FairyJam
 
         public void Generate()
         {
-            foreach (var hex in grid)
+            foreach(var hex in grid)
             {
                 hex.GenerateSystem();
+            }
+            foreach (var hex in grid)
+            {
+               
 
                 // Find if even/uneven:
                 if (hex.y % 2 == 1)

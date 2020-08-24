@@ -31,7 +31,7 @@ namespace FairyJam
 
         public void OnLoad()
         {
-            Globals.map = new Map(2, 2);
+            Globals.map = new Map(20, 20);
             Globals.map.Generate();
 
             buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
