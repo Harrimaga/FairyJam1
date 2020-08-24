@@ -1,0 +1,50 @@
+korean = {
+	family = {
+		Lee
+		Kim
+		Lim
+		Kang
+		Kwon
+		Choi
+		Yoon
+		Hwang
+		Seo
+		Jung
+	}
+	given = {
+		Hyo Yeon
+		Tae Yeon
+		Sun Kye
+		Mi Young
+		Yu Ri
+		Soo Young
+		Yoon A
+		Ju Hyun
+	}
+}
+dutch = {
+	family = {
+		Jansen
+		Bakker
+		van Dijk
+		van Brederode
+		Hartskeerl
+		Smit
+		Timmerman
+		Plantman
+		van Alkmaar
+	}
+
+	given = {
+		Ilan
+		Tim
+		Jan
+		Karel
+		Julia
+		Kim
+		Jan
+		Stefan
+		Katherina
+		Piet
+	}
+}

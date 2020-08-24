@@ -46,15 +46,26 @@ namespace FairyJam
                 Console.WriteLine(e.Message);
             }
 
+            try
+            {
+                string[] nameLines = FileHandler.Read("People/namelist.txt");
+                Globals.nameLists = ParseNameLists(nameLines);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
             Person[] possiblePeople = new Leader[25];
+            Namelist namelist = Globals.nameLists[0]; // @TODO For now just the first on we find, later on allow for selection?
             for(int i = 0; i < 25; i++)
             {
-                Trait trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)];
-                List<Trait> traitsToAdd = new List<Trait>();
-                traitsToAdd.Add(trait);
-                possiblePeople[i] = new Leader(100, "Yu Ri", "Kwon", Enums.LeaderTitle.Admiral, traitsToAdd, true);
+                namelist.Next();
+                Trait trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)]; // Gets a random existing trait
+                List<Trait> traitsToAdd = new List<Trait> { trait }; 
+                possiblePeople[i] = new Leader(100, namelist.GivenName, namelist.FamilyName, Enums.LeaderTitle.Admiral, traitsToAdd, true);
             }
-            int t = possiblePeople.Length;
+            int c = possiblePeople.Length;
 
         }
 
@@ -65,12 +76,10 @@ namespace FairyJam
 
             foreach (string line in lines)
             {
-                line.Trim();
-
-                if (line == "{")
+                if (line.Trim() == "{")
                 {
                     trait = new Trait();
-                } else if (line == "}")
+                } else if (line.Trim() == "}")
                 {
                     list.Add(trait);
                 }else
@@ -82,12 +91,60 @@ namespace FairyJam
                             trait.Name = words[1].Trim();
                             break;
                         case "population_growth":
-                            Globals.logger.Log("Trait action `" + words[0] + "` is not yet implemented", LogLevel.DEBUG);
+                            Globals.logger.Log("Trait action `" + words[0] + "` is not yet implemented", LogLevel.INFO);
                             break;
                         default:
                             Globals.logger.Log("Trait action `"+ words[0] +"` was unknown", LogLevel.WARNING);
                             break;
                     }
+                }
+            }
+
+            return list.ToArray();
+        }
+
+        private Namelist[] ParseNameLists(string[] lines)
+        {
+            List<Namelist> list = new List<Namelist>();
+            Namelist namelist = null;
+            bool inList = false;
+            bool inListIsFamilyName = false;
+            List<string> names = new List<string>();
+
+            foreach(string line in lines)
+            {
+                if (inList)
+                {
+                    if (line.Contains('}'))
+                    {
+                        if (inListIsFamilyName)
+                        {
+                            namelist.FamilyNames = names.ToArray();
+                        }
+                        else
+                        {
+                            namelist.GivenNames = names.ToArray();
+                        }
+                        names = new List<string>();
+                        inList = false;
+                    }
+                    else
+                    {
+                        names.Add(line.Trim());
+                    }
+                } else if (namelist == null && line.Contains('=')) // This is a namelist declaration and we aren't making a namelist already
+                {
+                    string name = line.Split('=')[0].Trim();
+                    namelist = new Namelist(name);
+                } else if(namelist != null && line.Contains('}')) // We are making a namelist and we found the closing argument
+                {
+                    list.Add(namelist);
+                    namelist = null;
+                } else if(namelist != null && line.Contains('{')) // We are making a namelist and we found an opening argument
+                {
+                    inList = true;
+                    string nameListType = line.Split('=')[0].Trim();
+                    inListIsFamilyName = (nameListType == "family");
                 }
             }
 
