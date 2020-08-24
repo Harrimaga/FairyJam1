@@ -14,13 +14,14 @@ namespace FairyJam
     {
 
         public static List<Texture> list = new List<Texture>();
-        public const int test = 0, pixel = 1, testTile = 2;
+        public const int test = 0, pixel = 1, testTile = 2, circle = 3;
 
         public static void Load()
         {
             list.Add(new Texture("Textures/Test.png", 1920, 1080, 1920, 1080));
             list.Add(new Texture("Textures/Pixel.png", 1, 1, 1, 1));
             list.Add(new Texture("Textures/TestTile.png", 128, 128, 128, 128));
+            list.Add(new Texture("Textures/Circle.png", 512, 512, 512, 512));
         }
 
         public static Texture Get(int i)

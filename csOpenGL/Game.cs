@@ -1,4 +1,5 @@
-﻿using OpenTK.Input;
+using FairyJam.Orbitals;
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace FairyJam
     {
 
         public Window window;
+        private Timer timer;
         private Hotkey left = new Hotkey(true).AddKey(Key.A).AddKey(Key.Left);
         private Hotkey right = new Hotkey(true).AddKey(Key.D).AddKey(Key.Right);
         private Hotkey up = new Hotkey(true).AddKey(Key.W).AddKey(Key.Up);
         private Hotkey down = new Hotkey(true).AddKey(Key.S).AddKey(Key.Down);
+        private Hotkey Q = new Hotkey(false).AddKey(Key.Q);
 
         public List<DrawnButton> buttons = new List<DrawnButton>();
 
@@ -23,17 +26,25 @@ namespace FairyJam
         public Game(Window window)
         {
             this.window = window;
+            this.timer = new Timer(60000);
             OnLoad();
             ReadFiles();
         }
 
         public void OnLoad()
         {
-            Globals.map = new Map(100, 100);
+            Globals.map = new Map(20, 20);
+            Globals.map.Generate();
 
             buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
             buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
-            buttons.Add(new DrawnButton("test3", 0, 210, 200, 100, () => { Window.window.ToggleShader(Shaders.bloom); }, 0.5f, 0.5f, 0.5f));
+            buttons.Add(new DrawnButton("Bloom", 0, 210, 200, 100, () => { Window.window.ToggleShader(Shaders.bloom); }, 0.5f, 0.5f, 0.5f));
+            Globals.currentState = GameState.MAPVIEW;
+
+            //buttons.Add(new DrawnButton("Play", 1920 / 2 - 100, 1080 / 2 - 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
+            //buttons.Add(new DrawnButton("Tutorial", 1920 / 2 - 100, 1080 / 2 + 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
+            //buttons.Add(new DrawnButton("Settings", 1920 / 2 - 100, 1080 / 2 + 180, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
+            //buttons.Add(new DrawnButton("Quit", 1920 / 2 - 100, 1080 / 2 + 300, 200, 100, () => { window.Exit(); }, 0.5f, 0.5f, 0.5f));
         }
 
         private void ReadFiles()
@@ -42,7 +53,9 @@ namespace FairyJam
             {
                 string[] traitLines = FileHandler.Read("People/traits.txt");
                 Globals.possibleTraits = ParseTraits(traitLines);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
 
@@ -82,7 +95,8 @@ namespace FairyJam
                 } else if (line.Trim() == "}")
                 {
                     list.Add(trait);
-                }else
+                }
+                else
                 {
                     string[] words = line.Split('=');
                     switch (words[0].Trim())
@@ -94,7 +108,7 @@ namespace FairyJam
                             Globals.logger.Log("Trait action `" + words[0] + "` is not yet implemented", LogLevel.INFO);
                             break;
                         default:
-                            Globals.logger.Log("Trait action `"+ words[0] +"` was unknown", LogLevel.WARNING);
+                            Globals.logger.Log("Trait action `" + words[0] + "` was unknown", LogLevel.WARNING);
                             break;
                     }
                 }
@@ -154,17 +168,52 @@ namespace FairyJam
         public void Update(double delta)
         {
             Globals.DeltaTime = delta;
+            timer.UpdateTimer();
+
+            //if (timer.Expired())
+            //{
+            //    window.Exit();
+            //}
+
             //Updating logic
             if (left.IsDown()) Window.camX -= (float)(10 * delta);
             if (right.IsDown()) Window.camX += (float)(10 * delta);
             if (up.IsDown()) Window.camY -= (float)(10 * delta);
             if (down.IsDown()) Window.camY += (float)(10 * delta);
+            if (Q.IsDown() && Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentState = GameState.MAPVIEW;
+                Window.camX = Globals.mapCamX;
+                Window.camY = Globals.mapCamY;
+            }
+
+            if (Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentSystem.Update();
+            }
+        }
+
+        public static void switchViewToSystem(PlanetarySystem ps)
+        {
+            Globals.mapCamX = Window.camX;
+            Globals.mapCamY = Window.camY;
+            Window.camX = 0;
+            Window.camY = 0;
+            Globals.currentState = GameState.SYSTEMVIEW;
+            Globals.currentSystem = ps;
         }
 
         public void Draw()
         {
             //Do all you draw calls here
-            Globals.map.Draw();
+            if (Globals.currentState == GameState.MAPVIEW)
+            {
+                Globals.map.Draw();
+            }
+            if (Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentSystem.Draw();
+            }
 
 
             foreach (DrawnButton button in buttons)
@@ -193,6 +242,6 @@ namespace FairyJam
         {
 
         }
-        
+
     }
 }

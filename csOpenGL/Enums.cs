@@ -13,4 +13,15 @@ namespace FairyJam
             Admiral, Governor, Merchant, Diplomat, Magnate
         }
     }
+    public enum GameState
+    {
+        MAINMENU,
+        TUTORIAL,
+        SETTINGS,
+        MINUTE,
+        PAUSED,
+        PLAYING,
+        MAPVIEW,
+        SYSTEMVIEW
+    }
 }

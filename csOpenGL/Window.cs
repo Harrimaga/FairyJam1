@@ -217,12 +217,18 @@ namespace FairyJam
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             game.MouseDown(e, mouseX, mouseY);
+            
             base.OnMouseDown(e);
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             game.MouseUp(e, mouseX, mouseY);
+            if (Globals.currentState == GameState.MAPVIEW)
+            {
+                Globals.map.MouseDown(e, mouseX, mouseY);
+            }
+            
             base.OnMouseDown(e);
         }
 

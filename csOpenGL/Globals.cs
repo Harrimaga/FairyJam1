@@ -1,4 +1,5 @@
-﻿using QuickFont;
+﻿using FairyJam.Orbitals;
+using QuickFont;
 using Secretary;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,18 @@ namespace FairyJam
 {
     class Globals
     {
-
         public static int Width, Height;
-        public static int TileWidth = 128, TileHeight = 95;
+        public static int TileWidth = 512, TileHeight = 240;
         public static Map map { get; set; }
         public static double DeltaTime;
+        public static GameState currentState;
         public static QFont buttonFont = new QFont("Fonts/arial.ttf", 16, new QuickFont.Configuration.QFontBuilderConfiguration(true));
         public static Random random = new Random();
         public static Logger logger = new Logger("logs/log.txt");
         public static Trait[] possibleTraits= { };
         public static Namelist[] nameLists = { };
+        public static PlanetarySystem currentSystem;
+        public static float mapCamX, mapCamY;
 
         public static bool checkCol(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2)
         {
