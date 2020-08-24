@@ -11,6 +11,7 @@ namespace FairyJam
     {
 
         public Window window;
+        private Timer timer;
         private Hotkey left = new Hotkey(true).AddKey(Key.A).AddKey(Key.Left);
         private Hotkey right = new Hotkey(true).AddKey(Key.D).AddKey(Key.Right);
         private Hotkey up = new Hotkey(true).AddKey(Key.W).AddKey(Key.Up);
@@ -22,6 +23,7 @@ namespace FairyJam
         public Game(Window window)
         {
             this.window = window;
+            this.timer = new Timer(60000);
             OnLoad();
         }
 
@@ -34,6 +36,12 @@ namespace FairyJam
         public void Update(double delta)
         {
             Globals.DeltaTime = delta;
+            timer.UpdateTimer();
+
+            //if (timer.Expired())
+            //{
+            //    window.Exit();
+            //}
 
             //Updating logic
             if (left.IsDown()) Window.camX -= (float)(10 * delta);

@@ -26,7 +26,7 @@ namespace FairyJam
 
         public void UpdateTimer()
         {
-            timer += TimeSpan.FromSeconds(Globals.DeltaTime * 60);
+            timer += TimeSpan.FromSeconds(Globals.DeltaTime / 60);
         }
 
         public virtual void AddToTimer(int mSecs)
