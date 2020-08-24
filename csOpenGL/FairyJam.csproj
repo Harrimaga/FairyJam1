@@ -170,6 +170,7 @@
     <Compile Include="Timer.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="UI\MainMenu.cs" />
+    <Compile Include="UI\UI.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>

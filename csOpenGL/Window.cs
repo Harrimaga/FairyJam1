@@ -321,9 +321,9 @@ namespace FairyJam
 
         private void CreatePostShaders()
         {
-            AddShader(new BasicPostShader());
-            AddShader(new BlurShader());
-            AddShader(new BloomShader());
+            //AddShader(new BasicPostShader());
+            //AddShader(new BlurShader());
+            //AddShader(new BloomShader());
         }
 
     }

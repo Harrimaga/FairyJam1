@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace FairyJam.UI
 {
-    public class UI
+    class UI
     {
-        private List<DrawnButton> buttons;
+        public List<DrawnButton> buttons;
 
         public UI() {
             buttons = new List<DrawnButton>();
+            Globals.activeButtons = buttons;
         }
 
-        public void L
+        public void reSelect()
+        {
+            Globals.activeButtons = buttons;
+        }
+        
     }
 }
