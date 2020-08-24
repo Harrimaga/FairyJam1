@@ -13,12 +13,19 @@ namespace FairyJam.UI
         public UI() {
             buttons = new List<DrawnButton>();
             Globals.activeButtons = buttons;
+            Globals.currentUI = this;
         }
 
         public void reSelect()
         {
             Globals.activeButtons = buttons;
+            Globals.currentUI = this;
         }
         
+        public virtual void Draw()
+        {
+
+        }
+
     }
 }

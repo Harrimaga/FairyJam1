@@ -94,9 +94,13 @@ namespace FairyJam
             {
                 Globals.map.Draw();
             }
-            if (Globals.currentState == GameState.SYSTEMVIEW)
+            else if (Globals.currentState == GameState.SYSTEMVIEW)
             {
                 Globals.currentSystem.Draw();
+            }
+            else
+            {
+                Globals.currentUI.Draw();
             }
 
 
@@ -127,6 +131,37 @@ namespace FairyJam
 
         }
 
+        public void MouseWheelScrollUp()
+        {
+            if(Globals.currentUI == Globals.leaderUI)
+            {
+                Globals.leaderUI.Scroll(-2);
+            }
+            else if (Globals.currentUI == Globals.scientistUI)
+            {
+                Globals.scientistUI.Scroll(-2);
+            }
+            else if (Globals.currentUI == Globals.suppliesUI)
+            {
+                Globals.suppliesUI.Scroll(-2);
+            }
+        }
+
+        public void MouseWheelScrollDown()
+        {
+            if (Globals.currentUI == Globals.leaderUI)
+            {
+                Globals.leaderUI.Scroll(2);
+            }
+            else if (Globals.currentUI == Globals.scientistUI)
+            {
+                Globals.scientistUI.Scroll(2);
+            }
+            else if (Globals.currentUI == Globals.suppliesUI)
+            {
+                Globals.suppliesUI.Scroll(2);
+            }
+        }
 
         private void ReadFiles()
         {
@@ -149,17 +184,6 @@ namespace FairyJam
             {
                 Console.WriteLine(e.Message);
             }
-
-            Person[] possiblePeople = new Leader[25];
-            Namelist namelist = Globals.nameLists[0]; // @TODO For now just the first on we find, later on allow for selection?
-            for (int i = 0; i < 25; i++)
-            {
-                namelist.Next();
-                Trait trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)]; // Gets a random existing trait
-                List<Trait> traitsToAdd = new List<Trait> { trait };
-                possiblePeople[i] = new Leader(100, namelist.GivenName, namelist.FamilyName, Enums.LeaderTitle.Admiral, traitsToAdd, true);
-            }
-            int c = possiblePeople.Length;
 
         }
 

@@ -15,6 +15,9 @@ namespace FairyJam.UI
         }
 
         public void CreateMainMenu() {
+            // Final button
+            buttons.Add(new DrawnButton("Play", 1920 / 2 - 100, 1080 / 2 - 360, 200, 100, () => { new OneMinuteUI(); Globals.leaderUI = new LeaderUI(); Globals.suppliesUI = new SuppliesUI(); Globals.scientistUI = new ScientistUI(); }, 0.5f, 0.5f, 0.5f));
+
             // Start 1 minute section
             buttons.Add(new DrawnButton("Play", 1920 / 2 - 100, 1080 / 2 - 60, 200, 100, () => { Globals.currentState = GameState.MAPVIEW; Globals.activeButtons = new List<DrawnButton>(); }, 0.5f, 0.5f, 0.5f));
 

@@ -169,7 +169,11 @@
     <Compile Include="Trait.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="UI\LeaderUI.cs" />
     <Compile Include="UI\MainMenu.cs" />
+    <Compile Include="UI\OneMinuteUI.cs" />
+    <Compile Include="UI\ScientistUI.cs" />
+    <Compile Include="UI\SuppliesUI.cs" />
     <Compile Include="UI\UI.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>

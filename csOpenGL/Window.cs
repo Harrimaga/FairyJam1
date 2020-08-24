@@ -232,6 +232,18 @@ namespace FairyJam
             base.OnMouseDown(e);
         }
 
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            if(e.Delta > 0)
+            {
+                game.MouseWheelScrollUp();
+            }
+            else if(e.Delta < 0)
+            {
+                game.MouseWheelScrollDown();
+            }
+        }
+
         private void Update()
         {
             //input
