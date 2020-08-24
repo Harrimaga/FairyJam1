@@ -155,6 +155,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shader.cs" />
     <Compile Include="Shaders\BasicPostShader.cs" />
+    <Compile Include="Shaders\BloomShader.cs" />
     <Compile Include="Shaders\BlurShader.cs" />
     <Compile Include="Shaders\MainShader.cs" />
     <Compile Include="SoundManager.cs" />
@@ -202,6 +203,9 @@
     <None Include="Shaders\fsAMD.glsl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Shaders\fsBloom.glsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Shaders\fsBlur.glsl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -222,6 +226,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="People\traits.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="People\namelist.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
