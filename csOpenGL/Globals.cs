@@ -13,6 +13,7 @@ namespace FairyJam
         public static int Width, Height;
         public static int TileWidth = 128, TileHeight = 95;
         public static Map map { get; set; }
+        public static double DeltaTime;
         public static QFont buttonFont = new QFont("Fonts/arial.ttf", 16, new QuickFont.Configuration.QFontBuilderConfiguration(true));
 
         public static bool checkCol(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2)
