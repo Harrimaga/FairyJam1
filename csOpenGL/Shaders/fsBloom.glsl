@@ -11,7 +11,7 @@ void main()
 	vec3 colour = vec3(0, 0, 0);
 	float num = 0;
 	int bloomX = screenSize.x/480;
-	int bloomY = screenSize.x/270;
+	int bloomY = screenSize.y/270;
 	vec4 baseColour = imageLoad(prev, pos);
 	for(int i=-bloomX;i<bloomX+1;i++){
 		for(int j=-bloomY;j<bloomY+1;j++){

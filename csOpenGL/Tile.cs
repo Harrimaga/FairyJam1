@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam
 {
-    class Tile
+    public class Tile
     {
 
         public int x { get; }
@@ -16,7 +16,7 @@ namespace FairyJam
         private Sprite sprite;
 
         private PlanetarySystem ps;
-        private int psOffsetX, psOffsetY;
+        public int psOffsetX, psOffsetY;
 
         public Tile(int x, int y)
         {
