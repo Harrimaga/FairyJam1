@@ -42,7 +42,7 @@ namespace FairyJam.Orbitals
 
         public void DrawMap(int x, int y)
         {
-            mapSprite.Draw(x, y, true, 0, 1, 0, 0);
+            mapSprite.Draw(x, y, true, 0, 5, 0, 0);
         }
 
         public void Update()
