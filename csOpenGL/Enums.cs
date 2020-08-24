@@ -9,6 +9,8 @@ namespace FairyJam
     public enum GameState
     {
         MAINMENU,
+        TUTORIAL,
+        SETTINGS,
         MINUTE,
         PAUSED,
         PLAYING
