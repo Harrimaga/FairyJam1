@@ -33,7 +33,7 @@ namespace FairyJam.Orbitals
             this.mass = mass;
             this.color = color;
             this.position = new System.Numerics.Vector2(1920 / 2, 1080 / 2);
-            Sprite = new Sprite((int)radius, (int)radius, 0, Textures.Get(Textures.pixel));
+            Sprite = new Sprite((int)radius, (int)radius, 0, Textures.Get(Textures.circle));
 
             velocity = parent != null ? Math.Sqrt((6.6720e-08 * parent.mass) / radiusFromParent) : 0;
             timeToOrbit = (radiusFromParent * 2 * Math.PI) / velocity;

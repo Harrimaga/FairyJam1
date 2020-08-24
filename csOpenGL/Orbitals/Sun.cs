@@ -9,7 +9,7 @@ namespace FairyJam.Orbitals
 {
     public class Sun : Orbital
     {
-        public Sun() : base(null, 1, 0, 10, 1000000000, System.Drawing.Color.White)
+        public Sun() : base(null, 1, 0, 10, 100000000, System.Drawing.Color.White)
         {
 
         }

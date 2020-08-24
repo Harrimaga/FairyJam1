@@ -20,6 +20,8 @@ namespace FairyJam
         SETTINGS,
         MINUTE,
         PAUSED,
-        PLAYING
+        PLAYING,
+        MAPVIEW,
+        SYSTEMVIEW
     }
 }

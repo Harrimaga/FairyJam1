@@ -1,4 +1,5 @@
 ﻿using FairyJam.Orbitals;
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace FairyJam
 
         private PlanetarySystem ps;
         public int psOffsetX, psOffsetY;
+        private DrawnButton button;
 
         public Tile(int x, int y)
         {
@@ -35,6 +37,14 @@ namespace FairyJam
             ps.Generate(Globals.random.Next(3, 12));
             psOffsetX = Globals.random.Next(-Globals.TileWidth / 4, Globals.TileWidth / 4);
             psOffsetY = Globals.random.Next(-Globals.TileWidth / 4, Globals.TileWidth / 4);
+
+            int drawX = x * Globals.TileWidth - 2 * x;
+            int drawY = y * Globals.TileHeight;
+            if (y % 2 == 1)
+            {
+                drawX += Globals.TileWidth / 2;
+            }
+            button = new DrawnButton("?", drawX + Globals.TileWidth / 2 + psOffsetX - 25 / 2, drawY + Globals.TileWidth / 2 + psOffsetY - 25 / 2, 25, 25, () => { Game.switchViewToSystem(ps); }, 0, 0, 0);
         }
 
         public bool HasSystem()
@@ -57,6 +67,17 @@ namespace FairyJam
             //sprite.Draw(drawX, drawY);
             if (!HasSystem()) return; 
             ps.DrawMap(drawX + Globals.TileWidth / 2 + psOffsetX, drawY + Globals.TileWidth / 2 + psOffsetY);
+        }
+
+        public void MouseDown(MouseButtonEventArgs e, int mx, int my)
+        {
+            if (e.Button == MouseButton.Left)
+            {
+                if (button != null && button.IsInButton(mx + Window.camX, my + Window.camY))
+                {
+                    button.OnClick();
+                }
+            }
         }
     }
 }

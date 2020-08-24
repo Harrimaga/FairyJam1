@@ -18,8 +18,10 @@ namespace FairyJam
         private Hotkey right = new Hotkey(true).AddKey(Key.D).AddKey(Key.Right);
         private Hotkey up = new Hotkey(true).AddKey(Key.W).AddKey(Key.Up);
         private Hotkey down = new Hotkey(true).AddKey(Key.S).AddKey(Key.Down);
+        private Hotkey Q = new Hotkey(false).AddKey(Key.Q);
 
         public List<DrawnButton> buttons = new List<DrawnButton>();
+
 
         public Game(Window window)
         {
@@ -37,7 +39,7 @@ namespace FairyJam
             buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
             buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
             buttons.Add(new DrawnButton("Bloom", 0, 210, 200, 100, () => { Window.window.ToggleShader(Shaders.bloom); }, 0.5f, 0.5f, 0.5f));
-            Globals.currentState = GameState.MAINMENU;
+            Globals.currentState = GameState.MAPVIEW;
 
             //buttons.Add(new DrawnButton("Play", 1920 / 2 - 100, 1080 / 2 - 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
             //buttons.Add(new DrawnButton("Tutorial", 1920 / 2 - 100, 1080 / 2 + 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
@@ -122,12 +124,40 @@ namespace FairyJam
             if (right.IsDown()) Window.camX += (float)(10 * delta);
             if (up.IsDown()) Window.camY -= (float)(10 * delta);
             if (down.IsDown()) Window.camY += (float)(10 * delta);
+            if (Q.IsDown() && Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentState = GameState.MAPVIEW;
+                Window.camX = Globals.mapCamX;
+                Window.camY = Globals.mapCamY;
+            }
+
+            if (Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentSystem.Update();
+            }
+        }
+
+        public static void switchViewToSystem(PlanetarySystem ps)
+        {
+            Globals.mapCamX = Window.camX;
+            Globals.mapCamY = Window.camY;
+            Window.camX = 0;
+            Window.camY = 0;
+            Globals.currentState = GameState.SYSTEMVIEW;
+            Globals.currentSystem = ps;
         }
 
         public void Draw()
         {
             //Do all you draw calls here
-            Globals.map.Draw();
+            if (Globals.currentState == GameState.MAPVIEW)
+            {
+                Globals.map.Draw();
+            }
+            if (Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentSystem.Draw();
+            }
 
 
             foreach (DrawnButton button in buttons)

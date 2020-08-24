@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.ES11;
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -201,6 +202,14 @@ namespace FairyJam
                 {
                     grid[i, j].Draw();
                 }
+            }
+        }
+
+        public void MouseDown(MouseButtonEventArgs e, int mx, int my)
+        {
+            foreach (Tile tile in grid)
+            {
+                tile.MouseDown(e, mx, my);
             }
         }
     }
