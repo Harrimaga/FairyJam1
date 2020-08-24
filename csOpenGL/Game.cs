@@ -19,6 +19,8 @@ namespace FairyJam
 
         public List<DrawnButton> buttons = new List<DrawnButton>();
 
+        public Nation n = new Nation();
+
         public Game(Window window)
         {
             this.window = window;
@@ -80,7 +82,7 @@ namespace FairyJam
         public void Update(double delta)
         {
             Globals.DeltaTime = delta;
-
+            n.Update();
             //Updating logic
             if (left.IsDown()) Window.camX -= (float)(10 * delta);
             if (right.IsDown()) Window.camX += (float)(10 * delta);
