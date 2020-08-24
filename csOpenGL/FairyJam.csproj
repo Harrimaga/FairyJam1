@@ -221,7 +221,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="People\traits.txt" />
+    <Content Include="People\traits.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Textures\Pixel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
