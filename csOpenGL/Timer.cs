@@ -79,5 +79,19 @@ namespace FairyJam
         {
             timer = TimeSpan.FromMilliseconds((long)mSecs);
         }
+
+        public string ToString(bool countDown)
+        {
+            if (countDown)
+            {
+                TimeSpan t = new TimeSpan(0, 0, 60);
+                t = t.Subtract(timer);
+                return t.ToString(@"ss\.ff");
+            }
+            else
+            {
+                return timer.ToString(@"ss\.ff");
+            }
+        }
     }
 }

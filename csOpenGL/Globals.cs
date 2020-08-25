@@ -27,6 +27,8 @@ namespace FairyJam
         public static UI.UI currentUI;
         public static Nation PlayerNation;
 
+        public static Timer timer;
+
         public static List<DrawnButton> activeButtons;
 
         // UI for the one minute section

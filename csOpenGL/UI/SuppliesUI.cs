@@ -153,7 +153,7 @@ namespace FairyJam.UI
             for (int i = 0; i < supplies.Length; i++)
             {
                 if (supplies[i].Equals("0")) continue;
-                sprites[i].Draw(2 + 32 * t, 60 + 25 * y);
+                sprites[i].Draw(2 + 32 * t, 60 + 25 * y, false);
                 t++;
             }
 

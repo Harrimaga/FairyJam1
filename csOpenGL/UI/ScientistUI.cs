@@ -129,7 +129,7 @@ namespace FairyJam.UI
             int x = 0;
             foreach (Trait t in scientist.Traits)
             {
-                t.sprite.Draw(2 + 32 * x, 60 + 25 * y);
+                t.sprite.Draw(2 + 32 * x, 60 + 25 * y, false);
                 x++;
             }
         }

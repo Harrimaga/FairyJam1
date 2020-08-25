@@ -18,10 +18,25 @@ namespace FairyJam.Orbitals
 
         public void GenerateMoons(int numMoons = 1)
         {
+            // Advanced Generation
+            ulong[] ringRadi = new ulong[numMoons];
             for (int i = 0; i < numMoons; i++)
             {
-                moons.Add(new Planet(this, (ulong)Globals.random.Next(radius, radius + 50), (float)Globals.random.NextDouble(), Globals.random.Next(5, radius/2), (ulong)Globals.random.Next(10, 100), System.Drawing.Color.FromArgb(Globals.random.Next(0, 256), Globals.random.Next(0, 256), Globals.random.Next(0, 256))));
+                ringRadi[i] = i > 0 ? ringRadi[i - 1] + (ulong)Globals.random.Next(1, 20) : (ulong)Globals.random.Next(radius, radius + 20);
             }
+
+            for (int j = 0; j < numMoons; j++)
+            {
+                moons.Add(new Planet(this, ringRadi[j], (float)Globals.random.NextDouble(), Globals.random.Next(5, 20), (ulong)Globals.random.Next(10, 100), System.Drawing.Color.FromArgb(Globals.random.Next(0, 256), Globals.random.Next(0, 256), Globals.random.Next(0, 256))));
+
+            }
+
+
+            // Basic Generation
+            //for (int i = 0; i < numMoons; i++)
+            //{
+            //    moons.Add(new Planet(this, (ulong)Globals.random.Next(radius, radius + 50), (float)Globals.random.NextDouble(), Globals.random.Next(5, radius/2), (ulong)Globals.random.Next(10, 100), System.Drawing.Color.FromArgb(Globals.random.Next(0, 256), Globals.random.Next(0, 256), Globals.random.Next(0, 256))));
+            //}
         }
 
         public override void Draw()

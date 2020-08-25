@@ -42,10 +42,15 @@ namespace FairyJam.UI
 
         }
 
+        public void Update()
+        {
+
+        }
+
         public override void Draw()
         {
             bg.Draw(0, 0, false);
-            Window.window.DrawText("5", 0, 0);
+            Window.window.DrawText(Globals.timer.ToString(true), 0, 0);
             for(int i = 0; i < 35; i++)
             {
                 if (scroll + i >= scrolledButtons.Count) break;
@@ -63,7 +68,7 @@ namespace FairyJam.UI
                 int x = 0;
                 foreach(Trait t in Globals.PlayerNation.leaders[i].Traits)
                 {
-                    t.sprite.Draw(1798 + 32*x, 60 + 25 * i);
+                    t.sprite.Draw(1798 + 32*x, 60 + 25 * i, false);
                     x++;
                 }
             }
@@ -84,7 +89,7 @@ namespace FairyJam.UI
                 int x = 0;
                 foreach (Trait t in Globals.PlayerNation.scientists[i].Traits)
                 {
-                    t.sprite.Draw(1798 + 32 * x, 120 + 25 * (i + offset));
+                    t.sprite.Draw(1798 + 32 * x, 120 + 25 * (i + offset), false);
                     x++;
                 }
             }
