@@ -152,6 +152,7 @@
     <Compile Include="GenerationSettings.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Hotkey.cs" />
+    <Compile Include="Orbitals\Asteroid.cs" />
     <Compile Include="Orbitals\Orbital.cs" />
     <Compile Include="Orbitals\Planet.cs" />
     <Compile Include="Orbitals\PlanetarySystem.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="UI\LeaderUI.cs" />
     <Compile Include="UI\MainMenu.cs" />
     <Compile Include="UI\OneMinuteUI.cs" />
+    <Compile Include="UI\PlanetUI.cs" />
     <Compile Include="UI\ScientistUI.cs" />
     <Compile Include="UI\SuppliesUI.cs" />
     <Compile Include="UI\UI.cs" />

@@ -101,6 +101,7 @@ namespace FairyJam
             Window.camY = 0;
             Globals.currentState = GameState.SYSTEMVIEW;
             Globals.currentSystem = ps;
+            Globals.currentUI = null;
         }
 
         public void Draw()
@@ -113,10 +114,10 @@ namespace FairyJam
             else if (Globals.currentState == GameState.SYSTEMVIEW)
             {
                 Globals.currentSystem.Draw();
-            }
-            else
-            {
-                Globals.currentUI.Draw();
+                if(Globals.currentUI != null) 
+                {
+                    Globals.currentUI.Draw();
+                }
             }
 
 

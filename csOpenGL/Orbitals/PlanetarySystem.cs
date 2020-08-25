@@ -14,14 +14,17 @@ namespace FairyJam.Orbitals
     {
         private Sun sun; //pls maar 1 sun
         private List<Planet> planets;
-        private List<Orbital> asteroids;
+        private List<Asteroid> asteroids;
         private Vector2 position = new Vector2(1920 / 2, 1080 / 2);
         private Sprite mapSprite = new Sprite(25, 25, 0, Textures.Get(Textures.circle));
+
+        public Asteroid selectedAsteroid;
 
         public PlanetarySystem()
         {
             planets = new List<Planet>();
-            asteroids = new List<Orbital>();
+            asteroids = new List<Asteroid>();
+            selectedAsteroid = null;
         }
 
         public void Generate(int planetAmount = 3)
@@ -47,7 +50,7 @@ namespace FairyJam.Orbitals
             int numAS = Globals.random.Next(1000, 10000);
             for (int k = 0; k < numAS; k++)
             {
-                asteroids.Add(new Orbital(sun, (ulong)Globals.random.Next(1500, 1700), (float)Globals.random.NextDouble(), Globals.random.Next(1,5), 10, System.Drawing.Color.Gray));
+                asteroids.Add(new Asteroid(sun, (ulong)Globals.random.Next(1500, 1700), (float)Globals.random.NextDouble(), Globals.random.Next(1,5), 10, System.Drawing.Color.Gray));
             }
 
 
@@ -91,6 +94,10 @@ namespace FairyJam.Orbitals
 
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)
         {
+            if (selectedAsteroid != null)
+            {
+                selectedAsteroid.UnSelect();
+            }
             if (e.Button == MouseButton.Left)
             {
                 foreach (Planet p in planets)
@@ -99,7 +106,7 @@ namespace FairyJam.Orbitals
                     if (button != null && button.IsInButton(mx + Window.camX, my + Window.camY))
                     {
                         button.OnClick();
-                        break;
+                        return;
                     }
                     foreach (Planet moon in p.moons)
                     {
@@ -107,11 +114,21 @@ namespace FairyJam.Orbitals
                         if (btn != null && btn.IsInButton(mx + Window.camX, my + Window.camY))
                         {
                             btn.OnClick();
-                            break;
+                            return;
                         }
                     }
                 }
+                foreach (Asteroid a in asteroids)
+                {
+                    CircleButton button = a.button;
+                    if (button != null && button.IsInButton(mx + Window.camX, my + Window.camY))
+                    {
+                        button.OnClick();
+                        return;
+                    }
+                }
             }
+            Globals.currentUI = null;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using FairyJam.UI;
+using OpenTK;
 using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,10 @@ namespace FairyJam.Orbitals
         protected double timeToOrbit;
         protected System.Numerics.Vector2 position;
         public CircleButton button;
+        public string Name { get; set; }
+
+        public double maxPop;
+        public double[] materialsAvailable; // Food / Materials / Fuel
 
         protected System.Drawing.Color Color { get; set; }
 
@@ -40,11 +45,13 @@ namespace FairyJam.Orbitals
 
             velocity = parent != null ? Math.Sqrt((6.6720e-08 * parent.mass) / radiusFromParent) : 0;
             timeToOrbit = (radiusFromParent * 2 * Math.PI) / velocity;
+
+            Name = Globals.random.Next(10000, 99999).ToString();
         }
 
         public virtual void OnClick()
         {
-            Console.WriteLine("clicked");
+            new PlanetUI(this);
         }
 
         public virtual void Draw()
