@@ -19,15 +19,18 @@ namespace FairyJam
         private Hotkey up = new Hotkey(true).AddKey(Key.W).AddKey(Key.Up);
         private Hotkey down = new Hotkey(true).AddKey(Key.S).AddKey(Key.Down);
         private Hotkey Q = new Hotkey(false).AddKey(Key.Q);
+        private Hotkey pause = new Hotkey(false).AddKey(Key.Space);
         MainMenu um = new MainMenu();
 
         bool TimerEnabled = true;
+        bool paused;
 
 
         public Game(Window window)
         {
             this.window = window;
             Globals.timer = new Timer(60000);
+            paused = false;
             OnLoad();
             ReadFiles();
         }
@@ -71,6 +74,7 @@ namespace FairyJam
             if (right.IsDown()) Window.camX += (float)(10 * delta);
             if (up.IsDown()) Window.camY -= (float)(10 * delta);
             if (down.IsDown()) Window.camY += (float)(10 * delta);
+            if (pause.IsDown()) paused = !paused;
 
             if(Q.IsDown() && Globals.currentState == GameState.MAPVIEW)
             {
@@ -83,7 +87,7 @@ namespace FairyJam
                 Window.camX = Globals.mapCamX;
                 Window.camY = Globals.mapCamY;
             }
-            if (Globals.currentState == GameState.SYSTEMVIEW)
+            if (Globals.currentState == GameState.SYSTEMVIEW && !paused)
             {
                 Globals.currentSystem.Update();
             }
