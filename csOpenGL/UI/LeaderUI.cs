@@ -27,7 +27,7 @@ namespace FairyJam.UI
         public void GenerateLeaders()
         {
             possibleLeaders = new List<Leader>();
-            Namelist namelist = Globals.nameLists[1]; // @TODO For now just the first on we find, later on allow for selection?
+            Namelist namelist = Globals.nameLists[GenerationSettings.LeaderNameGroup]; // @TODO For now just the first on we find, later on allow for selection?
             for (int i = 0; i < 250; i++)
             {
                 namelist.Next();

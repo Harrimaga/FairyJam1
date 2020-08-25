@@ -29,7 +29,7 @@ namespace FairyJam.UI
         public void GenerateScientists()
         {
             possibleScientists = new List<Scientist>();
-            Namelist namelist = Globals.nameLists[0]; // @TODO For now just the first on we find, later on allow for selection?
+            Namelist namelist = Globals.nameLists[GenerationSettings.ScientistNameGroup]; // @TODO For now just the first on we find, later on allow for selection?
             for (int i = 0; i < 250; i++)
             {
                 namelist.Next();

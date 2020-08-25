@@ -82,6 +82,11 @@ namespace FairyJam
             OnClickAction();
         }
 
+        public void SetSprite(Texture tex)
+        {
+            this.Sprite = new Sprite((int)Width, (int)Height, 0, tex);
+        }
+
         public void Draw()
         {
             if (!drawed) return;

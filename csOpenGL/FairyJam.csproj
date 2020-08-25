@@ -144,6 +144,7 @@
     <Compile Include="DrawnButton.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GenerationSettings.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Hotkey.cs" />
     <Compile Include="Orbitals\Orbital.cs" />

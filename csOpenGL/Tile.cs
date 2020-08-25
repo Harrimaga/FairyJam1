@@ -34,7 +34,7 @@ namespace FairyJam
                 return;
             }
             ps = new PlanetarySystem();
-            ps.Generate(Globals.random.Next(3, 12));
+            ps.Generate(Globals.random.Next(GenerationSettings.MinPlanets, GenerationSettings.MaxPlanets));
             psOffsetX = Globals.random.Next(-Globals.TileWidth / 4, Globals.TileWidth / 4);
             psOffsetY = Globals.random.Next(-Globals.TileWidth / 4, Globals.TileWidth / 4);
 
