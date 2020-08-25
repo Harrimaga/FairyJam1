@@ -119,6 +119,10 @@ namespace FairyJam
                     Globals.currentUI.Draw();
                 }
             }
+            else if (Globals.currentUI != null)
+            {
+                Globals.currentUI.Draw();
+            }
 
 
             foreach (DrawnButton button in Globals.activeButtons)
