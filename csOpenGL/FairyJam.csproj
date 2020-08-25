@@ -150,6 +150,11 @@
     <Compile Include="Orbitals\Planet.cs" />
     <Compile Include="Orbitals\PlanetarySystem.cs" />
     <Compile Include="Shaders\BloomShader.cs" />
+    <Compile Include="Ships\Freighter.cs" />
+    <Compile Include="Ships\Helper.cs" />
+    <Compile Include="Ships\Military.cs" />
+    <Compile Include="Ships\Ship.cs" />
+    <Compile Include="Ships\Transportation.cs" />
     <Compile Include="StarConnection.cs" />
     <Compile Include="Orbitals\Sun.cs" />
     <Compile Include="Leader.cs" />
