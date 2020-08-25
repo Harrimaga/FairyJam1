@@ -12,6 +12,8 @@ namespace FairyJam
     abstract class Ship
     {
         public string Name { get; set; }
+        public int HealthPoints { get; set; }
+        public int Damage { get; set; }
         public int ResourceLoad { get; set; }
         public int MaxResourceLoad { get; set; }
         List<Person> PeopleLoad;
@@ -21,12 +23,15 @@ namespace FairyJam
         
         //public int weaponAmount, speed, evasiveness, carryPeopleAmount;
 
-        protected Ship(int evasiveness, int maxPeopleAmount, int maxResourceAmount, int speed)
+        protected Ship(int health, int damage, int evasiveness, int speed, int maxPeopleAmount, int maxResourceAmount)
         {
+            HealthPoints = health;
+            Damage = damage;
             Evasiveness = evasiveness;
+            Speed = speed;
+
             MaxPeopleLoad = maxPeopleAmount;
             MaxResourceLoad = maxResourceAmount;
-            Speed = speed;
 
             PeopleLoad = new List<Person>();
         }
@@ -48,6 +53,22 @@ namespace FairyJam
         {
             if (PeopleLoad.Contains(person))
                 PeopleLoad.Remove(person);
+        }
+
+        public void AddResource(int resourceAmount)
+        {
+            if (ResourceLoad + resourceAmount <= MaxResourceLoad)
+                ResourceLoad += resourceAmount;
+        }
+
+        public void DropAllResources()
+        {
+            ResourceLoad = 0;
+        }
+
+        public void AttackShip(Ship enemy)
+        {
+
         }
     }
 }
