@@ -107,7 +107,7 @@ namespace FairyJam
             GL.DrawBuffers(2, new DrawBuffersEnum[]{ DrawBuffersEnum.ColorAttachment0, DrawBuffersEnum.ColorAttachment1 });
 
             //Font
-            font = new QFont("Fonts/arial.ttf", 36*Height/1080.0f, new QuickFont.Configuration.QFontBuilderConfiguration(true));
+            font = new QFont("Fonts/arial.ttf", 36, new QuickFont.Configuration.QFontBuilderConfiguration(true));
             textDrawing = new QFontDrawing();
             Matrix4 m = Matrix4.Identity;
             m.M11 /= (float)(1920.0/2);
@@ -232,6 +232,18 @@ namespace FairyJam
             base.OnMouseDown(e);
         }
 
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            if(e.Delta > 0)
+            {
+                game.MouseWheelScrollUp();
+            }
+            else if(e.Delta < 0)
+            {
+                game.MouseWheelScrollDown();
+            }
+        }
+
         private void Update()
         {
             //input
@@ -321,9 +333,9 @@ namespace FairyJam
 
         private void CreatePostShaders()
         {
-            AddShader(new BasicPostShader());
-            AddShader(new BlurShader());
-            AddShader(new BloomShader());
+            //AddShader(new BasicPostShader());
+            //AddShader(new BlurShader());
+            //AddShader(new BloomShader());
         }
 
     }

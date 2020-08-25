@@ -12,6 +12,11 @@ namespace FairyJam
         {
             Admiral, Governor, Merchant, Diplomat, Magnate
         }
+
+        public enum ScientistTitle
+        {
+            Feiv
+        }
     }
     public enum GameState
     {

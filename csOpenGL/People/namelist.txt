@@ -33,6 +33,33 @@ dutch = {
 		Timmerman
 		Plantman
 		van Alkmaar
+		Voske
+		Overgaag
+		Brugman
+		van Rhee
+		Crabbendam
+		Kapteyn den-Bouwmeester
+		Gnodde
+		Neurink
+		Schopman
+		Verhoeven
+		Arentszen
+		Blaak
+		Stoel
+		Derks op den Niewen Blokvoort
+		Willemzen
+		Storteboom
+		Zandbergen
+		Obermeijer
+		Duinmeijer
+		Boosveld
+		Lankamp
+		ter Mors
+		Morsink
+		Kelderman
+		van Heeckeren
+		Schluter
+		Telgenhof
 	}
 
 	given = {
@@ -46,5 +73,36 @@ dutch = {
 		Stefan
 		Katherina
 		Piet
+		Leendert
+		Sjaak
+		Naut
+		Luuk
+		Joris
+		Pieter-Jan
+		Dirk-Jan
+		Huibert
+		Hermen
+		Iwan
+		Kevin
+		Gudo
+		Aad
+		Koen
+		Maurits
+		Joeri
+		Marlijn
+		Mart
+		Bas
+		Lotte
+		Eliza
+		Mariska
+		Carlijn
+		Mieke
+		Gerrieke
+		Jet
+		Margriet
+		Annemiek
+		Noortje
+		Floortje
+		Willaerd
 	}
 }

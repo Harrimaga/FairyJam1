@@ -1,4 +1,5 @@
 using FairyJam.Orbitals;
+using FairyJam.UI;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,7 @@ namespace FairyJam
         private Hotkey up = new Hotkey(true).AddKey(Key.W).AddKey(Key.Up);
         private Hotkey down = new Hotkey(true).AddKey(Key.S).AddKey(Key.Down);
         private Hotkey Q = new Hotkey(false).AddKey(Key.Q);
-
-        public List<DrawnButton> buttons = new List<DrawnButton>();
+        MainMenu um = new MainMenu();
 
 
         public Game(Window window)
@@ -36,15 +36,132 @@ namespace FairyJam
             Globals.map = new Map(20, 20);
             Globals.map.Generate();
 
-            buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
-            buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
-            buttons.Add(new DrawnButton("Bloom", 0, 210, 200, 100, () => { Window.window.ToggleShader(Shaders.bloom); }, 0.5f, 0.5f, 0.5f));
-            Globals.currentState = GameState.MAPVIEW;
+            //buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
+            //buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
+            //buttons.Add(new DrawnButton("Bloom", 0, 210, 200, 100, () => { Window.window.ToggleShader(Shaders.bloom); }, 0.5f, 0.5f, 0.5f));
+            Globals.currentState = GameState.MAINMENU;
+            Globals.PlayerNation = new Nation();
 
-            //buttons.Add(new DrawnButton("Play", 1920 / 2 - 100, 1080 / 2 - 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
-            //buttons.Add(new DrawnButton("Tutorial", 1920 / 2 - 100, 1080 / 2 + 60, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
-            //buttons.Add(new DrawnButton("Settings", 1920 / 2 - 100, 1080 / 2 + 180, 200, 100, () => { }, 0.5f, 0.5f, 0.5f));
-            //buttons.Add(new DrawnButton("Quit", 1920 / 2 - 100, 1080 / 2 + 300, 200, 100, () => { window.Exit(); }, 0.5f, 0.5f, 0.5f));
+            
+        }
+
+        public void Update(double delta)
+        {
+            Globals.DeltaTime = delta;
+            timer.UpdateTimer();
+
+            //if (timer.Expired())
+            //{
+            //    window.Exit();
+            //}
+
+            //Updating logic
+            if (left.IsDown()) Window.camX -= (float)(10 * delta);
+            if (right.IsDown()) Window.camX += (float)(10 * delta);
+            if (up.IsDown()) Window.camY -= (float)(10 * delta);
+            if (down.IsDown()) Window.camY += (float)(10 * delta);
+
+            if(Q.IsDown() && Globals.currentState == GameState.MAPVIEW)
+            {
+                um.reSelect();
+                Globals.currentState = GameState.MAINMENU;
+            }
+            if (Q.IsDown() && Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentState = GameState.MAPVIEW;
+                Window.camX = Globals.mapCamX;
+                Window.camY = Globals.mapCamY;
+            }
+            if (Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentSystem.Update();
+            }
+        }
+
+        public static void switchViewToSystem(PlanetarySystem ps)
+        {
+            Globals.mapCamX = Window.camX;
+            Globals.mapCamY = Window.camY;
+            Window.camX = 0;
+            Window.camY = 0;
+            Globals.currentState = GameState.SYSTEMVIEW;
+            Globals.currentSystem = ps;
+        }
+
+        public void Draw()
+        {
+            //Do all you draw calls here
+            if (Globals.currentState == GameState.MAPVIEW)
+            {
+                Globals.map.Draw();
+            }
+            else if (Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentSystem.Draw();
+            }
+            else
+            {
+                Globals.currentUI.Draw();
+            }
+
+
+            foreach (DrawnButton button in Globals.activeButtons)
+            {
+                button.Draw();
+            }
+        }
+
+        public void MouseDown(MouseButtonEventArgs e, int mx, int my)
+        {
+            if (e.Button == MouseButton.Left)
+            {
+                for (int i = Globals.activeButtons.Count - 1; i >= 0; i--)
+                {
+                    DrawnButton button = Globals.activeButtons[i];
+                    if (button.IsInButton(mx, my))
+                    {
+                        button.OnClick();
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void MouseUp(MouseButtonEventArgs e, int mx, int my)
+        {
+
+        }
+
+        public void MouseWheelScrollUp()
+        {
+            if(Globals.currentUI == Globals.leaderUI)
+            {
+                Globals.leaderUI.Scroll(-2);
+            }
+            else if (Globals.currentUI == Globals.scientistUI)
+            {
+                Globals.scientistUI.Scroll(-2);
+            }
+            else if (Globals.currentUI == Globals.suppliesUI)
+            {
+                Globals.suppliesUI.Scroll(-2);
+            }
+        }
+
+        public void MouseWheelScrollDown()
+        {
+            if (Globals.currentUI == Globals.leaderUI)
+            {
+                Globals.leaderUI.Scroll(2);
+            }
+            else if (Globals.currentUI == Globals.scientistUI)
+            {
+                Globals.scientistUI.Scroll(2);
+            }
+            else if (Globals.currentUI == Globals.suppliesUI)
+            {
+                Globals.suppliesUI.Scroll(2);
+            }
         }
 
         private void ReadFiles()
@@ -69,17 +186,6 @@ namespace FairyJam
                 Console.WriteLine(e.Message);
             }
 
-            Person[] possiblePeople = new Leader[25];
-            Namelist namelist = Globals.nameLists[0]; // @TODO For now just the first on we find, later on allow for selection?
-            for(int i = 0; i < 25; i++)
-            {
-                namelist.Next();
-                Trait trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)]; // Gets a random existing trait
-                List<Trait> traitsToAdd = new List<Trait> { trait }; 
-                possiblePeople[i] = new Leader(100, namelist.GivenName, namelist.FamilyName, Enums.LeaderTitle.Admiral, traitsToAdd, true);
-            }
-            int c = possiblePeople.Length;
-
         }
 
         private Trait[] ParseTraits(string[] lines)
@@ -92,7 +198,8 @@ namespace FairyJam
                 if (line.Trim() == "{")
                 {
                     trait = new Trait();
-                } else if (line.Trim() == "}")
+                }
+                else if (line.Trim() == "}")
                 {
                     list.Add(trait);
                 }
@@ -104,8 +211,14 @@ namespace FairyJam
                         case "name":
                             trait.Name = words[1].Trim();
                             break;
+                        case "description":
+                            trait.Description = words[1].Trim();
+                            break;
                         case "population_growth":
                             Globals.logger.Log("Trait action `" + words[0] + "` is not yet implemented", LogLevel.INFO);
+                            break;
+                        case "sprite":
+                            trait.sprite = new Sprite(25, 25, 0, Textures.Get(int.Parse(words[1].Trim())));
                             break;
                         default:
                             Globals.logger.Log("Trait action `" + words[0] + "` was unknown", LogLevel.WARNING);
@@ -125,7 +238,7 @@ namespace FairyJam
             bool inListIsFamilyName = false;
             List<string> names = new List<string>();
 
-            foreach(string line in lines)
+            foreach (string line in lines)
             {
                 if (inList)
                 {
@@ -146,15 +259,18 @@ namespace FairyJam
                     {
                         names.Add(line.Trim());
                     }
-                } else if (namelist == null && line.Contains('=')) // This is a namelist declaration and we aren't making a namelist already
+                }
+                else if (namelist == null && line.Contains('=')) // This is a namelist declaration and we aren't making a namelist already
                 {
                     string name = line.Split('=')[0].Trim();
                     namelist = new Namelist(name);
-                } else if(namelist != null && line.Contains('}')) // We are making a namelist and we found the closing argument
+                }
+                else if (namelist != null && line.Contains('}')) // We are making a namelist and we found the closing argument
                 {
                     list.Add(namelist);
                     namelist = null;
-                } else if(namelist != null && line.Contains('{')) // We are making a namelist and we found an opening argument
+                }
+                else if (namelist != null && line.Contains('{')) // We are making a namelist and we found an opening argument
                 {
                     inList = true;
                     string nameListType = line.Split('=')[0].Trim();
@@ -165,83 +281,6 @@ namespace FairyJam
             return list.ToArray();
         }
 
-        public void Update(double delta)
-        {
-            Globals.DeltaTime = delta;
-            timer.UpdateTimer();
-
-            //if (timer.Expired())
-            //{
-            //    window.Exit();
-            //}
-
-            //Updating logic
-            if (left.IsDown()) Window.camX -= (float)(10 * delta);
-            if (right.IsDown()) Window.camX += (float)(10 * delta);
-            if (up.IsDown()) Window.camY -= (float)(10 * delta);
-            if (down.IsDown()) Window.camY += (float)(10 * delta);
-            if (Q.IsDown() && Globals.currentState == GameState.SYSTEMVIEW)
-            {
-                Globals.currentState = GameState.MAPVIEW;
-                Window.camX = Globals.mapCamX;
-                Window.camY = Globals.mapCamY;
-            }
-
-            if (Globals.currentState == GameState.SYSTEMVIEW)
-            {
-                Globals.currentSystem.Update();
-            }
-        }
-
-        public static void switchViewToSystem(PlanetarySystem ps)
-        {
-            Globals.mapCamX = Window.camX;
-            Globals.mapCamY = Window.camY;
-            Window.camX = 0;
-            Window.camY = 0;
-            Globals.currentState = GameState.SYSTEMVIEW;
-            Globals.currentSystem = ps;
-        }
-
-        public void Draw()
-        {
-            //Do all you draw calls here
-            if (Globals.currentState == GameState.MAPVIEW)
-            {
-                Globals.map.Draw();
-            }
-            if (Globals.currentState == GameState.SYSTEMVIEW)
-            {
-                Globals.currentSystem.Draw();
-            }
-
-
-            foreach (DrawnButton button in buttons)
-            {
-                button.Draw();
-            }
-        }
-
-        public void MouseDown(MouseButtonEventArgs e, int mx, int my)
-        {
-            if (e.Button == MouseButton.Left)
-            {
-                for (int i = buttons.Count - 1; i >= 0; i--)
-                {
-                    DrawnButton button = buttons[i];
-                    if (button.IsInButton(mx, my))
-                    {
-                        button.OnClick();
-                        break;
-                    }
-                }
-            }
-        }
-
-        public void MouseUp(MouseButtonEventArgs e, int mx, int my)
-        {
-
-        }
 
     }
 }

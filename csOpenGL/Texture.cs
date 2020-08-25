@@ -14,7 +14,8 @@ namespace FairyJam
     {
 
         public static List<Texture> list = new List<Texture>();
-        public const int test = 0, pixel = 1, testTile = 2, circle = 3;
+        public const int test = 0, pixel = 1, testTile = 2, circle = 3, bacon = 4, personSelectionBox = 5, personSelectionBoxHover = 6, personSelectionBoxSelected = 7,
+                         population = 8, materials = 9, food = 10, fuel = 11, money = 12;
 
         public static void Load()
         {
@@ -22,6 +23,15 @@ namespace FairyJam
             list.Add(new Texture("Textures/Pixel.png", 1, 1, 1, 1));
             list.Add(new Texture("Textures/TestTile.png", 128, 128, 128, 128));
             list.Add(new Texture("Textures/Circle.png", 512, 512, 512, 512));
+            list.Add(new Texture("Textures/CrispyBacon.png", 32, 32, 32, 32));
+            list.Add(new Texture("Textures/Buttons/PersonSelectionBox.png", 40, 10, 40, 10));
+            list.Add(new Texture("Textures/Buttons/PersonSelectionBoxHover.png", 40, 10, 40, 10));
+            list.Add(new Texture("Textures/Buttons/PersonSelectionBoxSelected.png", 40, 10, 40, 10));
+            list.Add(new Texture("Textures/Supplies/BanishmentSpell.png", 24, 24, 24, 24));
+            list.Add(new Texture("Textures/Supplies/Hammer.png", 16, 16, 16, 16));
+            list.Add(new Texture("Textures/Supplies/Heart.png", 16, 16, 16, 16));
+            list.Add(new Texture("Textures/Supplies/ManaPotion.png", 16, 16, 16, 16));
+            list.Add(new Texture("Textures/Supplies/PrayerCircleInactive.png", 32, 32, 32, 32));
         }
 
         public static Texture Get(int i)

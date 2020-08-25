@@ -141,14 +141,17 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Balance.cs" />
     <Compile Include="DrawnButton.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GenerationSettings.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Hotkey.cs" />
     <Compile Include="Orbitals\Orbital.cs" />
     <Compile Include="Orbitals\Planet.cs" />
     <Compile Include="Orbitals\PlanetarySystem.cs" />
+    <Compile Include="Scientist.cs" />
     <Compile Include="Shaders\BloomShader.cs" />
     <Compile Include="Ships\Freighter.cs" />
     <Compile Include="Ships\Helper.cs" />
@@ -170,10 +173,17 @@
     <Compile Include="Shaders\MainShader.cs" />
     <Compile Include="SoundManager.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="SupplyCompany.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Trait.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="UI\LeaderUI.cs" />
+    <Compile Include="UI\MainMenu.cs" />
+    <Compile Include="UI\OneMinuteUI.cs" />
+    <Compile Include="UI\ScientistUI.cs" />
+    <Compile Include="UI\SuppliesUI.cs" />
+    <Compile Include="UI\UI.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -242,10 +252,37 @@
     <Content Include="People\namelist.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Textures\Buttons\PersonSelectionBox.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Buttons\PersonSelectionBoxHover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Buttons\PersonSelectionBoxSelected.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Textures\Circle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Textures\CrispyBacon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Supplies\BanishmentSpell.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Supplies\Hammer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Supplies\Heart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Textures\Pixel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Supplies\ManaPotion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Supplies\PrayerCircleInactive.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Test.png">

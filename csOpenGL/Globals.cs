@@ -23,6 +23,15 @@ namespace FairyJam
         public static Namelist[] nameLists = { };
         public static PlanetarySystem currentSystem;
         public static float mapCamX, mapCamY;
+        public static UI.UI currentUI;
+        public static Nation PlayerNation;
+
+        public static List<DrawnButton> activeButtons;
+
+        // UI for the one minute section
+        public static UI.LeaderUI leaderUI;
+        public static UI.ScientistUI scientistUI;
+        public static UI.SuppliesUI suppliesUI;
 
         public static bool checkCol(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2)
         {
