@@ -30,7 +30,7 @@ namespace FairyJam
 
         public bool IsInButton(float x, float y)
         {
-            return Math.Sqrt((x-X)*(x-X) + (y-Y)*(y-Y)) < Radius;
+            return Math.Sqrt((x-X)*(x-X) + (y-Y)*(y-Y)) < Radius / 2;
         }
 
         public void OnClick()
