@@ -28,6 +28,8 @@ namespace FairyJam.Events
         {
             // Draw Popup layout
             Background.DrawLate(1920 / 4, 1080 / 4, false);
+
+            // TODO: Offset off screen?
             Window.window.DrawTextCentered(title, (int)((1920 / 2)), (int)((1080 / 4) + 15), true);
             Window.window.DrawText(description, (int)((1920 / 4) + 5), (int)((1080 / 4) + 125), true, Globals.buttonFont);
             // Override for specific events/things

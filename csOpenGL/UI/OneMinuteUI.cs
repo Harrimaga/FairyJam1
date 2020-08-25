@@ -13,6 +13,7 @@ namespace FairyJam.UI
         public List<ListEntry> scrolledButtons = new List<ListEntry>();
         public List<DrawnButton> scrollListButtons = new List<DrawnButton>();
         int scroll = 0;
+        Sprite bg;
 
         public OneMinuteUI()
         {
@@ -20,6 +21,8 @@ namespace FairyJam.UI
             // - Leaders
             // - Scientists
             // - Supplies
+
+            bg = new Sprite(1920, 1080, 0, Textures.Get(Textures.minuteBG));
 
             // Finish Button -> events if time left
             buttons.Add(new DrawnButton("Leaders", 1920 / 2 - 700, 10, 400, 50, () => { Globals.leaderUI.reSelect(); }, 0.5f, 0.5f, 0.5f));
@@ -41,6 +44,7 @@ namespace FairyJam.UI
 
         public override void Draw()
         {
+            bg.Draw(0, 0, false);
             Window.window.DrawText("5", 0, 0);
             for(int i = 0; i < 35; i++)
             {

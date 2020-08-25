@@ -21,10 +21,8 @@ namespace FairyJam.Events
 
         public void Draw()
         {
-            foreach (Event e in events)
-            {
-                e.Draw();
-            }
+            if(events.Count == 0) return;
+            events[events.Count-1].Draw();
         }
 
         public void SpawnRandomEvent() 
