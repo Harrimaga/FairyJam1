@@ -1,0 +1,36 @@
+Diplomatic = {
+	1 = {
+		
+		{
+			name = Music culture
+			description = Music makes me happy
+			effects = {
+				population_happiness = 5
+			}
+		}
+
+		{
+			name = Space border theory
+			description = Borders in space are hard, but we managed to find a way
+			flags = {
+				can_control_borders = true
+			}
+		}
+		
+	}
+
+	2 = {
+		
+		{
+			name = Music export
+			description = let us muse the other empires with our music
+			effects = {
+				money = 2
+			}
+			flags = {
+				can_hold_concert = true
+			}
+		}
+
+	}
+}
