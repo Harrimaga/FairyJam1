@@ -1,10 +1,12 @@
-﻿using SixLabors.ImageSharp;
+﻿using OpenTK.Input;
+using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FairyJam.Orbitals
 {
@@ -84,6 +86,31 @@ namespace FairyJam.Orbitals
             foreach (var a in asteroids)
             {
                 a.Update();
+            }
+        }
+
+        public void MouseDown(MouseButtonEventArgs e, int mx, int my)
+        {
+            if (e.Button == MouseButton.Left)
+            {
+                foreach (Planet p in planets)
+                {
+                    CircleButton button = p.button;
+                    if (button != null && button.IsInButton(mx + Window.camX, my + Window.camY))
+                    {
+                        button.OnClick();
+                        break;
+                    }
+                    foreach (Planet moon in p.moons)
+                    {
+                        CircleButton btn = moon.button;
+                        if (btn != null && btn.IsInButton(mx + Window.camX, my + Window.camY))
+                        {
+                            btn.OnClick();
+                            break;
+                        }
+                    }
+                }
             }
         }
     }

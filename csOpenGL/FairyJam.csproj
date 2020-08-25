@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Balance.cs" />
+    <Compile Include="CircleButton.cs" />
     <Compile Include="DrawnButton.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Events\Event.cs" />

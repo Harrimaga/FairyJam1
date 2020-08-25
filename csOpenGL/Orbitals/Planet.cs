@@ -11,7 +11,7 @@ namespace FairyJam.Orbitals
 {
     public class Planet : Orbital
     {
-        private List<Planet> moons;
+        public List<Planet> moons;
         public double maxPop;
         public double[] materialsAvailable; // Food / Materials / Fuel
         public PlanetType type;

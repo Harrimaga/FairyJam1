@@ -142,6 +142,13 @@ namespace FairyJam
                     }
                 }
             }
+
+            if (Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentSystem.MouseDown(e, mx, my);
+            }
+            
+
         }
 
         public void MouseUp(MouseButtonEventArgs e, int mx, int my)

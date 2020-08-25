@@ -21,6 +21,7 @@ namespace FairyJam.Orbitals
         protected double velocity;
         protected double timeToOrbit;
         protected System.Numerics.Vector2 position;
+        public CircleButton button;
 
         protected System.Drawing.Color Color { get; set; }
 
@@ -35,8 +36,15 @@ namespace FairyJam.Orbitals
             this.position = new System.Numerics.Vector2(1920 / 2, 1080 / 2);
             Sprite = new Sprite((int)radius, (int)radius, 0, Textures.Get(Textures.circle));
 
+            button = new CircleButton(position.X, position.Y, radius, () => { OnClick(); } );
+
             velocity = parent != null ? Math.Sqrt((6.6720e-08 * parent.mass) / radiusFromParent) : 0;
             timeToOrbit = (radiusFromParent * 2 * Math.PI) / velocity;
+        }
+
+        public virtual void OnClick()
+        {
+            Console.WriteLine("clicked");
         }
 
         public virtual void Draw()
@@ -55,6 +63,7 @@ namespace FairyJam.Orbitals
         public virtual void Update()
         {
             angleFromParent += (float)(2f * Math.PI * Globals.DeltaTime) / (float)timeToOrbit;
+            button.Update(position.X, position.Y);
         }
     }
 }
