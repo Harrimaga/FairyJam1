@@ -1,4 +1,4 @@
-korean = {
+Korean = {
 	family = {
 		Lee
 		Kim
@@ -12,17 +12,17 @@ korean = {
 		Jung
 	}
 	given = {
-		Hyo Yeon
-		Tae Yeon
-		Sun Kye
-		Mi Young
-		Yu Ri
-		Soo Young
-		Yoon A
-		Ju Hyun
+		Hyo-Yeon
+		Tae-Yeon
+		Sun-Kye
+		Mi-Young
+		Yu-Ri
+		Soo-Young
+		Yoon-A
+		Ju-Hyun
 	}
 }
-dutch = {
+Dutch = {
 	family = {
 		Jansen
 		Bakker

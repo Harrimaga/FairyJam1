@@ -12,6 +12,16 @@ namespace FairyJam
         {
             Admiral, Governor, Merchant, Diplomat, Magnate
         }
+
+        public enum TechType
+        {
+            Diplomatic, Military, Economic, Technology
+        }
+
+        public enum Resource
+        {
+            POPULATION_GROWTH, TECH_POINTS
+        }
     }
     public enum GameState
     {

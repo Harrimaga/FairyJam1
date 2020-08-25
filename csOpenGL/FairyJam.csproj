@@ -165,6 +165,7 @@
     <Compile Include="Shaders\MainShader.cs" />
     <Compile Include="SoundManager.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="Technology\Technology.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Trait.cs" />
     <Compile Include="Timer.cs" />
