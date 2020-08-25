@@ -12,12 +12,14 @@ namespace FairyJam.Orbitals
     {
         private Sun sun; //pls maar 1 sun
         private List<Planet> planets;
+        private List<Orbital> asteroids;
         private Vector2 position = new Vector2(1920 / 2, 1080 / 2);
         private Sprite mapSprite = new Sprite(25, 25, 0, Textures.Get(Textures.circle));
 
         public PlanetarySystem()
         {
             planets = new List<Planet>();
+            asteroids = new List<Orbital>();
         }
 
         public void Generate(int planetAmount = 3)
@@ -32,10 +34,18 @@ namespace FairyJam.Orbitals
                 ringRadi[i] = i > 0 ? ringRadi[i - 1] + (ulong)Globals.random.Next(100, 300) : (ulong)Globals.random.Next(100, 300);
             }
 
+            // Put planets in those rings
             for (int j = 0; j < planetAmount; j++)
             {
-                planets.Add(new Planet(sun, ringRadi[j], (float)Globals.random.NextDouble(), Globals.random.Next(10, 100), (ulong)Globals.random.Next(100000, 10000000), System.Drawing.Color.FromArgb(Globals.random.Next(0, 256), Globals.random.Next(0, 256), Globals.random.Next(0, 256))));
+                planets.Add(new Planet(sun, ringRadi[j], (float)Globals.random.NextDouble(), Globals.random.Next(10, 100), (ulong)Globals.random.Next(100000, 10000000), System.Drawing.Color.FromArgb(Globals.random.Next(0, 256), Globals.random.Next(0, 256), Globals.random.Next(0, 256)), false));
                 planets.Last().GenerateMoons(Globals.random.Next(GenerationSettings.MinMoons, GenerationSettings.MaxMoons));
+            }
+
+            // Generate Asteroids
+            int numAS = Globals.random.Next(1000, 10000);
+            for (int k = 0; k < numAS; k++)
+            {
+                asteroids.Add(new Orbital(sun, (ulong)Globals.random.Next(1500, 1700), (float)Globals.random.NextDouble(), Globals.random.Next(1,5), 10, System.Drawing.Color.Gray));
             }
 
 
@@ -54,6 +64,10 @@ namespace FairyJam.Orbitals
             {
                 planet.Draw();
             }
+            foreach (var a in asteroids)
+            {
+                a.Draw();
+            }
         }
 
         public void DrawMap(int x, int y)
@@ -66,6 +80,10 @@ namespace FairyJam.Orbitals
             foreach (var planet in planets)
             {
                 planet.Update();
+            }
+            foreach (var a in asteroids)
+            {
+                a.Update();
             }
         }
     }

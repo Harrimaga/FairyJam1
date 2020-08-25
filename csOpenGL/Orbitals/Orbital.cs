@@ -22,7 +22,7 @@ namespace FairyJam.Orbitals
         protected double timeToOrbit;
         protected System.Numerics.Vector2 position;
 
-        private System.Drawing.Color color;
+        protected System.Drawing.Color Color { get; set; }
 
         public Orbital(Orbital parent, ulong radiusFromParent, float startingAngle, int radius, ulong mass, System.Drawing.Color color)
         {
@@ -31,7 +31,7 @@ namespace FairyJam.Orbitals
             this.angleFromParent = startingAngle;
             this.radius = radius;
             this.mass = mass;
-            this.color = color;
+            this.Color = color;
             this.position = new System.Numerics.Vector2(1920 / 2, 1080 / 2);
             Sprite = new Sprite((int)radius, (int)radius, 0, Textures.Get(Textures.circle));
 
@@ -48,7 +48,7 @@ namespace FairyJam.Orbitals
             else
             {
                 position = parent.position + new System.Numerics.Vector2(radiusFromParent * (float)Math.Cos(angleFromParent * 2 * Math.PI), radiusFromParent * (float)Math.Sin(angleFromParent * 2 * Math.PI));
-                Sprite.Draw(position.X - radius / 2, position.Y - radius / 2, true, 0, color.R / 256f, color.G / 256f, color.B / 256f);
+                Sprite.Draw(position.X - radius / 2, position.Y - radius / 2, true, 0, Color.R / 256f, Color.G / 256f, Color.B / 256f);
             }
         }
 
