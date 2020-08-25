@@ -23,16 +23,52 @@ namespace FairyJam
 
         public Nation()
         {
-            Materials = 5;
-            Fuel = 5;
-            Food = 5;
-            Money = 5;
-            Happiness = 5;
-            TechPoints = 5;
-            Population = 5;
+            Materials = 10;
+            Fuel = 10;
+            Food = 10;
+            Money = 10;
+            Happiness = 10;
+            TechPoints = 10;
+            Population = 10;
             leaders = new List<Leader>();
             scientists = new List<Scientist>();
 
+        }
+
+        public double AddSuppliesPointBuy(int num, double amount) {
+            switch(num) {
+            case 0:
+                if(Materials + amount < 10) {
+                    return 10 - Materials;
+                }
+                Materials += amount;
+                break;
+            case 1:
+                if(Food + amount < 10) {
+                    return 10 - Food;
+                }
+                Food += amount;
+                break;
+            case 2:
+                if(Fuel + amount < 10) {
+                    return 10 - Fuel;
+                }
+                Fuel += amount;
+                break;
+            case 3:
+                if(Population + amount < 10) {
+                    return 10 - Population;
+                }
+                Population += amount;
+                break;
+            case 4:
+                if(Money + amount < 10) {
+                    return 10 - Money;
+                }
+                Money += amount;
+                break;
+            }
+            return amount;
         }
 
         public void AddLeader(Leader l)
