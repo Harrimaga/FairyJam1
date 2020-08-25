@@ -14,5 +14,7 @@ namespace FairyJam
         public static int MaxMoons              = 3;
         public static int MinPlanets            = 3;
         public static int MinMoons              = 0;
+        public static int MaxSupplyPoints       = 300;
+        public static int MinSupplyPoints       = 50;
     }
 }

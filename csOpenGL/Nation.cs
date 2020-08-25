@@ -20,6 +20,7 @@ namespace FairyJam
 
         public List<Leader> leaders { get;}
         public List<Scientist> scientists { get;}
+        public List<SupplyCompany> supplyCompanies { get;}
 
         public Nation()
         {
@@ -32,44 +33,11 @@ namespace FairyJam
             Population = 10;
             leaders = new List<Leader>();
             scientists = new List<Scientist>();
+            supplyCompanies = new List<SupplyCompany>();
 
         }
 
-        public double AddSuppliesPointBuy(int num, double amount) {
-            switch(num) {
-            case 0:
-                if(Materials + amount < 10) {
-                    return 10 - Materials;
-                }
-                Materials += amount;
-                break;
-            case 1:
-                if(Food + amount < 10) {
-                    return 10 - Food;
-                }
-                Food += amount;
-                break;
-            case 2:
-                if(Fuel + amount < 10) {
-                    return 10 - Fuel;
-                }
-                Fuel += amount;
-                break;
-            case 3:
-                if(Population + amount < 10) {
-                    return 10 - Population;
-                }
-                Population += amount;
-                break;
-            case 4:
-                if(Money + amount < 10) {
-                    return 10 - Money;
-                }
-                Money += amount;
-                break;
-            }
-            return amount;
-        }
+        
 
         public void AddLeader(Leader l)
         {
@@ -89,6 +57,26 @@ namespace FairyJam
         public void RemoveScientist(Scientist s)
         {
             scientists.Remove(s);
+        }
+
+        public void AddSupplyCompany(SupplyCompany s)
+        {
+            supplyCompanies.Add(s);
+            Materials += s.Materials;
+            Fuel += s.Fuel;
+            Food += s.Food;
+            Money += s.Money;
+            Population += s.Population;
+        }
+
+        public void RemoveSupplyCompany(SupplyCompany s)
+        {
+            supplyCompanies.Remove(s);
+            Materials -= s.Materials;
+            Fuel -= s.Fuel;
+            Food -= s.Food;
+            Money -= s.Money;
+            Population -= s.Population;
         }
 
         public void Update()

@@ -83,6 +83,21 @@ namespace FairyJam.UI
                     x++;
                 }
             }
+
+            if (Globals.PlayerNation.scientists.Count == 0)
+            {
+                offset++;
+            }
+            offset += Globals.PlayerNation.scientists.Count;
+
+            Window.window.DrawText("Supplies:", 1500, 145 + offset * 25, Globals.buttonFont);
+            Window.window.DrawText("Materials: " + Globals.PlayerNation.Materials, 1525, 180 + (0 + offset) * 25, Globals.buttonFont);
+            Window.window.DrawText("Food: " + Globals.PlayerNation.Food, 1525, 180 + (1 + offset) * 25, Globals.buttonFont);
+            Window.window.DrawText("Fuel: " + Globals.PlayerNation.Fuel, 1525, 180 + (2 + offset) * 25, Globals.buttonFont);
+            Window.window.DrawText("Population: " + Globals.PlayerNation.Population, 1525, 180 + (3 + offset) * 25, Globals.buttonFont);
+            Window.window.DrawText("Money: " + Globals.PlayerNation.Money, 1525, 180 + (4 + offset) * 25, Globals.buttonFont);
+
+
         }
 
         public void Scroll(int val)

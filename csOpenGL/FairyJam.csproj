@@ -168,6 +168,7 @@
     <Compile Include="Shaders\MainShader.cs" />
     <Compile Include="SoundManager.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="SupplyCompany.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Trait.cs" />
     <Compile Include="Timer.cs" />
@@ -261,7 +262,22 @@
     <Content Include="Textures\CrispyBacon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Textures\Supplies\BanishmentSpell.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Supplies\Hammer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Supplies\Heart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Textures\Pixel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Supplies\ManaPotion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Supplies\PrayerCircleInactive.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Test.png">
