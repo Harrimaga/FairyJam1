@@ -38,5 +38,10 @@ namespace FairyJam
             // If the person uses east asian naming convention flip names
             return EastAsianName ? FamilyName + " " + GivenName : GivenName + " " + FamilyName;
         }
+
+        public string ToStringShort()
+        {
+            return ToString().Length > 25 ? ToString().Substring(0, 24) + "..." : ToString();
+        }
     }
 }

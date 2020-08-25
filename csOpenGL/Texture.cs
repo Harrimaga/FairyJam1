@@ -14,7 +14,7 @@ namespace FairyJam
     {
 
         public static List<Texture> list = new List<Texture>();
-        public const int test = 0, pixel = 1, testTile = 2, circle = 3, bacon = 4;
+        public const int test = 0, pixel = 1, testTile = 2, circle = 3, bacon = 4, personSelectionBox = 5, personSelectionBoxHover = 6, personSelectionBoxSelected = 7;
 
         public static void Load()
         {
@@ -23,6 +23,9 @@ namespace FairyJam
             list.Add(new Texture("Textures/TestTile.png", 128, 128, 128, 128));
             list.Add(new Texture("Textures/Circle.png", 512, 512, 512, 512));
             list.Add(new Texture("Textures/CrispyBacon.png", 32, 32, 32, 32));
+            list.Add(new Texture("Textures/Buttons/PersonSelectionBox.png", 40, 10, 40, 10));
+            list.Add(new Texture("Textures/Buttons/PersonSelectionBoxHover.png", 40, 10, 40, 10));
+            list.Add(new Texture("Textures/Buttons/PersonSelectionBoxSelected.png", 40, 10, 40, 10));
         }
 
         public static Texture Get(int i)

@@ -19,6 +19,7 @@ namespace FairyJam
         public double Population { get; set; }
 
         public List<Leader> leaders { get;}
+        public List<Scientist> scientists { get;}
 
         public Nation()
         {
@@ -30,6 +31,7 @@ namespace FairyJam
             TechPoints = 5;
             Population = 5;
             leaders = new List<Leader>();
+            scientists = new List<Scientist>();
 
         }
 
@@ -43,12 +45,27 @@ namespace FairyJam
             leaders.Remove(l);
         }
 
+        public void AddScientist(Scientist s)
+        {
+            scientists.Add(s);
+        }
+
+        public void RemoveScientist(Scientist s)
+        {
+            scientists.Remove(s);
+        }
+
         public void Update()
         {
             for(int i = leaders.Count() - 1; i >= 0; i--)
             {
                 Leader l = leaders[i];
                 l.Update(() => leaders.Remove(l));
+            }
+            for(int i = scientists.Count() - 1; i >= 0; i--)
+            {
+                Scientist l = scientists[i];
+                l.Update(() => scientists.Remove(l));
             }
         }
 

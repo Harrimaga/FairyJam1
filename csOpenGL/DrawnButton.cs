@@ -69,6 +69,7 @@ namespace FairyJam
             this.g = g;
             this.b = b;
             a = 1;
+            drawed = true;
         }
 
         public bool IsInButton(float x, float y)

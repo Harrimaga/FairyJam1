@@ -32,7 +32,7 @@ namespace FairyJam.UI
             for(int i = 0; i < 35; i++)
             {
                 int k = i;
-                scrollListButtons.Add(new DrawnButton("", 100, 60 + 25 * i, 300, 25, () => { SelectFromList(k + scroll); }, 0, 0, 0, false));
+                scrollListButtons.Add(new DrawnButton("", 100, 60 + 25 * i, 300, 25, () => { SelectFromList(k + scroll); }, Textures.Get(Textures.personSelectionBox), 1, 1, 1));
                 buttons.Add(scrollListButtons[scrollListButtons.Count-1]);
             }
 
@@ -47,9 +47,41 @@ namespace FairyJam.UI
                 scrolledButtons[scroll+i].Draw(i);
             }
 
+            Window.window.DrawText("Leaders:", 1500, 25, Globals.buttonFont);
+            if (Globals.PlayerNation.leaders.Count == 0)
+            {
+                Window.window.DrawText("None", 1525, 60, Globals.buttonFont);
+            }
             for(int i = 0; i < Globals.PlayerNation.leaders.Count; i++)
             {
-                Window.window.DrawText(Globals.PlayerNation.leaders[i].ToString(), 1500, 25 + i * 25, Globals.buttonFont);
+                Window.window.DrawText(Globals.PlayerNation.leaders[i].ToStringShort(), 1525, 60 + i * 25, Globals.buttonFont);
+                int x = 0;
+                foreach(Trait t in Globals.PlayerNation.leaders[i].Traits)
+                {
+                    t.sprite.Draw(1798 + 32*x, 60 + 25 * i);
+                    x++;
+                }
+            }
+
+            int offset = Globals.PlayerNation.leaders.Count;
+            if(offset == 0) {
+                offset = 1;
+            }
+
+            Window.window.DrawText("Scientists:", 1500, 85 + offset * 25, Globals.buttonFont);
+            if (Globals.PlayerNation.scientists.Count == 0)
+            {
+                Window.window.DrawText("None", 1525, 120 + offset * 25, Globals.buttonFont);
+            }
+            for (int i = 0; i < Globals.PlayerNation.scientists.Count; i++)
+            {
+                Window.window.DrawText(Globals.PlayerNation.scientists[i].ToStringShort(), 1525, 120 + (i + offset) * 25, Globals.buttonFont);
+                int x = 0;
+                foreach (Trait t in Globals.PlayerNation.scientists[i].Traits)
+                {
+                    t.sprite.Draw(1798 + 32 * x, 120 + 25 * (i + offset));
+                    x++;
+                }
             }
         }
 

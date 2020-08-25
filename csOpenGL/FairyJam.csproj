@@ -149,6 +149,7 @@
     <Compile Include="Orbitals\Orbital.cs" />
     <Compile Include="Orbitals\Planet.cs" />
     <Compile Include="Orbitals\PlanetarySystem.cs" />
+    <Compile Include="Scientist.cs" />
     <Compile Include="Shaders\BloomShader.cs" />
     <Compile Include="StarConnection.cs" />
     <Compile Include="Orbitals\Sun.cs" />
@@ -241,6 +242,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="People\namelist.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Buttons\PersonSelectionBox.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Buttons\PersonSelectionBoxHover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Buttons\PersonSelectionBoxSelected.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Circle.png">
