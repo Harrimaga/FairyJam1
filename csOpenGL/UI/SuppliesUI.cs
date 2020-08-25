@@ -138,11 +138,11 @@ namespace FairyJam.UI
         {
             if (supplyCompany.Hired)
             {
-                Window.window.DrawText(supplyCompany.ToString(), 100, 60 + 25 * y, 1, 0, 0, 1, Globals.buttonFont);
+                Window.window.DrawText(supplyCompany.ToString(), 100, 60 + 25 * y, 1, 0, 0, 1, true, Globals.buttonFont);
             }
             else
             {
-                Window.window.DrawText(supplyCompany.ToString(), 100, 60 + 25 * y, Globals.buttonFont);
+                Window.window.DrawText(supplyCompany.ToString(), 100, 60 + 25 * y, true, Globals.buttonFont);
             }
             int x = 0;
 

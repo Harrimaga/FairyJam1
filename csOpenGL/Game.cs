@@ -42,7 +42,8 @@ namespace FairyJam
             Globals.currentState = GameState.MAINMENU;
             Globals.PlayerNation = new Nation();
 
-            
+            Globals.eventHandler = new Events.EventHandler();
+
         }
 
         public void Update(double delta)
@@ -109,6 +110,8 @@ namespace FairyJam
             {
                 button.Draw();
             }
+
+            Globals.eventHandler.Draw();
         }
 
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)

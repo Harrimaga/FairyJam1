@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FairyJam.Events;
 
 namespace FairyJam.UI
 {
@@ -27,7 +28,7 @@ namespace FairyJam.UI
 
             buttons.Add(new DrawnButton("Supplies", 1920 / 2 + 100, 10, 400, 50, () => { Globals.suppliesUI.reSelect(); }, 0.5f, 0.5f, 0.5f));
 
-            buttons.Add(new DrawnButton("Embark!", 1920 - 200, 1080 - 100, 200, 100, () => { Globals.currentState = GameState.MAPVIEW; Globals.activeButtons = new List<DrawnButton>(); }, 0.5f, 0.5f, 0.5f));
+            buttons.Add(new DrawnButton("Embark!", 1920 - 200, 1080 - 100, 200, 100, () => { Globals.eventHandler.SpawnEvent(new Event());/*Globals.currentState = GameState.MAPVIEW; Globals.activeButtons = new List<DrawnButton>();*/ }, 0.5f, 0.5f, 0.5f));
 
             for(int i = 0; i < 35; i++)
             {
@@ -47,14 +48,14 @@ namespace FairyJam.UI
                 scrolledButtons[scroll+i].Draw(i);
             }
 
-            Window.window.DrawText("Leaders:", 1500, 25, Globals.buttonFont);
+            Window.window.DrawText("Leaders:", 1500, 25, false, Globals.buttonFont);
             if (Globals.PlayerNation.leaders.Count == 0)
             {
-                Window.window.DrawText("None", 1525, 60, Globals.buttonFont);
+                Window.window.DrawText("None", 1525, 60, false, Globals.buttonFont);
             }
             for(int i = 0; i < Globals.PlayerNation.leaders.Count; i++)
             {
-                Window.window.DrawText(Globals.PlayerNation.leaders[i].ToStringShort(), 1525, 60 + i * 25, Globals.buttonFont);
+                Window.window.DrawText(Globals.PlayerNation.leaders[i].ToStringShort(), 1525, 60 + i * 25, false, Globals.buttonFont);
                 int x = 0;
                 foreach(Trait t in Globals.PlayerNation.leaders[i].Traits)
                 {
@@ -68,14 +69,14 @@ namespace FairyJam.UI
                 offset = 1;
             }
 
-            Window.window.DrawText("Scientists:", 1500, 85 + offset * 25, Globals.buttonFont);
+            Window.window.DrawText("Scientists:", 1500, 85 + offset * 25, false, Globals.buttonFont);
             if (Globals.PlayerNation.scientists.Count == 0)
             {
-                Window.window.DrawText("None", 1525, 120 + offset * 25, Globals.buttonFont);
+                Window.window.DrawText("None", 1525, 120 + offset * 25, false, Globals.buttonFont);
             }
             for (int i = 0; i < Globals.PlayerNation.scientists.Count; i++)
             {
-                Window.window.DrawText(Globals.PlayerNation.scientists[i].ToStringShort(), 1525, 120 + (i + offset) * 25, Globals.buttonFont);
+                Window.window.DrawText(Globals.PlayerNation.scientists[i].ToStringShort(), 1525, 120 + (i + offset) * 25, false, Globals.buttonFont);
                 int x = 0;
                 foreach (Trait t in Globals.PlayerNation.scientists[i].Traits)
                 {
@@ -90,12 +91,12 @@ namespace FairyJam.UI
             }
             offset += Globals.PlayerNation.scientists.Count;
 
-            Window.window.DrawText("Supplies:", 1500, 145 + offset * 25, Globals.buttonFont);
-            Window.window.DrawText("Materials: " + Globals.PlayerNation.Materials, 1525, 180 + (0 + offset) * 25, Globals.buttonFont);
-            Window.window.DrawText("Food: " + Globals.PlayerNation.Food, 1525, 180 + (1 + offset) * 25, Globals.buttonFont);
-            Window.window.DrawText("Fuel: " + Globals.PlayerNation.Fuel, 1525, 180 + (2 + offset) * 25, Globals.buttonFont);
-            Window.window.DrawText("Population: " + Globals.PlayerNation.Population, 1525, 180 + (3 + offset) * 25, Globals.buttonFont);
-            Window.window.DrawText("Money: " + Globals.PlayerNation.Money, 1525, 180 + (4 + offset) * 25, Globals.buttonFont);
+            Window.window.DrawText("Supplies:", 1500, 145 + offset * 25, false, Globals.buttonFont);
+            Window.window.DrawText("Materials: " + Globals.PlayerNation.Materials, 1525, 180 + (0 + offset) * 25, false, Globals.buttonFont);
+            Window.window.DrawText("Food: " + Globals.PlayerNation.Food, 1525, 180 + (1 + offset) * 25, false, Globals.buttonFont);
+            Window.window.DrawText("Fuel: " + Globals.PlayerNation.Fuel, 1525, 180 + (2 + offset) * 25, false, Globals.buttonFont);
+            Window.window.DrawText("Population: " + Globals.PlayerNation.Population, 1525, 180 + (3 + offset) * 25, false, Globals.buttonFont);
+            Window.window.DrawText("Money: " + Globals.PlayerNation.Money, 1525, 180 + (4 + offset) * 25, false, Globals.buttonFont);
 
 
         }

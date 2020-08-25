@@ -14,7 +14,7 @@ namespace FairyJam
 
         private int vao, vbo, ssbo;
         public bool late = false;
-        PassThroughShader pts = new PassThroughShader();
+        PassThroughShader pts;
         float[] data = {
                 0.0f, 1.0f, 0,
                 1.0f, 0.0f, 0,
@@ -44,12 +44,12 @@ namespace FairyJam
             ssbo = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ShaderStorageBuffer, ssbo);
             GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 0, ssbo);
+            pts = new PassThroughShader(vao);
         }
 
         protected override void Run(long previous)
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
             SData[] sdd = Window.sd.getData();
             int num = Window.sd.Count();
             if (late)
@@ -57,6 +57,7 @@ namespace FairyJam
                 sdd = Window.lateDraw.getData();
                 num = Window.lateDraw.Count();
             }
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
             GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 0, ssbo);
             GL.BufferData<SData>(BufferTarget.ShaderStorageBuffer, (sizeof(int) * 5 + 1 * sizeof(long) + 9 * sizeof(float)) * num, sdd, BufferUsageHint.DynamicDraw);
             GL.Uniform2(GL.GetUniformLocation(Handle, "screenSize"), Globals.Width, Globals.Height);
@@ -81,11 +82,11 @@ namespace FairyJam
     class PassThroughShader : Shader
     {
 
-        private int prev, screenSize;
+        private int prev, screenSize, vao;
 
-        public PassThroughShader() : base("Shaders/vsPost.glsl", "Shaders/fsPass.glsl")
+        public PassThroughShader(int vao) : base("Shaders/vsPost.glsl", "Shaders/fsPass.glsl")
         {
-
+            this.vao = vao;
         }
 
         protected override void ShaderSetup()
@@ -102,9 +103,11 @@ namespace FairyJam
                 throw new ArgumentException("Previous was a non existing framebuffer");
             }
             GL.Arb.MakeImageHandleResident(previous, All.ReadOnly);
+            GL.BindVertexArray(vao);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
             GL.Arb.UniformHandle(prev, previous);
             GL.Uniform2(screenSize, Globals.Width, Globals.Height);
+            GL.BindVertexArray(vao);
             GL.MemoryBarrier(MemoryBarrierFlags.AllBarrierBits);
             GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
             GL.MemoryBarrier(MemoryBarrierFlags.AllBarrierBits);

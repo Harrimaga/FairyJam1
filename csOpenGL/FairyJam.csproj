@@ -144,6 +144,9 @@
     <Compile Include="Balance.cs" />
     <Compile Include="DrawnButton.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Events\Event.cs" />
+    <Compile Include="Events\EventHandler.cs" />
+    <Compile Include="Events\Popup.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GenerationSettings.cs" />
     <Compile Include="Globals.cs" />
@@ -260,6 +263,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\CrispyBacon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Events\EventBackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Supplies\BanishmentSpell.png">

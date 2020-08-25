@@ -61,8 +61,8 @@ namespace FairyJam.UI
             // Draw Traits
             for (int i = 0; i < selectedScientist.Traits.Count; i++)
             {
-                Window.window.DrawText(selectedScientist.Traits[i].ToString(), 600, 100 + 80 * i, Globals.buttonFont);
-                Window.window.DrawText(selectedScientist.Traits[i].Description, 650, 130 + 80 * i, Globals.buttonFont);
+                Window.window.DrawText(selectedScientist.Traits[i].ToString(), 600, 100 + 80 * i, false, Globals.buttonFont);
+                Window.window.DrawText(selectedScientist.Traits[i].Description, 650, 130 + 80 * i, false, Globals.buttonFont);
             }
 
             // Draw Description
@@ -120,11 +120,11 @@ namespace FairyJam.UI
         {
             if (scientist.Hired)
             {
-                Window.window.DrawText(scientist.ToString(), 100, 60 + 25 * y, 1, 0, 0, 1, Globals.buttonFont);
+                Window.window.DrawText(scientist.ToString(), 100, 60 + 25 * y, 1, 0, 0, 1, true, Globals.buttonFont);
             }
             else
             {
-                Window.window.DrawText(scientist.ToString(), 100, 60 + 25 * y, Globals.buttonFont);
+                Window.window.DrawText(scientist.ToString(), 100, 60 + 25 * y, true, Globals.buttonFont);
             }
             int x = 0;
             foreach (Trait t in scientist.Traits)
