@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Secretary;
+using FairyJam.Technology;
 
 namespace FairyJam
 {
@@ -163,6 +164,49 @@ namespace FairyJam
             }
 
             return list.ToArray();
+        }
+
+        private void ParseTechnologies(string[] lines)
+        {
+            TechTree tree = null;
+            bool startedTier = false;
+            bool startedTechnology = false;
+            Enums.TechType type = Enums.TechType.Technology;
+            foreach(string line in lines)
+            {
+                bool opening = line.Contains('{');
+                bool closing = line.Contains('}');
+
+                if(tree == null && opening) // There is no tree being built and this line contains {
+                {
+                    string treeName = line.Split('=')[0].Trim();
+                    // Get which techtree this is
+                    switch (treeName)
+                    {
+                        case "diplomatic":
+                            type = Enums.TechType.Diplomatic;
+                            break;
+                        case "economic":
+                            type = Enums.TechType.Economic;
+                            break;
+                        case "military":
+                            type = Enums.TechType.Military;
+                            break;
+                        default:
+                            type = Enums.TechType.Technology;
+                            break;
+                    }
+                    // Create the tree object
+                    tree = new TechTree(type);
+                } else if (tree != null && opening && !startedTier) // There is a tree being built, this line contains { and we haven't started a tier yet
+                {
+                    startedTier = true;
+                    tree.NewTier();
+                } else if (tree != null && opening && startedTier && !startedTechnology) // This is a new technology
+                {
+                    startedTechnology = true;
+                }
+            }
         }
 
         public void Update(double delta)
