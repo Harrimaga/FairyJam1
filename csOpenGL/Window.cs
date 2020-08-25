@@ -197,9 +197,9 @@ namespace FairyJam
                         prev = rt;
                     }
                 }
-
                 textDrawing.RefreshBuffers();
                 textDrawing.Draw();
+
                 GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
                 mainShader.RunLate(prev);
             }
