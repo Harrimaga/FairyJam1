@@ -213,6 +213,9 @@ namespace FairyJam
                         case "population_growth":
                             Globals.logger.Log("Trait action `" + words[0] + "` is not yet implemented", LogLevel.INFO);
                             break;
+                        case "sprite":
+                            trait.sprite = new Sprite(25, 25, 0, Textures.Get(int.Parse(words[1].Trim())));
+                            break;
                         default:
                             Globals.logger.Log("Trait action `" + words[0] + "` was unknown", LogLevel.WARNING);
                             break;

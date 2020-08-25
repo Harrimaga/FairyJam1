@@ -10,6 +10,7 @@ namespace FairyJam.UI
     {
 
         public List<ListEntry> scrolledButtons = new List<ListEntry>();
+        public List<DrawnButton> scrollListButtons = new List<DrawnButton>();
         int scroll = 0;
 
         public OneMinuteUI()
@@ -27,6 +28,14 @@ namespace FairyJam.UI
             buttons.Add(new DrawnButton("Supplies", 1920 / 2 + 200, 10, 400, 50, () => { Globals.suppliesUI.reSelect(); }, 0.5f, 0.5f, 0.5f));
 
             buttons.Add(new DrawnButton("Embark!", 1920 - 200, 1080 - 100, 200, 100, () => { Globals.currentState = GameState.MAPVIEW; Globals.activeButtons = new List<DrawnButton>(); }, 0.5f, 0.5f, 0.5f));
+
+            for(int i = 0; i < 35; i++)
+            {
+                int k = i;
+                scrollListButtons.Add(new DrawnButton("", 100, 60 + 25 * i, 300, 25, () => { SelectFromList(k + scroll); }, 0, 0, 0, false));
+                buttons.Add(scrollListButtons[scrollListButtons.Count-1]);
+            }
+
         }
 
         public override void Draw()
@@ -50,6 +59,11 @@ namespace FairyJam.UI
             {
                 scroll = 0;
             }
+        }
+
+        public virtual void SelectFromList(int i)
+        {
+
         }
 
 

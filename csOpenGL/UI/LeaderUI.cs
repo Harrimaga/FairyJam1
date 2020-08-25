@@ -9,6 +9,7 @@ namespace FairyJam.UI
     class LeaderUI : OneMinuteUI
     {
         private List<Leader> possibleLeaders;
+        private Leader selectedLeader;
 
         public LeaderUI() {
             GenerateLeaders();
@@ -16,6 +17,7 @@ namespace FairyJam.UI
             {
                 scrolledButtons.Add(new LeaderEntry(l));
             }
+            selectedLeader = possibleLeaders[0];
         }
 
         // Generate Leader List
@@ -28,7 +30,35 @@ namespace FairyJam.UI
                 namelist.Next();
                 Trait trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)]; // Gets a random existing trait
                 List<Trait> traitsToAdd = new List<Trait> { trait };
+                if (Globals.random.Next(0,100) > 50)
+                {
+                    trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)];
+                    traitsToAdd.Add(trait);
+                }
                 possibleLeaders.Add(new Leader(100, namelist.GivenName, namelist.FamilyName, Enums.LeaderTitle.Admiral, traitsToAdd, false));
+            }
+        }
+
+        public override void Draw()
+        {
+            base.Draw();
+            // Draw Leader information and stats
+
+            // Draw Name
+            Window.window.DrawText(selectedLeader.ToString(), 400, 50);
+            
+            // Draw Traits
+
+            // Draw Description
+
+            // Draw random background information that just wastes time
+        }
+
+        public override void SelectFromList(int i)
+        {
+            if(i < possibleLeaders.Count)
+            {
+                selectedLeader = possibleLeaders[i];
             }
         }
 
@@ -47,6 +77,12 @@ namespace FairyJam.UI
         public override void Draw(int y)
         {
             Window.window.DrawText(leader.ToString(), 100, 60 + 25 * y, Globals.buttonFont);
+            int x = 0;
+            foreach(Trait t in leader.Traits)
+            {
+                t.sprite.Draw(32*x, 60 + 25 * y);
+                x++;
+            }
         }
 
     }

@@ -1,8 +1,11 @@
 {
 name = less sexy
 population_growth = 1.5
+sprite = 4
 blablabla
 }
 {
 name = sexy
+population_growth = 2
+sprite = 3
 }

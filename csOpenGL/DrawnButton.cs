@@ -23,7 +23,9 @@ namespace FairyJam
         public float b { get; set; }
         public float a { get; set; }
 
-        public DrawnButton(string text, float x, float y, float width, float height, EventAction onClickAction, float r, float g, float b)
+        public bool drawed { get; set; }
+
+        public DrawnButton(string text, float x, float y, float width, float height, EventAction onClickAction, float r, float g, float b, bool drawed = true)
         {
             if (height < 25)
             {
@@ -40,6 +42,7 @@ namespace FairyJam
             this.g = g;
             this.b = b;
             a = 1;
+            this.drawed = drawed;
         }
 
         public DrawnButton(string text, float x, float y, float width, float height, EventAction onClickAction, Texture tex = null, float r = 1, float g = 1, float b = 1)
@@ -80,6 +83,7 @@ namespace FairyJam
 
         public void Draw()
         {
+            if (!drawed) return;
             Sprite.DrawLate(X, Y, false, 0, r, g, b, a);
             Window.window.DrawTextCentered(Text, (int)(X + (Width / 2)), (int)(Y + (Height / 2) - 12), Globals.buttonFont);
         }

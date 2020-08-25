@@ -13,6 +13,8 @@ namespace FairyJam
         public List<Action> Actions { get; set; } // All effects
         public delegate void Action();
 
+        public Sprite sprite;
+
         public Trait()
         {
             Actions = new List<Action>();
