@@ -25,5 +25,23 @@ namespace FairyJam.Events
             // Draw Options
         }
 
+        public virtual void OptionA() 
+        {
+            
+        }
+
+        public virtual void OptionB() 
+        {
+            
+        }
+
+
+        public virtual void OptionC() 
+        {
+            
+        }
+
+
+
     }
 }
