@@ -12,6 +12,7 @@ namespace FairyJam
         public string GivenName { get; set; }
         public string FamilyName { get; set; }
         public bool EastAsianName { get; set; }
+        public bool Hired { get; set; }
         public delegate void OnDeath();
 
         protected Person(int healthiness, string givenName, string familyName, bool eastAsianName = false)
@@ -20,6 +21,7 @@ namespace FairyJam
             GivenName = givenName;
             FamilyName = familyName;
             EastAsianName = eastAsianName;
+            Hired = false;
         }
 
         public virtual void Update(OnDeath onDeath)

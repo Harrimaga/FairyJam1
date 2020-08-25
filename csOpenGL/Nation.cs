@@ -18,7 +18,7 @@ namespace FairyJam
         public double TechPoints { get; set; }
         public double Population { get; set; }
 
-        public List<Leader> leaders;
+        public List<Leader> leaders { get;}
 
         public Nation()
         {
@@ -36,6 +36,11 @@ namespace FairyJam
         public void AddLeader(Leader l)
         {
             leaders.Add(l);
+        }
+
+        public void RemoveLeader(Leader l)
+        {
+            leaders.Remove(l);
         }
 
         public void Update()

@@ -10,6 +10,7 @@ namespace FairyJam.UI
     {
         private List<Leader> possibleLeaders;
         private Leader selectedLeader;
+        private DrawnButton hireButton;
 
         public LeaderUI() {
             GenerateLeaders();
@@ -18,6 +19,8 @@ namespace FairyJam.UI
                 scrolledButtons.Add(new LeaderEntry(l));
             }
             selectedLeader = possibleLeaders[0];
+            hireButton = new DrawnButton(selectedLeader.Hired ? "FIRE" : "HIRE", 1600, 800, 320, 100, () => { HireFire(); }, 0.5f, 0.5f, 0.5f);
+            buttons.Add(hireButton);
         }
 
         // Generate Leader List
@@ -34,6 +37,12 @@ namespace FairyJam.UI
                 {
                     trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)];
                     traitsToAdd.Add(trait);
+
+                    if (Globals.random.Next(0, 100) > 50)
+                    {
+                        trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)];
+                        traitsToAdd.Add(trait);
+                    }
                 }
                 possibleLeaders.Add(new Leader(100, namelist.GivenName, namelist.FamilyName, Enums.LeaderTitle.Admiral, traitsToAdd, false));
             }
@@ -45,9 +54,14 @@ namespace FairyJam.UI
             // Draw Leader information and stats
 
             // Draw Name
-            Window.window.DrawText(selectedLeader.ToString(), 400, 50);
+            Window.window.DrawText(selectedLeader.ToString(), 600, 50);
             
             // Draw Traits
+            for(int i = 0; i < selectedLeader.Traits.Count; i++)
+            {
+                Window.window.DrawText(selectedLeader.Traits[i].ToString(), 600, 100 + 80 * i, Globals.buttonFont);
+                Window.window.DrawText(selectedLeader.Traits[i].Description, 650, 130 + 80 * i, Globals.buttonFont);
+            }
 
             // Draw Description
 
@@ -58,7 +72,33 @@ namespace FairyJam.UI
         {
             if(i < possibleLeaders.Count)
             {
-                selectedLeader = possibleLeaders[i];
+                if (selectedLeader == possibleLeaders[i])
+                {
+                    hireButton.OnClick();
+                }
+                else
+                {
+                    selectedLeader = possibleLeaders[i];
+                    hireButton.Text = selectedLeader.Hired ? "FIRE" : "HIRE";
+                }
+            }
+        }
+
+        public void HireFire()
+        {
+            if(!selectedLeader.Hired && Globals.PlayerNation.leaders.Count >= 10)
+            {
+                return;
+            }
+            selectedLeader.Hired = !selectedLeader.Hired;
+            hireButton.Text = selectedLeader.Hired ? "FIRE" : "HIRE";
+            if (selectedLeader.Hired)
+            {
+                Globals.PlayerNation.AddLeader(selectedLeader);
+            }
+            else
+            {
+                Globals.PlayerNation.RemoveLeader(selectedLeader);
             }
         }
 
@@ -76,11 +116,18 @@ namespace FairyJam.UI
 
         public override void Draw(int y)
         {
-            Window.window.DrawText(leader.ToString(), 100, 60 + 25 * y, Globals.buttonFont);
+            if (leader.Hired)
+            {
+                Window.window.DrawText(leader.ToString(), 100, 60 + 25 * y, 1, 0, 0, 1, Globals.buttonFont);
+            }
+            else
+            {
+                Window.window.DrawText(leader.ToString(), 100, 60 + 25 * y, Globals.buttonFont);
+            }
             int x = 0;
             foreach(Trait t in leader.Traits)
             {
-                t.sprite.Draw(32*x, 60 + 25 * y);
+                t.sprite.Draw(2+ 32*x, 60 + 25 * y);
                 x++;
             }
         }

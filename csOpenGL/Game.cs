@@ -40,6 +40,7 @@ namespace FairyJam
             //buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
             //buttons.Add(new DrawnButton("Bloom", 0, 210, 200, 100, () => { Window.window.ToggleShader(Shaders.bloom); }, 0.5f, 0.5f, 0.5f));
             Globals.currentState = GameState.MAINMENU;
+            Globals.PlayerNation = new Nation();
 
             
         }
@@ -209,6 +210,9 @@ namespace FairyJam
                     {
                         case "name":
                             trait.Name = words[1].Trim();
+                            break;
+                        case "description":
+                            trait.Description = words[1].Trim();
                             break;
                         case "population_growth":
                             Globals.logger.Log("Trait action `" + words[0] + "` is not yet implemented", LogLevel.INFO);

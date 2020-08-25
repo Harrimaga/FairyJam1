@@ -21,11 +21,11 @@ namespace FairyJam.UI
             // - Supplies
 
             // Finish Button -> events if time left
-            buttons.Add(new DrawnButton("Leaders", 1920 / 2 - 600, 10, 400, 50, () => { Globals.leaderUI.reSelect(); }, 0.5f, 0.5f, 0.5f));
+            buttons.Add(new DrawnButton("Leaders", 1920 / 2 - 700, 10, 400, 50, () => { Globals.leaderUI.reSelect(); }, 0.5f, 0.5f, 0.5f));
 
-            buttons.Add(new DrawnButton("Scientists", 1920 / 2 - 200, 10, 400, 50, () => { Globals.scientistUI.reSelect(); }, 0.5f, 0.5f, 0.5f));
+            buttons.Add(new DrawnButton("Scientists", 1920 / 2 - 300, 10, 400, 50, () => { Globals.scientistUI.reSelect(); }, 0.5f, 0.5f, 0.5f));
 
-            buttons.Add(new DrawnButton("Supplies", 1920 / 2 + 200, 10, 400, 50, () => { Globals.suppliesUI.reSelect(); }, 0.5f, 0.5f, 0.5f));
+            buttons.Add(new DrawnButton("Supplies", 1920 / 2 + 100, 10, 400, 50, () => { Globals.suppliesUI.reSelect(); }, 0.5f, 0.5f, 0.5f));
 
             buttons.Add(new DrawnButton("Embark!", 1920 - 200, 1080 - 100, 200, 100, () => { Globals.currentState = GameState.MAPVIEW; Globals.activeButtons = new List<DrawnButton>(); }, 0.5f, 0.5f, 0.5f));
 
@@ -45,6 +45,11 @@ namespace FairyJam.UI
             {
                 if (scroll + i >= scrolledButtons.Count) break;
                 scrolledButtons[scroll+i].Draw(i);
+            }
+
+            for(int i = 0; i < Globals.PlayerNation.leaders.Count; i++)
+            {
+                Window.window.DrawText(Globals.PlayerNation.leaders[i].ToString(), 1500, 25 + i * 25, Globals.buttonFont);
             }
         }
 

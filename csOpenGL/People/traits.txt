@@ -2,10 +2,12 @@
 name = less sexy
 population_growth = 1.5
 sprite = 4
+description = Dit is de description van een van de traits ofzo
 blablabla
 }
 {
 name = sexy
 population_growth = 2
 sprite = 3
+description = Nog meer test text
 }

@@ -27,6 +27,11 @@ namespace FairyJam
             Actions = actions;
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public void Update()
         {
             foreach(Action action in Actions)

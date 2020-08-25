@@ -24,6 +24,7 @@ namespace FairyJam
         public static PlanetarySystem currentSystem;
         public static float mapCamX, mapCamY;
         public static UI.UI currentUI;
+        public static Nation PlayerNation;
 
         public static List<DrawnButton> activeButtons;
 
