@@ -145,7 +145,12 @@
     <Compile Include="CircleButton.cs" />
     <Compile Include="DrawnButton.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Equipment\SpecialEquipment\Cloak.cs" />
+    <Compile Include="Equipment\SpecialEquipment\EMP.cs" />
+    <Compile Include="Equipment\SpecialEquipment\Nuke.cs" />
+    <Compile Include="Equipment\SpecialEquipment\ResourceDetection.cs" />
     <Compile Include="Equipment\SpecialEquipment\SpecialEquipment.cs" />
+    <Compile Include="Equipment\SpecialEquipment\WormholeDevice.cs" />
     <Compile Include="Equipment\Weapons\BasicGun.cs" />
     <Compile Include="Equipment\Weapons\BasicLaser.cs" />
     <Compile Include="Equipment\Weapons\BasicPlasmaGun.cs" />

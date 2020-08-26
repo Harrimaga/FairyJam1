@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FairyJam.Equipment
+namespace FairyJam.Equipment.SpecialEquipment
 {
     public abstract class SpecialEquipment
     {
         public string Name { get; set; }
+        public bool passive { get; set; }
 
         protected SpecialEquipment()
         {

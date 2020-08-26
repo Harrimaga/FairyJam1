@@ -30,7 +30,7 @@ namespace FairyJam.Ships
 
         }
 
-        private void AddWeaponTypes()
+        protected override void AddWeaponTypes()
         {
             AllowedWeaponTypes.Add(Enums.WeaponType.Bullet, true);
             AllowedWeaponTypes.Add(Enums.WeaponType.Laser, true);

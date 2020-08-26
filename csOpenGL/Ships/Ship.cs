@@ -1,4 +1,5 @@
 ﻿using FairyJam.Equipment;
+using FairyJam.Equipment.SpecialEquipment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,8 @@ namespace FairyJam
 
             PeopleLoad = new List<Person>();
         }
+
+        protected abstract void AddWeaponTypes();
 
         /// <summary>
         ///     Add person to the ship
