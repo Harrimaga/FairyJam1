@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FairyJam.Equipment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,22 +12,29 @@ namespace FairyJam
     /// </summary>
     abstract class Ship
     {
+        //Ship basic stats
         public string Name { get; set; }
         public int HealthPoints { get; set; }
-        public int Damage { get; set; }
+        public int DamageBonus { get; set; }
+        public int Evasiveness { get; set; }
+        public int Speed { get; set; }
+
+        //Equipment of ship
+        public Weapon Weapon { get; set; }
+        public SpecialEquipment Special { get; set; }
+
+        //Load Capacity for resources and people
         public int ResourceLoad { get; set; }
         public int MaxResourceLoad { get; set; }
         List<Person> PeopleLoad;
         public int MaxPeopleLoad { get; set; }
-        public int Evasiveness { get; set; }
-        public int Speed { get; set; }
         
-        //public int weaponAmount, speed, evasiveness, carryPeopleAmount;
 
-        protected Ship(int health, int damage, int evasiveness, int speed, int maxPeopleAmount, int maxResourceAmount)
+        protected Ship(string name, int health, int damageBonus, int evasiveness, int speed, int maxPeopleAmount, int maxResourceAmount)
         {
+            Name = name;
             HealthPoints = health;
-            Damage = damage;
+            DamageBonus = damageBonus;
             Evasiveness = evasiveness;
             Speed = speed;
 
@@ -90,8 +98,12 @@ namespace FairyJam
             bool hit = Globals.random.Next(0, 100) >= Evasiveness;
 
             if (hit)
-                enemy.HealthPoints -= Damage;
-            
+                enemy.HealthPoints -= Globals.random.Next(Weapon.MinDamage, Weapon.MaxDamage);
+        }
+
+        public virtual void changeWeapon(Weapon weapon)
+        {
+            this.Weapon = weapon;
         }
 
     }

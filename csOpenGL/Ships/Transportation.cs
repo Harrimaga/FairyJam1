@@ -12,15 +12,15 @@ namespace FairyJam.Ships
     class Transportation : Ship
     {
         private const int minHealth = 80, maxHealth = 100;
-        private const int minDamage = 0, maxDamage = 0;
         private const int minEvasion = 10, maxEvasion = 20;
         private const int minSpeed = 3, maxSpeed = 4;
         private const int maxPeople = 5, maxResource = 250;
 
-        public Transportation(int healthBonus = 0, int damageBonus = 0, int evasionBonus = 0, int maxPeopleAmountBonus = 0, int maxResourceAmountBonus = 0, int speedBonus = 0)
+        public Transportation(string name = "Transportation", int healthBonus = 0, int damageBonus = 0, int evasionBonus = 0, int maxPeopleAmountBonus = 0, int maxResourceAmountBonus = 0, int speedBonus = 0)
             : base(
+                  name,
                   Globals.random.Next(minHealth + healthBonus, maxHealth + healthBonus),
-                  Globals.random.Next(minDamage + damageBonus, maxDamage + damageBonus),
+                  damageBonus,
                   Globals.random.Next(minEvasion + evasionBonus, maxEvasion + evasionBonus),
                   Globals.random.Next(minSpeed + speedBonus, maxSpeed + speedBonus),
                   maxPeople + maxPeopleAmountBonus,
@@ -28,6 +28,11 @@ namespace FairyJam.Ships
                   )
         {
 
+        }
+
+        public override void changeWeapon(Weapon weapon)
+        {
+            base.changeWeapon(weapon);
         }
     }
 }
