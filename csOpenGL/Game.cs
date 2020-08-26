@@ -103,6 +103,8 @@ namespace FairyJam
             Globals.currentSystem = ps;
             ps.Owner = Globals.PlayerNation;
             Globals.currentUI = null;
+            ps.Draw();
+            ps.Update();
         }
 
         public void Draw()

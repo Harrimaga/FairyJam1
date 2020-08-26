@@ -27,6 +27,12 @@ namespace FairyJam
             sprite = new Sprite(Globals.TileWidth, Globals.TileWidth, 0, Textures.Get(Textures.testTile));
         }
 
+        public void Turn()
+        {
+            if (ps == null) return;
+            ps.Turn();
+        }
+
         public void GenerateSystem()
         {
             if (Globals.random.Next(0,100) > 80)

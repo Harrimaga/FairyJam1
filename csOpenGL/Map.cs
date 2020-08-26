@@ -31,6 +31,14 @@ namespace FairyJam
             connections = new List<StarConnection>();
         }
 
+        public void Turn()
+        {
+            foreach (Tile tile in grid)
+            {
+                tile.Turn();
+            }
+        }
+
         public bool ConContains(Tile from, Tile to)
         {
             if (!from.HasSystem() || !to.HasSystem()) return true;

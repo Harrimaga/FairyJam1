@@ -142,6 +142,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Balance.cs" />
+    <Compile Include="Buildings\Building.cs" />
+    <Compile Include="Buildings\RAB.cs" />
     <Compile Include="CircleButton.cs" />
     <Compile Include="DrawnButton.cs" />
     <Compile Include="Enums.cs" />

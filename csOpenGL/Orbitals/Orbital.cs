@@ -24,7 +24,7 @@ namespace FairyJam.Orbitals
         protected System.Numerics.Vector2 position;
         public CircleButton button;
 
-        protected Nation Owner { get; set; }
+        public Nation Owner { get; set; }
         public string Name { get; set; }
 
         public double maxPop;
@@ -70,7 +70,15 @@ namespace FairyJam.Orbitals
                 if (Owner != null && !(this is Asteroid))
                 {
                     Sprite temp = new Sprite(Sprite.w + 4, Sprite.h + 4, 0, Sprite.texture);
-                    temp.Draw(position.X - (radius + 4) / 2, position.Y - (radius + 4) / 2, true, 0, 1, 1, 1, 1);
+
+                    if (materialsAvailable[0] == 0 && materialsAvailable[1] == 0 && materialsAvailable[2] == 0)
+                    {
+                        temp.Draw(position.X - (radius + 4) / 2, position.Y - (radius + 4) / 2, true, 0, 1, 0, 0, 1);
+                    }
+                    else
+                    {
+                        temp.Draw(position.X - (radius + 4) / 2, position.Y - (radius + 4) / 2, true, 0, 1, 1, 1, 1);
+                    }  
                 }
                 Sprite.Draw(position.X - radius / 2, position.Y - radius / 2, true, 0, Color.R / 256f, Color.G / 256f, Color.B / 256f);
             }
@@ -87,6 +95,11 @@ namespace FairyJam.Orbitals
                 angleFromParent -= (float)(2f * Math.PI * Globals.DeltaTime) / (float)timeToOrbit;
             }
             button.Update(position.X, position.Y);
+        }
+
+        public virtual void Turn()
+        {
+
         }
     }
 }

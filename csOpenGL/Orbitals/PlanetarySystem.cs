@@ -151,5 +151,13 @@ namespace FairyJam.Orbitals
             }
             Globals.currentUI = null;
         }
+
+        public void Turn()
+        {
+            foreach (Planet planet in planets)
+            {
+                planet.Turn();
+            }
+        }
     }
 }

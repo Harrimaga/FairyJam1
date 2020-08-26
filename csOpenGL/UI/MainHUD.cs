@@ -15,7 +15,7 @@ namespace FairyJam.UI
         public static QFont ResourceFontTop, ResourceFontBot;
 
         public static List<DrawnButton> buttons;
-        public static DrawnButton pauseButton;
+        public static DrawnButton pauseButton, turnButton;
         public static Sprite[] sprites;
 
         public static void Init() 
@@ -36,9 +36,11 @@ namespace FairyJam.UI
             };
 
             pauseButton = new DrawnButton("", 1920 - 245, 5, 240, 60, () => { Globals.paused = !Globals.paused; }, 0, 0, 1, true);
+            turnButton = new DrawnButton("", 1920 - 240, 1080 - 80, 240, 80, () => { Globals.map.Turn(); }, 1, 0, 0, true);
             buttons = new List<DrawnButton>()
             {
-                pauseButton
+                pauseButton,
+                turnButton
             };
 
             ResourceFontTop = new QFont("Fonts/times.ttf", 16, new QuickFont.Configuration.QFontBuilderConfiguration());
@@ -112,9 +114,11 @@ namespace FairyJam.UI
             pauseButton.Draw();
 
 
+
             // Bottom
             //  - Minimap
             //  - Next Turn button
+            turnButton.Draw();
         }
 
         public static void MouseDown(MouseButtonEventArgs e, int mx, int my)

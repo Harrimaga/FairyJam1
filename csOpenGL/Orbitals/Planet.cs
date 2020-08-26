@@ -1,4 +1,5 @@
-﻿using SharpFont.PostScript;
+﻿using FairyJam.Buildings;
+using SharpFont.PostScript;
 using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,15 @@ namespace FairyJam.Orbitals
     public class Planet : Orbital
     {
         public List<Planet> moons;
-        
+        public List<Building> buildings;
         public PlanetType type;
 
 
         public Planet(Orbital parent, ulong radiusFromParent, float startingAngle, int radius, ulong mass, System.Drawing.Color color, bool moon) : base(parent, radiusFromParent, startingAngle, radius, mass, color)
         {
             moons = new List<Planet>();
+            buildings = new List<Building>();
+
             materialsAvailable = new double[3];
 
             Name = moon ? "Moon" : "Planet";
@@ -62,6 +65,12 @@ namespace FairyJam.Orbitals
             }
         }
 
+        public override void OnClick()
+        {
+            base.OnClick();
+            buildings.Add(new RAB("Miner", new double[3] { 10, 10, 10 }));
+        }
+
         public void GenerateMoons(int numMoons = 1)
         {
             // Advanced Generation
@@ -101,6 +110,15 @@ namespace FairyJam.Orbitals
             foreach (var moon in moons)
             {
                 moon.Update();
+            }
+        }
+
+        public override void Turn()
+        {
+            foreach (Building building in buildings)
+            {
+
+                building.Turn(this);
             }
         }
     }
