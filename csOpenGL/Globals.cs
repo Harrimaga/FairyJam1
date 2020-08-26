@@ -26,6 +26,7 @@ namespace FairyJam
         public static float mapCamX, mapCamY;
         public static UI.UI currentUI;
         public static Nation PlayerNation;
+        public static bool paused;
 
         public static Timer timer;
 

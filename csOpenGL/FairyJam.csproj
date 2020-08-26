@@ -179,6 +179,7 @@
     <Compile Include="Timer.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="UI\LeaderUI.cs" />
+    <Compile Include="UI\MainHUD.cs" />
     <Compile Include="UI\MainMenu.cs" />
     <Compile Include="UI\OneMinuteUI.cs" />
     <Compile Include="UI\PlanetUI.cs" />
@@ -214,6 +215,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Fonts\ariblk.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Fonts\times.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Fonts\timesbd.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Fonts\timesbi.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Fonts\timesi.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="OpenTK.dll.config" />

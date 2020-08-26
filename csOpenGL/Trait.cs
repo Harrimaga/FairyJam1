@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace FairyJam
 {
-    class Trait
+    public class Trait
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Action> Actions { get; set; } // All effects
         public delegate void Action();
 
-        public Sprite sprite;
+        public Sprite sprite { get; set; }
 
         public Trait()
         {

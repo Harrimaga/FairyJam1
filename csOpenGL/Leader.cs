@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam
 {
-    class Leader : Person
+    public class Leader : Person
     {
         public Enums.LeaderTitle Title { get; set; }
         public List<Trait> Traits { get; set; }

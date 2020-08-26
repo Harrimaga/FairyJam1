@@ -23,7 +23,14 @@ namespace FairyJam.Orbitals
 
         public void UnSelect()
         {
-            Color = Color.Gray;
+            if (Owner != null)
+            {
+                Color = Owner.Color;
+            }
+            else
+            {
+                Color = Color.Gray;
+            }
         }
     }
 }

@@ -46,7 +46,7 @@ namespace FairyJam
         }
     }
 
-    class Sprite
+    public class Sprite
     {
 
         public int w, h, num;
@@ -58,6 +58,14 @@ namespace FairyJam
             this.h = h;
             this.num = num;
             this.texture = texture;
+        }
+
+        public Sprite(int w, int h, int num, int texture)
+        {
+            this.w = w;
+            this.h = h;
+            this.num = num;
+            this.texture = Textures.Get(texture);
         }
 
         public void Draw(float x, float y, bool cam = true, float rot = 0, float r = 1, float g = 1, float b = 1, float a = 1)

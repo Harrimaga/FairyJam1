@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace FairyJam
 {
 
-    class Nation
+    public class Nation
     {
 
         public double Materials { get; set; }
@@ -22,6 +23,8 @@ namespace FairyJam
         public List<Scientist> scientists { get;}
         public List<SupplyCompany> supplyCompanies { get;}
 
+        public System.Drawing.Color Color { get; }
+
         public Nation()
         {
             Materials = 10;
@@ -31,10 +34,10 @@ namespace FairyJam
             Happiness = 10;
             TechPoints = 10;
             Population = 10;
+            Color = Color.FromArgb(255, Globals.random.Next(256), Globals.random.Next(256), Globals.random.Next(256));
             leaders = new List<Leader>();
             scientists = new List<Scientist>();
             supplyCompanies = new List<SupplyCompany>();
-
         }
 
         

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam
 {
-    class SupplyCompany
+    public class SupplyCompany
     {
 
         public double Materials { get; set; }

@@ -23,6 +23,8 @@ namespace FairyJam.Orbitals
         protected double timeToOrbit;
         protected System.Numerics.Vector2 position;
         public CircleButton button;
+
+        protected Nation Owner { get; set; }
         public string Name { get; set; }
 
         public double maxPop;
@@ -39,6 +41,7 @@ namespace FairyJam.Orbitals
             this.mass = mass;
             this.Color = color;
             this.position = new System.Numerics.Vector2(1920 / 2, 1080 / 2);
+            Owner = null;
             Sprite = new Sprite((int)radius, (int)radius, 0, Textures.Get(Textures.circle));
 
             button = new CircleButton(position.X, position.Y, radius, () => { OnClick(); } );
@@ -52,6 +55,7 @@ namespace FairyJam.Orbitals
         public virtual void OnClick()
         {
             new PlanetUI(this);
+            Owner = Globals.PlayerNation;
         }
 
         public virtual void Draw()
@@ -63,13 +67,25 @@ namespace FairyJam.Orbitals
             else
             {
                 position = parent.position + new System.Numerics.Vector2(radiusFromParent * (float)Math.Cos(angleFromParent * 2 * Math.PI), radiusFromParent * (float)Math.Sin(angleFromParent * 2 * Math.PI));
+                if (Owner != null && !(this is Asteroid))
+                {
+                    Sprite temp = new Sprite(Sprite.w + 4, Sprite.h + 4, 0, Sprite.texture);
+                    temp.Draw(position.X - (radius + 4) / 2, position.Y - (radius + 4) / 2, true, 0, 1, 1, 1, 1);
+                }
                 Sprite.Draw(position.X - radius / 2, position.Y - radius / 2, true, 0, Color.R / 256f, Color.G / 256f, Color.B / 256f);
             }
         }
 
         public virtual void Update()
         {
-            angleFromParent += (float)(2f * Math.PI * Globals.DeltaTime) / (float)timeToOrbit;
+            if (Globals.currentSystem.clockWise)
+            {
+                angleFromParent += (float)(2f * Math.PI * Globals.DeltaTime) / (float)timeToOrbit;
+            }
+            else
+            {
+                angleFromParent -= (float)(2f * Math.PI * Globals.DeltaTime) / (float)timeToOrbit;
+            }
             button.Update(position.X, position.Y);
         }
     }

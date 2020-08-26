@@ -10,7 +10,7 @@ using SixLabors.ImageSharp.Processing;
 namespace FairyJam
 {
 
-    class Textures
+    public class Textures
     {
 
         public static List<Texture> list = new List<Texture>();
@@ -43,7 +43,7 @@ namespace FairyJam
 
     }
 
-    class Texture
+    public class Texture
     {
 
         public long Handle;
