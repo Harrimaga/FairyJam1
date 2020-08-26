@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam.Ships
 {
-    class Military : Ship
+    public class Military : Ship
     {
         private const int minHealth = 80, maxHealth = 110;
         private const int minEvasion = 10, maxEvasion = 20;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam.Equipment.Weapons
 {
-    class BasicLaser : Weapon
+    public class BasicLaser : Weapon
     {
         private const string name = "Basic Laser";
         private const int minDamage = 30, maxDamage = 40;

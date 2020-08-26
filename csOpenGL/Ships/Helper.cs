@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam.Ships
 {
-    class Helper : Ship
+    public class Helper : Ship
     {
         private const int minHealth = 40, maxHealth = 80;
         private const int minEvasion = 30, maxEvasion = 50;

@@ -9,7 +9,7 @@ namespace FairyJam.Ships
     /// <summary>
     ///     Transportation ship, used to transport people and resources
     /// </summary>
-    class Transportation : Ship
+    public class Transportation : Ship
     {
         private const int minHealth = 80, maxHealth = 100;
         private const int minEvasion = 10, maxEvasion = 20;

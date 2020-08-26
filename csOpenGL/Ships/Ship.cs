@@ -10,7 +10,7 @@ namespace FairyJam
     /// <summary>
     ///     Abstract Class which contains the main elements of a ship
     /// </summary>
-    abstract class Ship
+    public abstract class Ship
     {
         //Ship basic stats
         public string Name { get; set; }

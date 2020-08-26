@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam.Equipment.Weapons
 {
-    class BasicPlasmaGun : Weapon
+    public class BasicPlasmaGun : Weapon
     {
         private const string name = "Basic Plasma gun";
         private const int minDamage = 10, maxDamage = 20;
