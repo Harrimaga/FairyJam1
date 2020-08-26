@@ -91,7 +91,7 @@ namespace FairyJam
         {
             if (!drawed) return;
             Sprite.DrawLate(X, Y, false, 0, r, g, b, a);
-            Window.window.DrawTextCentered(Text, (int)(X + (Width / 2)), (int)(Y + (Height / 2) - 12), Globals.buttonFont);
+            Window.window.DrawTextCentered(Text, (int)(X + (Width / 2)), (int)(Y + (Height / 2) - 12), true, Globals.buttonFont);
         }
     }
 }

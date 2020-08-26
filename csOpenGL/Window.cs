@@ -70,7 +70,7 @@ namespace FairyJam
         private bool noobMode = false;
 
         QFont font;
-        QFontDrawing textDrawing;
+        QFontDrawing textDrawing, textDrawingLate;
         private double delta;
         private Game game;
         public int mouseX, mouseY;
@@ -109,10 +109,12 @@ namespace FairyJam
             //Font
             font = new QFont("Fonts/arial.ttf", 36, new QuickFont.Configuration.QFontBuilderConfiguration(true));
             textDrawing = new QFontDrawing();
+            textDrawingLate = new QFontDrawing();
             Matrix4 m = Matrix4.Identity;
             m.M11 /= (float)(1920.0/2);
             m.M22 /= (float)(1080.0/2);
             textDrawing.ProjectionMatrix = m;
+            textDrawingLate.ProjectionMatrix = m;
 
             //Textures
             Textures.Load();
@@ -195,12 +197,14 @@ namespace FairyJam
                         prev = rt;
                     }
                 }
+                textDrawing.RefreshBuffers();
+                textDrawing.Draw();
 
                 GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
                 mainShader.RunLate(prev);
             }
-            textDrawing.RefreshBuffers();
-            textDrawing.Draw();
+            textDrawingLate.RefreshBuffers();
+            textDrawingLate.Draw();
 
             Context.SwapBuffers();
 
@@ -217,18 +221,19 @@ namespace FairyJam
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             game.MouseDown(e, mouseX, mouseY);
-            
+            if (Globals.currentState == GameState.MAPVIEW)
+            {
+                Globals.map.MouseDown(e, mouseX, mouseY);
+            }
+
+            Globals.eventHandler.MouseDown(e, mouseX, mouseY);
+
             base.OnMouseDown(e);
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             game.MouseUp(e, mouseX, mouseY);
-            if (Globals.currentState == GameState.MAPVIEW)
-            {
-                Globals.map.MouseDown(e, mouseX, mouseY);
-            }
-            
             base.OnMouseDown(e);
         }
 
@@ -257,6 +262,7 @@ namespace FairyJam
             mouseY = window.mouseY;
             //other shit
             textDrawing.DrawingPrimitives.Clear();
+            textDrawingLate.DrawingPrimitives.Clear();
             game.Update(delta);
             game.Draw();
             SoundManager.Update();
@@ -269,42 +275,73 @@ namespace FairyJam
             base.OnMouseMove(e);
         }
 
-        public void DrawText(string text, int x, int y, QFont f = null)
+        public void DrawText(string text, int x, int y, bool late = false, QFont f = null)
         {
             if(f == null)
             {
                 f = font;
             }
-            textDrawing.Print(f, text, new Vector3(x-960, 540-y, 0), QFontAlignment.Left);
+            if(late) 
+            {
+                textDrawingLate.Print(f, text, new Vector3(x-960, 540-y, 0), QFontAlignment.Left);
+            }
+            else 
+            {
+                textDrawing.Print(f, text, new Vector3(x-960, 540-y, 0), QFontAlignment.Left);
+            }
+            
         }
 
-        public void DrawText(string text, int x, int y, float r, float g, float b, float a, QFont f = null)
+        public void DrawText(string text, int x, int y, float r, float g, float b, float a, bool late = false, QFont f = null)
         {
             if (f == null)
             {
                 f = font;
             }
             QFontRenderOptions opt = new QFontRenderOptions() { Colour = Color.FromArgb(new Color4(r, g, b, a).ToArgb()) };
-            textDrawing.Print(f, text, new Vector3(x - 960, 540 - y, 0), QFontAlignment.Left, opt);
+            if (late)
+            {
+                textDrawingLate.Print(f, text, new Vector3(x - 960, 540 - y, 0), QFontAlignment.Left, opt);
+            }
+            else
+            {
+                textDrawing.Print(f, text, new Vector3(x - 960, 540 - y, 0), QFontAlignment.Left, opt);
+            }
         }
 
-        public void DrawTextCentered(string text, int x, int y, QFont f = null)
+        public void DrawTextCentered(string text, int x, int y, bool late = false, QFont f = null)
         {
             if (f == null)
             {
                 f = font;
             }
-            textDrawing.Print(f, text, new Vector3(x - 960, 540 - y, 0), QFontAlignment.Centre);
+            if (late)
+            {
+                textDrawingLate.Print(f, text, new Vector3(x - 960, 540 - y, 0), QFontAlignment.Centre);
+            }
+            else
+            {
+                textDrawing.Print(f, text, new Vector3(x - 960, 540 - y, 0), QFontAlignment.Centre);
+            }
+            
         }
 
-        public void DrawTextCentered(string text, int x, int y, float r, float g, float b, float a, QFont f = null)
+        public void DrawTextCentered(string text, int x, int y, float r, float g, float b, float a, bool late = false, QFont f = null)
         {
             if (f == null)
             {
                 f = font;
             }
             QFontRenderOptions opt = new QFontRenderOptions() { Colour = Color.FromArgb(new Color4(r, g, b, a).ToArgb()) };
-            textDrawing.Print(f, text, new Vector3(x - 960, 540 - y, 0), QFontAlignment.Centre, opt);
+            if(late) 
+            {
+                textDrawingLate.Print(f, text, new Vector3(x - 960, 540 - y, 0), QFontAlignment.Centre, opt);
+            }
+            else 
+            {
+                textDrawing.Print(f, text, new Vector3(x - 960, 540 - y, 0), QFontAlignment.Centre, opt);       
+            }
+            
         }
 
         public void AddShader(Shader s, bool enabled = true)

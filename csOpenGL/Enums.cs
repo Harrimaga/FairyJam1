@@ -29,4 +29,12 @@ namespace FairyJam
         MAPVIEW,
         SYSTEMVIEW
     }
+
+    // TODO: Create more Types
+    public enum PlanetType
+    {
+        GASGIANT,
+        NORMAL,
+        DENSE
+    }
 }

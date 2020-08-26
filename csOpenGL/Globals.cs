@@ -16,6 +16,7 @@ namespace FairyJam
         public static Map map { get; set; }
         public static double DeltaTime;
         public static GameState currentState;
+        public static Events.EventHandler eventHandler;
         public static QFont buttonFont = new QFont("Fonts/arial.ttf", 16, new QuickFont.Configuration.QFontBuilderConfiguration(true));
         public static Random random = new Random();
         public static Logger logger = new Logger("logs/log.txt");
@@ -25,6 +26,8 @@ namespace FairyJam
         public static float mapCamX, mapCamY;
         public static UI.UI currentUI;
         public static Nation PlayerNation;
+
+        public static Timer timer;
 
         public static List<DrawnButton> activeButtons;
 

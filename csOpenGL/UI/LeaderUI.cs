@@ -59,8 +59,8 @@ namespace FairyJam.UI
             // Draw Traits
             for(int i = 0; i < selectedLeader.Traits.Count; i++)
             {
-                Window.window.DrawText(selectedLeader.Traits[i].ToString(), 600, 100 + 80 * i, Globals.buttonFont);
-                Window.window.DrawText(selectedLeader.Traits[i].Description, 650, 130 + 80 * i, Globals.buttonFont);
+                Window.window.DrawText(selectedLeader.Traits[i].ToString(), 600, 100 + 80 * i, false, Globals.buttonFont);
+                Window.window.DrawText(selectedLeader.Traits[i].Description, 650, 130 + 80 * i, false, Globals.buttonFont);
             }
 
             // Draw Description
@@ -118,16 +118,16 @@ namespace FairyJam.UI
         {
             if (leader.Hired)
             {
-                Window.window.DrawText(leader.ToString(), 100, 60 + 25 * y, 1, 0, 0, 1, Globals.buttonFont);
+                Window.window.DrawText(leader.ToString(), 100, 60 + 25 * y, 1, 0, 0, 1, true, Globals.buttonFont);
             }
             else
             {
-                Window.window.DrawText(leader.ToString(), 100, 60 + 25 * y, Globals.buttonFont);
+                Window.window.DrawText(leader.ToString(), 100, 60 + 25 * y, true, Globals.buttonFont);
             }
             int x = 0;
             foreach(Trait t in leader.Traits)
             {
-                t.sprite.Draw(2+ 32*x, 60 + 25 * y);
+                t.sprite.Draw(2+ 32*x, 60 + 25 * y, false);
                 x++;
             }
         }

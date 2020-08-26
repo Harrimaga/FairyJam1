@@ -14,19 +14,23 @@ namespace FairyJam
     {
 
         public Window window;
-        private Timer timer;
         private Hotkey left = new Hotkey(true).AddKey(Key.A).AddKey(Key.Left);
         private Hotkey right = new Hotkey(true).AddKey(Key.D).AddKey(Key.Right);
         private Hotkey up = new Hotkey(true).AddKey(Key.W).AddKey(Key.Up);
         private Hotkey down = new Hotkey(true).AddKey(Key.S).AddKey(Key.Down);
         private Hotkey Q = new Hotkey(false).AddKey(Key.Q);
+        private Hotkey pause = new Hotkey(false).AddKey(Key.Space);
         MainMenu um = new MainMenu();
+
+        bool TimerEnabled = true;
+        bool paused;
 
 
         public Game(Window window)
         {
             this.window = window;
-            this.timer = new Timer(60000);
+            Globals.timer = new Timer(60000);
+            paused = false;
             OnLoad();
             ReadFiles();
         }
@@ -42,13 +46,23 @@ namespace FairyJam
             Globals.currentState = GameState.MAINMENU;
             Globals.PlayerNation = new Nation();
 
-            
+            Globals.eventHandler = new Events.EventHandler();
+
         }
 
         public void Update(double delta)
         {
             Globals.DeltaTime = delta;
-            timer.UpdateTimer();
+
+            if (Globals.currentState == GameState.MINUTE)
+            {
+                Globals.timer.UpdateTimer();
+                if (Globals.timer.Expired() && TimerEnabled)
+                {
+                    Globals.currentState = GameState.MAPVIEW;
+                    Globals.activeButtons = new List<DrawnButton>();
+                }
+            }
 
             //if (timer.Expired())
             //{
@@ -60,6 +74,7 @@ namespace FairyJam
             if (right.IsDown()) Window.camX += (float)(10 * delta);
             if (up.IsDown()) Window.camY -= (float)(10 * delta);
             if (down.IsDown()) Window.camY += (float)(10 * delta);
+            if (pause.IsDown()) paused = !paused;
 
             if(Q.IsDown() && Globals.currentState == GameState.MAPVIEW)
             {
@@ -72,7 +87,7 @@ namespace FairyJam
                 Window.camX = Globals.mapCamX;
                 Window.camY = Globals.mapCamY;
             }
-            if (Globals.currentState == GameState.SYSTEMVIEW)
+            if (Globals.currentState == GameState.SYSTEMVIEW && !paused)
             {
                 Globals.currentSystem.Update();
             }
@@ -109,6 +124,8 @@ namespace FairyJam
             {
                 button.Draw();
             }
+
+            Globals.eventHandler.Draw();
         }
 
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)

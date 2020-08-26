@@ -11,7 +11,7 @@ namespace FairyJam
         public static int LeaderNameGroup       = 1; // Dutch Names
         public static int ScientistNameGroup    = 0; // Koreaboo Names
         public static int MaxPlanets            = 8;
-        public static int MaxMoons              = 3;
+        public static int MaxMoons              = 12;
         public static int MinPlanets            = 3;
         public static int MinMoons              = 0;
         public static int MaxSupplyPoints       = 300;
