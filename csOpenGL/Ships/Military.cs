@@ -9,7 +9,7 @@ namespace FairyJam.Ships
     class Military : Ship
     {
         private const int minHealth = 80, maxHealth = 110;
-        private const int minEvasion = 0, maxEvasion = 20;
+        private const int minEvasion = 10, maxEvasion = 20;
         private const int minSpeed = 2, maxSpeed = 3;
         private const int maxPeople = 1, maxResource = 0;
 
@@ -24,7 +24,16 @@ namespace FairyJam.Ships
                   maxResource + maxResourceAmountBonus
                   )
         {
+            AllowedWeaponTypes = new Dictionary<Enums.WeaponType, bool>();
+            AddWeaponTypes();
 
+        }
+
+        private void AddWeaponTypes()
+        {
+            AllowedWeaponTypes.Add(Enums.WeaponType.Bullet, true);
+            AllowedWeaponTypes.Add(Enums.WeaponType.Laser, true);
+            AllowedWeaponTypes.Add(Enums.WeaponType.Plasma, true);
         }
 
         public override void changeWeapon(Weapon weapon)

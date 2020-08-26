@@ -24,7 +24,16 @@ namespace FairyJam.Ships
                   maxResource + maxResourceAmountBonus
                   )
         {
+            AllowedWeaponTypes = new Dictionary<Enums.WeaponType, bool>();
+            AddWeaponTypes();
 
+        }
+
+        private void AddWeaponTypes()
+        {
+            AllowedWeaponTypes.Add(Enums.WeaponType.Bullet, false);
+            AllowedWeaponTypes.Add(Enums.WeaponType.Laser, false);
+            AllowedWeaponTypes.Add(Enums.WeaponType.Plasma, true);
         }
 
         public override void changeWeapon(Weapon weapon)

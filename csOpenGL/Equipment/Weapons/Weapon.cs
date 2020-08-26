@@ -15,12 +15,16 @@ namespace FairyJam
         public int Accuracy { get; set; }
 
         //Weapon slots this weapon occupies
-        public int Size { get; set; }
+        public int Slotsize { get; set; }
 
-        protected Weapon(int minDamage, int maxDamage)
+        protected Weapon(string name, int minDamage, int maxDamage, int accuracy, int slots)
         {
+            Name = name;
             MinDamage = minDamage;
             MaxDamage = maxDamage;
+            Accuracy = accuracy;
+
+            Slotsize = slots;
         }
     }
 }

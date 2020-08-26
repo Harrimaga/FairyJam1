@@ -20,6 +20,7 @@ namespace FairyJam
         public int Speed { get; set; }
 
         //Equipment of ship
+        public Dictionary<Enums.WeaponType, bool> AllowedWeaponTypes { get; set; }
         public Weapon Weapon { get; set; }
         public SpecialEquipment Special { get; set; }
 
@@ -37,6 +38,8 @@ namespace FairyJam
             DamageBonus = damageBonus;
             Evasiveness = evasiveness;
             Speed = speed;
+
+            AllowedWeaponTypes = new Dictionary<Enums.WeaponType, bool>();
 
             MaxPeopleLoad = maxPeopleAmount;
             MaxResourceLoad = maxResourceAmount;
@@ -95,7 +98,7 @@ namespace FairyJam
         /// <param name="enemy"></param>
         public void AttackShip(Ship enemy)
         {
-            bool hit = Globals.random.Next(0, 100) >= Evasiveness;
+            bool hit = Globals.random.Next(0, Weapon.Accuracy) >= Evasiveness;
 
             if (hit)
                 enemy.HealthPoints -= Globals.random.Next(Weapon.MinDamage, Weapon.MaxDamage);
