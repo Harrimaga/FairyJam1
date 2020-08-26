@@ -19,9 +19,11 @@ namespace FairyJam
         public int Evasiveness { get; set; }
         public int Speed { get; set; }
 
+        public int MaxSlots { get; set; }
+
         //Equipment of ship
         public Dictionary<Enums.WeaponType, bool> AllowedWeaponTypes { get; set; }
-        public Weapon Weapon { get; set; }
+        public List<Weapon> WeaponList { get; set; }
         public SpecialEquipment Special { get; set; }
 
         //Load Capacity for resources and people
@@ -31,14 +33,16 @@ namespace FairyJam
         public int MaxPeopleLoad { get; set; }
         
 
-        protected Ship(string name, int health, int damageBonus, int evasiveness, int speed, int maxPeopleAmount, int maxResourceAmount)
+        protected Ship(string name, int health, int damageBonus, int evasiveness, int speed, int maxWeaponSlots, int maxPeopleAmount, int maxResourceAmount)
         {
             Name = name;
             HealthPoints = health;
             DamageBonus = damageBonus;
             Evasiveness = evasiveness;
             Speed = speed;
+            MaxSlots = maxWeaponSlots;
 
+            WeaponList = new List<Weapon>();
             AllowedWeaponTypes = new Dictionary<Enums.WeaponType, bool>();
 
             MaxPeopleLoad = maxPeopleAmount;
@@ -96,18 +100,30 @@ namespace FairyJam
         ///     Method which handles attacks on other ships
         /// </summary>
         /// <param name="enemy"></param>
-        public void AttackShip(Ship enemy)
+        public void AttackShip(Ship enemy, Weapon weapon)
         {
-            bool hit = Globals.random.Next(0, Weapon.Accuracy) >= Evasiveness;
+            bool hit = Globals.random.Next(0, weapon.Accuracy) >= Evasiveness;
 
             if (hit)
-                enemy.HealthPoints -= Globals.random.Next(Weapon.MinDamage, Weapon.MaxDamage);
+                enemy.HealthPoints -= Globals.random.Next(weapon.MinDamage, weapon.MaxDamage);
         }
 
-        public virtual void changeWeapon(Weapon weapon)
+        /// <summary>
+        ///     Add weapon to ship arsenal
+        /// </summary>
+        /// <param name="weapon">Weapon to be added</param>
+        public void AddWeapon(Weapon weapon)
         {
-            this.Weapon = weapon;
+            WeaponList.Add(weapon);
         }
 
+        /// <summary>
+        ///     Remove weapon from ship arsenal
+        /// </summary>
+        /// <param name="weapon">Weapon to be removed</param>
+        public void RemoveWeapon(Weapon weapon)
+        {
+            WeaponList.Remove(weapon);
+        }
     }
 }

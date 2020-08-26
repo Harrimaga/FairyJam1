@@ -12,6 +12,7 @@ namespace FairyJam.Ships
         private const int minEvasion = 30, maxEvasion = 50;
         private const int minSpeed = 3, maxSpeed = 6;
         private const int maxPeople = 2, maxResource = 400;
+        private const int weaponSlots = 1;
 
         public Helper(string name = "Helper", int healthBonus = 0, int damageBonus = 0, int evasionBonus = 0, int maxPeopleAmountBonus = 0, int maxResourceAmountBonus = 0, int speedBonus = 0)
             : base(
@@ -20,11 +21,11 @@ namespace FairyJam.Ships
                   damageBonus,
                   Globals.random.Next(minEvasion + evasionBonus, maxEvasion + evasionBonus),
                   Globals.random.Next(minSpeed + speedBonus, maxSpeed + speedBonus),
+                  weaponSlots,
                   maxPeople + maxPeopleAmountBonus,
                   maxResource + maxResourceAmountBonus
                   )
         {
-            AllowedWeaponTypes = new Dictionary<Enums.WeaponType, bool>();
             AddWeaponTypes();
 
         }
@@ -34,11 +35,6 @@ namespace FairyJam.Ships
             AllowedWeaponTypes.Add(Enums.WeaponType.Bullet, false);
             AllowedWeaponTypes.Add(Enums.WeaponType.Laser, false);
             AllowedWeaponTypes.Add(Enums.WeaponType.Plasma, true);
-        }
-
-        public override void changeWeapon(Weapon weapon)
-        {
-            base.changeWeapon(weapon);
         }
     }
 }
