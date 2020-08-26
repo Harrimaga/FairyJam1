@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam.Equipment
 {
-    abstract class SpecialEquipment
+    public abstract class SpecialEquipment
     {
         public string Name { get; set; }
 

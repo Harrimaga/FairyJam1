@@ -125,5 +125,14 @@ namespace FairyJam
         {
             WeaponList.Remove(weapon);
         }
+
+        /// <summary>
+        ///     Add Special Equipment Weapon to the ship arsenal
+        /// </summary>
+        /// <param name="special">The Special Equipment to be added</param>
+        public void AddSpecialEquipment(SpecialEquipment special)
+        {
+            Special = special;
+        }
     }
 }
