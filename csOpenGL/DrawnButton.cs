@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam
 {
-    class DrawnButton
+    public class DrawnButton
     {
         public delegate void EventAction();
 

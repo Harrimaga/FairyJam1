@@ -66,6 +66,5 @@ namespace FairyJam.Events
                 }
             }
         }
-
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam
 {
-    class Enums
+    public class Enums
     {
         public enum LeaderTitle
         {

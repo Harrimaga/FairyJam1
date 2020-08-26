@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FairyJam
 {
-    abstract class Person
+    public abstract class Person
     {
         public int Healthiness { get; set; }
         public string GivenName { get; set; }

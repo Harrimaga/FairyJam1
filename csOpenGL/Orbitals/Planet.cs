@@ -11,9 +11,8 @@ namespace FairyJam.Orbitals
 {
     public class Planet : Orbital
     {
-        private List<Planet> moons;
-        public double maxPop;
-        public double[] materialsAvailable; // Food / Materials / Fuel
+        public List<Planet> moons;
+        
         public PlanetType type;
 
 
@@ -21,6 +20,8 @@ namespace FairyJam.Orbitals
         {
             moons = new List<Planet>();
             materialsAvailable = new double[3];
+
+            Name = moon ? "Moon" : "Planet";
 
             ulong mr = mass / (ulong)radius;
 

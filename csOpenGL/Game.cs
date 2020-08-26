@@ -23,14 +23,12 @@ namespace FairyJam
         MainMenu um = new MainMenu();
 
         bool TimerEnabled = true;
-        bool paused;
-
 
         public Game(Window window)
         {
             this.window = window;
             Globals.timer = new Timer(60000);
-            paused = false;
+            Globals.paused = false;
             OnLoad();
             ReadFiles();
         }
@@ -45,6 +43,8 @@ namespace FairyJam
             //buttons.Add(new DrawnButton("Bloom", 0, 210, 200, 100, () => { Window.window.ToggleShader(Shaders.bloom); }, 0.5f, 0.5f, 0.5f));
             Globals.currentState = GameState.MAINMENU;
             Globals.PlayerNation = new Nation();
+
+            UI.MainHUD.Init();
 
             Globals.eventHandler = new Events.EventHandler();
 
@@ -74,7 +74,7 @@ namespace FairyJam
             if (right.IsDown()) Window.camX += (float)(10 * delta);
             if (up.IsDown()) Window.camY -= (float)(10 * delta);
             if (down.IsDown()) Window.camY += (float)(10 * delta);
-            if (pause.IsDown()) paused = !paused;
+            if (pause.IsDown()) Globals.paused = !Globals.paused;
 
             if(Q.IsDown() && Globals.currentState == GameState.MAPVIEW)
             {
@@ -87,7 +87,7 @@ namespace FairyJam
                 Window.camX = Globals.mapCamX;
                 Window.camY = Globals.mapCamY;
             }
-            if (Globals.currentState == GameState.SYSTEMVIEW && !paused)
+            if (Globals.currentState == GameState.SYSTEMVIEW && !Globals.paused)
             {
                 Globals.currentSystem.Update();
             }
@@ -101,6 +101,8 @@ namespace FairyJam
             Window.camY = 0;
             Globals.currentState = GameState.SYSTEMVIEW;
             Globals.currentSystem = ps;
+            ps.Owner = Globals.PlayerNation;
+            Globals.currentUI = null;
         }
 
         public void Draw()
@@ -113,8 +115,12 @@ namespace FairyJam
             else if (Globals.currentState == GameState.SYSTEMVIEW)
             {
                 Globals.currentSystem.Draw();
+                if(Globals.currentUI != null) 
+                {
+                    Globals.currentUI.Draw();
+                }
             }
-            else
+            else if (Globals.currentUI != null)
             {
                 Globals.currentUI.Draw();
             }
@@ -126,10 +132,16 @@ namespace FairyJam
             }
 
             Globals.eventHandler.Draw();
+
+            if (Globals.currentState == GameState.MAPVIEW || Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                MainHUD.Draw();
+            }
         }
 
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)
         {
+            if (Globals.currentState == GameState.SYSTEMVIEW || Globals.currentState == GameState.MAPVIEW) MainHUD.MouseDown(e, mx, my);
             if (e.Button == MouseButton.Left)
             {
                 for (int i = Globals.activeButtons.Count - 1; i >= 0; i--)
@@ -142,6 +154,13 @@ namespace FairyJam
                     }
                 }
             }
+
+            if (Globals.currentState == GameState.SYSTEMVIEW)
+            {
+                Globals.currentSystem.MouseDown(e, mx, my);
+            }
+            
+
         }
 
         public void MouseUp(MouseButtonEventArgs e, int mx, int my)
@@ -151,33 +170,39 @@ namespace FairyJam
 
         public void MouseWheelScrollUp()
         {
-            if(Globals.currentUI == Globals.leaderUI)
+            if (Globals.currentState == GameState.MINUTE)
             {
-                Globals.leaderUI.Scroll(-2);
-            }
-            else if (Globals.currentUI == Globals.scientistUI)
-            {
-                Globals.scientistUI.Scroll(-2);
-            }
-            else if (Globals.currentUI == Globals.suppliesUI)
-            {
-                Globals.suppliesUI.Scroll(-2);
+                if (Globals.currentUI == Globals.leaderUI)
+                {
+                    Globals.leaderUI.Scroll(-2);
+                }
+                else if (Globals.currentUI == Globals.scientistUI)
+                {
+                    Globals.scientistUI.Scroll(-2);
+                }
+                else if (Globals.currentUI == Globals.suppliesUI)
+                {
+                    Globals.suppliesUI.Scroll(-2);
+                }
             }
         }
 
         public void MouseWheelScrollDown()
         {
-            if (Globals.currentUI == Globals.leaderUI)
+            if (Globals.currentState == GameState.MINUTE)
             {
-                Globals.leaderUI.Scroll(2);
-            }
-            else if (Globals.currentUI == Globals.scientistUI)
-            {
-                Globals.scientistUI.Scroll(2);
-            }
-            else if (Globals.currentUI == Globals.suppliesUI)
-            {
-                Globals.suppliesUI.Scroll(2);
+                if (Globals.currentUI == Globals.leaderUI)
+                {
+                    Globals.leaderUI.Scroll(2);
+                }
+                else if (Globals.currentUI == Globals.scientistUI)
+                {
+                    Globals.scientistUI.Scroll(2);
+                }
+                else if (Globals.currentUI == Globals.suppliesUI)
+                {
+                    Globals.suppliesUI.Scroll(2);
+                }
             }
         }
 

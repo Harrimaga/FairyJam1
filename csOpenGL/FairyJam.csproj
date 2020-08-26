@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Balance.cs" />
+    <Compile Include="CircleButton.cs" />
     <Compile Include="DrawnButton.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Equipment\SpecialEquipment\SpecialEquipment.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="GenerationSettings.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Hotkey.cs" />
+    <Compile Include="Orbitals\Asteroid.cs" />
     <Compile Include="Orbitals\Orbital.cs" />
     <Compile Include="Orbitals\Planet.cs" />
     <Compile Include="Orbitals\PlanetarySystem.cs" />
@@ -186,8 +188,10 @@
     <Compile Include="Timer.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="UI\LeaderUI.cs" />
+    <Compile Include="UI\MainHUD.cs" />
     <Compile Include="UI\MainMenu.cs" />
     <Compile Include="UI\OneMinuteUI.cs" />
+    <Compile Include="UI\PlanetUI.cs" />
     <Compile Include="UI\ScientistUI.cs" />
     <Compile Include="UI\SuppliesUI.cs" />
     <Compile Include="UI\UI.cs" />
@@ -221,6 +225,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Fonts\ariblk.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Fonts\times.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Fonts\timesbd.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Fonts\timesbi.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Fonts\timesi.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="OpenTK.dll.config" />
