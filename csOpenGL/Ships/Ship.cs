@@ -55,20 +55,44 @@ namespace FairyJam
                 PeopleLoad.Remove(person);
         }
 
+        /// <summary>
+        ///     Add an amount of resource to the ship
+        /// </summary>
+        /// <param name="resourceAmount"></param>
         public void AddResource(int resourceAmount)
         {
             if (ResourceLoad + resourceAmount <= MaxResourceLoad)
                 ResourceLoad += resourceAmount;
         }
+        /// <summary>
+        ///     Drop an amount of resource from ship
+        /// </summary>
+        /// <param name="resourceAmount"></param>
+        public void DropResource(int resourceAmount)
+        {
+            ResourceLoad -= resourceAmount;
+        }
 
+        /// <summary>
+        ///     Drop all resources from the ship
+        /// </summary>
         public void DropAllResources()
         {
             ResourceLoad = 0;
         }
 
+        /// <summary>
+        ///     Method which handles attacks on other ships
+        /// </summary>
+        /// <param name="enemy"></param>
         public void AttackShip(Ship enemy)
         {
+            bool hit = Globals.random.Next(0, 100) >= Evasiveness;
 
+            if (hit)
+                enemy.HealthPoints -= Damage;
+            
         }
+
     }
 }

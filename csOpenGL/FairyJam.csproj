@@ -184,6 +184,7 @@
     <Compile Include="UI\ScientistUI.cs" />
     <Compile Include="UI\SuppliesUI.cs" />
     <Compile Include="UI\UI.cs" />
+    <Compile Include="Weapon.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>
