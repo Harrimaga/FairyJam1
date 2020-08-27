@@ -35,6 +35,7 @@ namespace FairyJam
     {
         GASGIANT,
         NORMAL,
-        DENSE
+        DENSE,
+        MOON
     }
 }

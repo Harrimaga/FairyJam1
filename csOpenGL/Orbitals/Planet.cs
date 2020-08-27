@@ -22,8 +22,6 @@ namespace FairyJam.Orbitals
             moons = new List<Planet>();
             buildings = new List<Building>();
 
-            materialsAvailable = new double[3];
-
             Name = moon ? "Moon" : "Planet";
 
             ulong mr = mass / (ulong)radius;
@@ -63,12 +61,19 @@ namespace FairyJam.Orbitals
                     Color = System.Drawing.Color.Orange;
                 }
             }
+            else
+            {
+                materialsAvailable[0] = 0;
+                materialsAvailable[1] = Globals.random.NextDouble() * Globals.random.Next(50, 10000);
+                materialsAvailable[2] = 0;
+                maxPop = 0;
+                type = PlanetType.MOON;
+            }
         }
 
         public override void OnClick()
         {
             base.OnClick();
-            buildings.Add(new RAB("Miner", new double[3] { 10, 10, 10 }));
         }
 
         public void GenerateMoons(int numMoons = 1)
@@ -82,7 +87,7 @@ namespace FairyJam.Orbitals
 
             for (int j = 0; j < numMoons; j++)
             {
-                moons.Add(new Planet(this, ringRadi[j], (float)Globals.random.NextDouble(), Globals.random.Next(5, 20), (ulong)Globals.random.Next(10, 100), System.Drawing.Color.FromArgb(Globals.random.Next(0, 256), Globals.random.Next(0, 256), Globals.random.Next(0, 256)), true));
+                moons.Add(new Planet(this, ringRadi[j], (float)Globals.random.NextDouble(), Globals.random.Next(5, 20), (ulong)Globals.random.Next(10, 100), System.Drawing.Color.FromArgb(100, 100, 100), true));
 
             }
 

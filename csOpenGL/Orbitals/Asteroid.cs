@@ -11,7 +11,7 @@ namespace FairyJam.Orbitals
     {
         public Asteroid(Orbital parent, ulong radiusFromParent, float startingAngle, int radius, ulong mass, Color color) : base(parent, radiusFromParent, startingAngle, radius, mass, color)
         {
-
+            materialsAvailable[1] = radius * 100 * Globals.random.NextDouble();
         }
 
         public override void OnClick()

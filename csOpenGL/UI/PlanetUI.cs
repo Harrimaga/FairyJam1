@@ -22,12 +22,22 @@ namespace FairyJam.UI
         {
             backGround.DrawLate(1920 / 2 - 200, 1080 / 2 - 300, false, 0, 1, 1, 1, 0.8f);
             Window.window.DrawTextCentered(o.Name, 1920 / 2, 1080 / 2 - 300, 0, 0, 0, 1, true);
-
-            if (o.Name == "Planet")
+            int offset = 0;
+            if (o.materialsAvailable[0] > 0)
             {
                 Window.window.DrawText("Food: " + Math.Truncate(o.materialsAvailable[0] * 100) / 100, 1920 / 2 - 200, 1080 / 2 - 200, 0, 0, 0, 1, true, Globals.buttonFont);
-                Window.window.DrawText("Materials: " + Math.Truncate(o.materialsAvailable[1] * 100) / 100, 1920 / 2 - 200, 1080 / 2 - 150, 0, 0, 0, 1, true, Globals.buttonFont);
-                Window.window.DrawText("Fuel: " + Math.Truncate(o.materialsAvailable[2] * 100) / 100, 1920 / 2 - 200, 1080 / 2 - 100, 0, 0, 0, 1, true, Globals.buttonFont);
+                offset += 50;
+            }
+                
+            if (o.materialsAvailable[1] > 0)
+            {
+                Window.window.DrawText("Materials: " + Math.Truncate(o.materialsAvailable[1] * 100) / 100, 1920 / 2 - 200, 1080 / 2 - 200 + offset, 0, 0, 0, 1, true, Globals.buttonFont);
+                offset += 50;
+            }
+                
+            if (o.materialsAvailable[2] > 0)
+            {
+                Window.window.DrawText("Fuel: " + Math.Truncate(o.materialsAvailable[2] * 100) / 100, 1920 / 2 - 200, 1080 / 2 - 200 + offset, 0, 0, 0, 1, true, Globals.buttonFont);
             }
         }
 

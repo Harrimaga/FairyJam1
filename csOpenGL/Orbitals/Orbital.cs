@@ -34,6 +34,7 @@ namespace FairyJam.Orbitals
 
         public Orbital(Orbital parent, ulong radiusFromParent, float startingAngle, int radius, ulong mass, System.Drawing.Color color)
         {
+            materialsAvailable = new double[3];
             this.parent = parent;
             this.radiusFromParent = radiusFromParent;
             this.angleFromParent = startingAngle;
@@ -46,7 +47,7 @@ namespace FairyJam.Orbitals
 
             button = new CircleButton(position.X, position.Y, radius, () => { OnClick(); } );
 
-            velocity = parent != null ? Math.Sqrt((6.6720e-08 * parent.mass) / radiusFromParent) : 0;
+            velocity = parent != null ? Math.Sqrt(6.6720e-08 * parent.mass / radiusFromParent) : 0;
             timeToOrbit = (radiusFromParent * 2 * Math.PI) / velocity;
 
             Name = Globals.random.Next(10000, 99999).ToString();
