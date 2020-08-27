@@ -84,6 +84,14 @@ namespace FairyJam
                     button.OnClick();
                 }
             }
+            if (e.Button == MouseButton.Right)
+            {
+                // Open ps UI
+                if (button != null && button.IsInButton(mx + Window.camX, my + Window.camY))
+                {
+                    ps.ShowUI();
+                }
+            }
         }
     }
 }

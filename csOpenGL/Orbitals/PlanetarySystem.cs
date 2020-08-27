@@ -1,4 +1,5 @@
 ﻿using FairyJam.Ships;
+using FairyJam.UI;
 using OpenTK.Input;
 using SixLabors.ImageSharp;
 using System;
@@ -33,6 +34,11 @@ namespace FairyJam.Orbitals
             asteroids = new List<Asteroid>();
             selectedAsteroid = null;
             Owner = null;
+        }
+
+        public void ShowUI()
+        {
+            new psUI();
         }
 
         public void Generate(int planetAmount = 3)

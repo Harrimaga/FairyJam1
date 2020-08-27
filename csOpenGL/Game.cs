@@ -119,12 +119,8 @@ namespace FairyJam
             else if (Globals.currentState == GameState.SYSTEMVIEW)
             {
                 Globals.currentSystem.Draw();
-                if(Globals.currentUI != null) 
-                {
-                    Globals.currentUI.Draw();
-                }
             }
-            else if (Globals.currentUI != null)
+            if (Globals.currentUI != null)
             {
                 Globals.currentUI.Draw();
             }

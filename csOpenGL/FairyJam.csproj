@@ -202,6 +202,7 @@
     <Compile Include="UI\MainMenu.cs" />
     <Compile Include="UI\OneMinuteUI.cs" />
     <Compile Include="UI\PlanetUI.cs" />
+    <Compile Include="UI\psUI.cs" />
     <Compile Include="UI\ScientistUI.cs" />
     <Compile Include="UI\SuppliesUI.cs" />
     <Compile Include="UI\UI.cs" />

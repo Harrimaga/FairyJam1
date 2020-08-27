@@ -65,10 +65,6 @@ namespace FairyJam.UI
 
             // RAB building button:
 
-            foreach (DrawnButton button in buttons)
-            {
-                button.Draw();
-            }
             Window.window.DrawText(o.GetBuildingCount(0).ToString(), 1920 / 2 - 190, 1080 / 2 + 25, true, Globals.buttonFont);
             Window.window.DrawText(o.GetBuildingCount(1).ToString(), 1920 / 2 - 57, 1080 / 2 + 25, true, Globals.buttonFont);
             Window.window.DrawText(o.GetBuildingCount(2).ToString(), 1920 / 2 + 74, 1080 / 2 + 25, true, Globals.buttonFont);
