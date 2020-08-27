@@ -149,6 +149,15 @@
     <Compile Include="CircleButton.cs" />
     <Compile Include="DrawnButton.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Equipment\SpecialEquipment\Cloak.cs" />
+    <Compile Include="Equipment\SpecialEquipment\EMP.cs" />
+    <Compile Include="Equipment\SpecialEquipment\Nuke.cs" />
+    <Compile Include="Equipment\SpecialEquipment\ResourceDetection.cs" />
+    <Compile Include="Equipment\SpecialEquipment\SpecialEquipment.cs" />
+    <Compile Include="Equipment\SpecialEquipment\WormholeDevice.cs" />
+    <Compile Include="Equipment\Weapons\BasicGun.cs" />
+    <Compile Include="Equipment\Weapons\BasicLaser.cs" />
+    <Compile Include="Equipment\Weapons\BasicPlasmaGun.cs" />
     <Compile Include="Events\Event.cs" />
     <Compile Include="Events\EventHandler.cs" />
     <Compile Include="Events\Popup.cs" />
@@ -162,6 +171,11 @@
     <Compile Include="Orbitals\PlanetarySystem.cs" />
     <Compile Include="Scientist.cs" />
     <Compile Include="Shaders\BloomShader.cs" />
+    <Compile Include="Ships\Freighter.cs" />
+    <Compile Include="Ships\Helper.cs" />
+    <Compile Include="Ships\Military.cs" />
+    <Compile Include="Ships\Ship.cs" />
+    <Compile Include="Ships\Transportation.cs" />
     <Compile Include="StarConnection.cs" />
     <Compile Include="Orbitals\Sun.cs" />
     <Compile Include="Leader.cs" />
@@ -190,6 +204,7 @@
     <Compile Include="UI\ScientistUI.cs" />
     <Compile Include="UI\SuppliesUI.cs" />
     <Compile Include="UI\UI.cs" />
+    <Compile Include="Equipment\Weapons\Weapon.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>

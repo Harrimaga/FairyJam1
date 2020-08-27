@@ -17,6 +17,11 @@ namespace FairyJam
         {
             Feiv
         }
+
+        public enum WeaponType
+        {
+            Bullet, Laser, Plasma
+        }
     }
     public enum GameState
     {
