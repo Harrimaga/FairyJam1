@@ -28,9 +28,9 @@ namespace FairyJam.UI
 
         }
 
-        public virtual void MouseDown(MouseButtonEventArgs e, int mx, int my)
+        public virtual bool MouseDown(MouseButtonEventArgs e, int mx, int my)
         {
-
+            return false;
         }
 
     }

@@ -30,7 +30,7 @@ namespace FairyJam.Ships
                   )
         {
             AddWeaponTypes();
-
+            Type = ShipType.TRANSPORTATION;
         }
 
         protected override void AddWeaponTypes()

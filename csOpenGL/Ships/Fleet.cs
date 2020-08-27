@@ -10,7 +10,7 @@ namespace FairyJam.Ships
     public class Fleet
     {
         public List<Ship> ships;
-        private PlanetarySystem destination, next;
+        private PlanetarySystem destination, next, origin;
         private int turnsTillDestination;
         public Nation owner;
         public string Name { get; set; }
@@ -32,9 +32,10 @@ namespace FairyJam.Ships
             ships.Remove(s);
         }
 
-        public void SetDestination(PlanetarySystem ps)
+        public void SetDestination(PlanetarySystem destination, PlanetarySystem origin)
         {
-            destination = ps;
+            this.destination = destination;
+            this.origin = origin;
 
             // TODO: Calculate Turn Time
             turnsTillDestination = 2;
@@ -52,5 +53,69 @@ namespace FairyJam.Ships
             }
             return lowest;
         }
+
+        public double DamageTotal() 
+        {
+            double damage = 0;
+            foreach(Ship s in ships) 
+            {
+                foreach (Weapon weapon in s.WeaponList)
+                {
+                    damage += (weapon.MaxDamage + weapon.MinDamage) / 2;
+                }
+            }
+            return damage;
+        }
+
+        public double GetEvasiveness()
+        {
+            double e = 0;
+            foreach (Ship ship in ships)
+            {
+                e += ship.Evasiveness;
+            }
+            return e / ships.Count;
+        }
+
+        public double GetMaxHull()
+        {
+            double e = 0;
+            foreach (Ship ship in ships)
+            {
+                e += ship.MaxHealth;
+            }
+            return e;
+        }
+
+        public double GetCurrentHull()
+        {
+            double e = 0;
+            foreach (Ship ship in ships)
+            {
+                e += ship.HealthPoints;
+            }
+            return e;
+        }
+
+        public double GetTransportCap()
+        {
+            double e = 0;
+            foreach (Ship ship in ships)
+            {
+                e += ship.MaxPeopleLoad;
+            }
+            return e;
+        }
+
+        public double GetResourceCap()
+        {
+            double e = 0;
+            foreach (Ship ship in ships)
+            {
+                e += ship.MaxResourceLoad;
+            }
+            return e;
+        }
+
     }
 }

@@ -13,6 +13,7 @@ namespace FairyJam
         public int MinDamage { get; set; }
         public int MaxDamage { get; set; }
         public int Accuracy { get; set; }
+        public DamageType Type { get; set; }
 
         //Weapon slots this weapon occupies
         public int Slotsize { get; set; }

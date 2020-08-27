@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.ES11;
+﻿using FairyJam.Orbitals;
+using OpenTK.Graphics.ES11;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,30 @@ namespace FairyJam
                 tile.Turn();
             }
             Globals.PlayerNation.SetTurnResources();
+        }
+
+        public List<DrawnButton> GetButtons()
+        {
+            List<DrawnButton> btns = new List<DrawnButton>();
+
+            foreach (Tile tile in grid)
+            {
+                btns.Add(tile.button);
+            }
+
+            return btns;
+        }
+
+        public PlanetarySystem GetSystem(DrawnButton button) 
+        {
+             foreach (Tile tile in grid)
+             {
+                if(button == tile.button) 
+                {
+                    return tile.ps;
+                }
+             }
+             return null;
         }
 
         public bool ConContains(Tile from, Tile to)

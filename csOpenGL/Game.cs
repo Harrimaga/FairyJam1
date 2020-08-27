@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Secretary;
+using System.Drawing.Design;
 
 namespace FairyJam
 {
@@ -141,29 +142,45 @@ namespace FairyJam
 
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)
         {
-            if (Globals.currentUI != null)
-            {
-                Globals.currentUI.MouseDown(e, mx, my);
-            }
+            
             
             if (Globals.currentState == GameState.SYSTEMVIEW || Globals.currentState == GameState.MAPVIEW) MainHUD.MouseDown(e, mx, my);
-            if (e.Button == MouseButton.Left)
             {
                 for (int i = Globals.activeButtons.Count - 1; i >= 0; i--)
                 {
                     DrawnButton button = Globals.activeButtons[i];
                     if (button.IsInButton(mx, my))
                     {
-                        button.OnClick();
+                        if (e.Button == MouseButton.Left)
+                        {
+                            button.OnClick();
+                        }
+                        else if (e.Button == MouseButton.Right)
+                        {
+                            button.OnRightClick();
+                        }
                         break;
                     }
                 }
             }
-
+            if (Globals.currentUI != null)
+            {
+                if(Globals.currentUI.MouseDown(e, mx, my)) 
+                {
+                    return;
+                }
+            }
             if (Globals.currentState == GameState.SYSTEMVIEW)
             {
                 Globals.currentSystem.MouseDown(e, mx, my);
             }
+            if (Globals.currentState == GameState.MAPVIEW)
+            {
+                Globals.map.MouseDown(e, mx, my);
+            }
+
+            Globals.eventHandler.MouseDown(e, mx, my);
+
         }
 
         public void MouseUp(MouseButtonEventArgs e, int mx, int my)
@@ -195,6 +212,13 @@ namespace FairyJam
 
                 ui.Scroll(-2);
             }
+
+            if (Globals.currentUI is FleetTransferUI)
+            {
+                FleetTransferUI ui = (FleetTransferUI)Globals.currentUI;
+
+                ui.Scroll(-2);
+            }
         }
 
         public void MouseWheelScrollDown()
@@ -218,6 +242,13 @@ namespace FairyJam
             if (Globals.currentUI is psUI)
             {
                 psUI ui = (psUI)Globals.currentUI;
+
+                ui.Scroll(2);
+            }
+
+            if (Globals.currentUI is FleetTransferUI)
+            {
+                FleetTransferUI ui = (FleetTransferUI)Globals.currentUI;
 
                 ui.Scroll(2);
             }

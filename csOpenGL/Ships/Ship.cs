@@ -3,6 +3,7 @@ using FairyJam.Equipment.SpecialEquipment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,12 +16,14 @@ namespace FairyJam
     {
         //Ship basic stats
         public string Name { get; set; }
-        public int HealthPoints { get; set; }
-        public int DamageBonus { get; set; }
-        public int Evasiveness { get; set; }
+        public double HealthPoints { get; set; }
+        public double MaxHealth { get; set; }
+        public double DamageBonus { get; set; }
+        public double Evasiveness { get; set; }
         public int Speed { get; set; }
 
         public int MaxSlots { get; set; }
+        public ShipType Type { get; set; }
 
         //Equipment of ship
         public Dictionary<Enums.WeaponType, bool> AllowedWeaponTypes { get; set; }
@@ -28,16 +31,17 @@ namespace FairyJam
         public SpecialEquipment Special { get; set; }
 
         //Load Capacity for resources and people
-        public int ResourceLoad { get; set; }
-        public int MaxResourceLoad { get; set; }
+        public double ResourceLoad { get; set; }
+        public double MaxResourceLoad { get; set; }
         List<Person> PeopleLoad;
         public int MaxPeopleLoad { get; set; }
         
 
-        protected Ship(string name, int health, int damageBonus, int evasiveness, int speed, int maxWeaponSlots, int maxPeopleAmount, int maxResourceAmount)
+        protected Ship(string name, double health, double damageBonus, double evasiveness, int speed, int maxWeaponSlots, int maxPeopleAmount, double maxResourceAmount)
         {
             Name = name;
             HealthPoints = health;
+            MaxHealth = health;
             DamageBonus = damageBonus;
             Evasiveness = evasiveness;
             Speed = speed;
@@ -136,6 +140,34 @@ namespace FairyJam
         public void AddSpecialEquipment(SpecialEquipment special)
         {
             Special = special;
+        }
+
+        public string WeaponTypes()
+        {
+            bool[] types;
+            types = new bool[3];
+
+            foreach (Weapon weapon in WeaponList)
+            {
+                switch (weapon.Type)
+                {
+                    case DamageType.PHYSICAL:
+                        types[0] = true;
+                        break;
+                    case DamageType.LASER:
+                        types[1] = true;
+                        break;
+                    case DamageType.PLASMA:
+                        types[2] = true;
+                        break;
+                }
+            }
+            string res = "" + (types[0] ? "Ph" : "") + (types[1] ? "/L" : "") + (types[2] ? "/Pl" : "");
+            if (res.StartsWith("/"))
+            {
+                res = res.Substring(1);
+            }
+            return res;
         }
     }
 }

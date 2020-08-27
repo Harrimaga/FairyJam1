@@ -27,6 +27,7 @@ namespace FairyJam.Ships
                   )
         {
             AddWeaponTypes();
+            Type = ShipType.FREIGHTER;
 
         }
 

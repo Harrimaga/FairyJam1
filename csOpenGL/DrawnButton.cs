@@ -18,6 +18,7 @@ namespace FairyJam
         private float Width { get; set; }
         private float Height { get; set; }
         private EventAction OnClickAction { get; set; }
+        private EventAction OnRightClickAction { get; set; }
         public float r { get; set; }
         public float g { get; set; }
         public float b { get; set; }
@@ -25,7 +26,7 @@ namespace FairyJam
 
         public bool drawed { get; set; }
 
-        public DrawnButton(string text, float x, float y, float width, float height, EventAction onClickAction, float r, float g, float b, bool drawed = true)
+        public DrawnButton(string text, float x, float y, float width, float height, EventAction onClickAction, float r, float g, float b, bool drawed = true, EventAction onRightClickAction = null)
         {
             if (height < 25)
             {
@@ -37,6 +38,7 @@ namespace FairyJam
             Width = width;
             Height = height;
             OnClickAction = onClickAction;
+            OnRightClickAction = onRightClickAction == null ? () => {} : onRightClickAction;
             Sprite = new Sprite((int)width, (int)height, 0, Textures.Get(Textures.pixel));
             this.r = r;
             this.g = g;
@@ -45,7 +47,7 @@ namespace FairyJam
             this.drawed = drawed;
         }
 
-        public DrawnButton(string text, float x, float y, float width, float height, EventAction onClickAction, Texture tex = null, float r = 1, float g = 1, float b = 1)
+        public DrawnButton(string text, float x, float y, float width, float height, EventAction onClickAction, Texture tex = null, float r = 1, float g = 1, float b = 1, EventAction onRightClickAction = null)
         {
             if (height < 25)
             {
@@ -57,6 +59,7 @@ namespace FairyJam
             Width = width;
             Height = height;
             OnClickAction = onClickAction;
+            OnRightClickAction = onRightClickAction == null ? () => {} : onRightClickAction;
             if (tex == null)
             {
                 Sprite = new Sprite((int)width, (int)height, 0, Textures.Get(Textures.pixel));
@@ -80,6 +83,11 @@ namespace FairyJam
         public void OnClick()
         {
             OnClickAction();
+        }
+
+        public void OnRightClick()
+        {
+            OnRightClickAction();
         }
 
         public void SetSprite(Texture tex)

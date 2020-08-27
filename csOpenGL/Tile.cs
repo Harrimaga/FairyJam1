@@ -16,9 +16,9 @@ namespace FairyJam
 
         private Sprite sprite;
 
-        private PlanetarySystem ps;
+        public PlanetarySystem ps;
         public int psOffsetX, psOffsetY;
-        private DrawnButton button;
+        public DrawnButton button;
 
         public Tile(int x, int y)
         {
@@ -50,7 +50,8 @@ namespace FairyJam
             {
                 drawX += Globals.TileWidth / 2;
             }
-            button = new DrawnButton("?", drawX + Globals.TileWidth / 2 + psOffsetX - 25 / 2, drawY + Globals.TileWidth / 2 + psOffsetY - 25 / 2, 25, 25, () => { Game.switchViewToSystem(ps); }, 0, 0, 0);
+
+            button = new DrawnButton("?", drawX + Globals.TileWidth / 2 + psOffsetX - 25 / 2, drawY + Globals.TileWidth / 2 + psOffsetY - 25 / 2, 25, 25, () => { if (Globals.currentUI != null) { return; } Game.switchViewToSystem(ps); }, 0, 0, 0);
         }
 
         public bool HasSystem()

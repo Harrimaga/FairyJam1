@@ -14,7 +14,7 @@ namespace FairyJam.Equipment.Weapons
         private const int slotSize = 1;
         public BasicGun() : base(name, minDamage, maxDamage, accuracy, slotSize)
         {
-
+            Type = DamageType.PHYSICAL;
         }
     }
 }

@@ -17,20 +17,35 @@ namespace FairyJam.UI
         private DrawnButton createFleet, sendFleet;
         private const int buttonAmount = 15;
         private int scrollFriendly = 0, scrollEnemy = 0;
+        private List<Fleet> selected;
 
         public psUI(PlanetarySystem ps)
         {
             this.ps = ps;
-            if(ps.Owner == Globals.PlayerNation) 
+            selected = new List<Fleet>();
+            if (ps.Owner == Globals.PlayerNation)
             {
-                createFleet = new DrawnButton("Create Fleet", 1920 / 2 - 195, 1080 / 2 + 195, 190, 100, () => { ps.fleets.Add(new Fleet(ps.Owner, new List<Ship>()));}, 0, 0.5f, 0.5f, true);
-                sendFleet = new DrawnButton("Send Fleet", 1920 / 2 + 5, 1080 / 2 + 195, 190, 100, () => { }, 0, 0.5f, 0.5f, true);
+                createFleet = new DrawnButton("Create Fleet", 1920 / 2 - 195, 1080 / 2 + 195, 190, 100, () => { ps.fleets.Add(new Fleet(ps.Owner, new List<Ship>())); new FleetTransferUI(this, ps.fleets.Last(), ps); }, 0, 0.5f, 0.5f, true);
+                sendFleet = new DrawnButton("Send Fleet", 1920 / 2 + 5, 1080 / 2 + 195, 190, 100, () => { if (selected.Count > 0) { new FleetDestinationUI(selected, ps); } }, 0, 0.5f, 0.5f, true);
                 buttons.Add(createFleet);
                 buttons.Add(sendFleet);
             }
-            for(int j=0;j<buttonAmount;j++){
+            for(int j=0;j<buttonAmount;j++)
+            {
                 int k = j;
-                buttons.Add(new DrawnButton("", 1920/2 - 195, 1080/2 - 155 + 20 * j, 190, 20, () => { List<Fleet> fl = ps.GetFleets()[0]; if(fl.Count <= k){return;} new FleetTransferUI(this, fl[k], ps); }, 1, 1, 1, false));
+                buttons.Add(new DrawnButton("", 1920/2 - 195, 1080/2 - 155 + 20 * j, 190, 20, () => { List<Fleet> fl = ps.GetFleets()[0]; if (fl.Count <= k + scrollFriendly) { return; } SelectFleet(fl[k + scrollFriendly]); }, 1, 1, 1, false, () => { List<Fleet> fl = ps.GetFleets()[0]; if(fl.Count <= k + scrollFriendly) {return; } new FleetTransferUI(this, fl[k + scrollFriendly], ps); }));
+            }
+        }
+
+        public void SelectFleet(Fleet f)
+        {
+            if (selected.Contains(f))
+            {
+                selected.Remove(f);
+            }
+            else
+            {
+                selected.Add(f);
             }
         }
 
@@ -53,7 +68,7 @@ namespace FairyJam.UI
 
             for (int i = scrollFriendly; i < (buttonAmount + scrollFriendly < fleets[0].Count ? buttonAmount + scrollFriendly : fleets[0].Count); i++)
             {
-                Window.window.DrawText(fleets[0][i].Name, 1920 / 2 - 195, 1080 / 2 - 155 + (i - scrollFriendly) * 20, 0, 0, 0, 1, true, Globals.buttonFont);
+                Window.window.DrawText(fleets[0][i].Name, 1920 / 2 - 195, 1080 / 2 - 155 + (i - scrollFriendly) * 20, selected.Contains(fleets[0][i]) ? 1 : 0, 0, 0, 1, true, Globals.buttonFont);
             }
 
             // Enemy Fleets in System:
@@ -63,13 +78,15 @@ namespace FairyJam.UI
             }
         }
 
-        public override void MouseDown(MouseButtonEventArgs e, int mx, int my)
+        public override bool MouseDown(MouseButtonEventArgs e, int mx, int my)
         {
             if(!Globals.checkCol(mx, my, 0, 0, 1920 / 2 - 200, 1080 / 2 - 300, 400, 600)) 
             {
                 Globals.currentUI = null;
                 Globals.activeButtons = new List<DrawnButton>();
+                return false;
             }
+            return true;
         }
 
         public void Scroll(int val)

@@ -221,13 +221,7 @@ namespace FairyJam
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             game.MouseDown(e, mouseX, mouseY);
-            if (Globals.currentState == GameState.MAPVIEW)
-            {
-                Globals.map.MouseDown(e, mouseX, mouseY);
-            }
-
-            Globals.eventHandler.MouseDown(e, mouseX, mouseY);
-
+            
             base.OnMouseDown(e);
         }
 

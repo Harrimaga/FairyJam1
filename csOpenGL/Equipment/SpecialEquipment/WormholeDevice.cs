@@ -11,7 +11,7 @@ namespace FairyJam.Equipment.SpecialEquipment
 
         public WormholeDevice()
         {
-
+            Name = "Wormhole Device";
         }
 
         public override void UseSpecial()

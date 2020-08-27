@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FairyJam.Equipment.SpecialEquipment;
+using FairyJam.Equipment.Weapons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +29,21 @@ namespace FairyJam.Ships
                   )
         {
             AddWeaponTypes();
+            Type = ShipType.MILITARY;
+            if (Globals.random.Next(0, 100) > 50)
+            {
+                WeaponList.Add(new BasicGun());
+            }
+            if (Globals.random.Next(0, 100) > 50)
+            {
+                WeaponList.Add(new BasicLaser());
+            }
+            if (Globals.random.Next(0, 100) > 50)
+            {
+                WeaponList.Add(new BasicPlasmaGun());
+            }
 
+            Special = new WormholeDevice();
         }
 
         protected override void AddWeaponTypes()

@@ -197,6 +197,7 @@
     <Compile Include="Trait.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="UI\FleetDestinationUI.cs" />
     <Compile Include="UI\FleetTransferUI.cs" />
     <Compile Include="UI\LeaderUI.cs" />
     <Compile Include="UI\MainHUD.cs" />

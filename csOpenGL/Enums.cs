@@ -35,6 +35,21 @@ namespace FairyJam
         SYSTEMVIEW
     }
 
+    public enum ShipType
+    {
+        MILITARY,
+        FREIGHTER,
+        HELPER,
+        TRANSPORTATION
+    }
+
+    public enum DamageType
+    {
+        PHYSICAL,
+        LASER,
+        PLASMA
+    }
+
     // TODO: Create more Types
     public enum PlanetType
     {
