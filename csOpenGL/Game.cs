@@ -86,6 +86,8 @@ namespace FairyJam
                 Globals.currentState = GameState.MAPVIEW;
                 Window.camX = Globals.mapCamX;
                 Window.camY = Globals.mapCamY;
+                Globals.currentUI = null;
+                Globals.activeButtons = new List<DrawnButton>();
             }
             if (Globals.currentState == GameState.SYSTEMVIEW && !Globals.paused)
             {

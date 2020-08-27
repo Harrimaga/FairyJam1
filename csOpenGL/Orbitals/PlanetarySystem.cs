@@ -1,4 +1,5 @@
-﻿using OpenTK.Input;
+﻿using FairyJam.Ships;
+using OpenTK.Input;
 using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,13 @@ namespace FairyJam.Orbitals
 
         public bool clockWise;
 
+        public List<Fleet> fleets;
+
         public Asteroid selectedAsteroid;
 
         public PlanetarySystem()
         {
+            fleets = new List<Fleet>();
             planets = new List<Planet>();
             asteroids = new List<Asteroid>();
             selectedAsteroid = null;

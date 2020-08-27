@@ -1,5 +1,6 @@
 ﻿using FairyJam.Buildings;
 using FairyJam.Orbitals;
+using FairyJam.Ships;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace FairyJam.UI
 
             toResource = new DrawnButton("Resource Overview", 1920 / 2 - 195, 1080 / 2 + 55, 390, 77, () => { }, 0, 0, 1, true);
             toShipManagement = new DrawnButton("Ship Management", 1920 / 2 - 195, 1080 / 2 + 137, 390, 77, () => { }, 0, 0, 1, true);
-            toShipBuilding = new DrawnButton("Ship Building", 1920 / 2 - 195, 1080 / 2 + 219, 390, 77, () => { }, 0, 0, 1, true);
+            toShipBuilding = new DrawnButton("Ship Building", 1920 / 2 - 195, 1080 / 2 + 219, 390, 77, () => { Globals.currentSystem.fleets.Add(new Fleet(Globals.PlayerNation, new List<Ship>() { new Military() })); }, 0, 0, 1, true);
 
             buttons.Add(rab);
             buttons.Add(shipyard);

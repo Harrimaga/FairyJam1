@@ -171,6 +171,7 @@
     <Compile Include="Orbitals\PlanetarySystem.cs" />
     <Compile Include="Scientist.cs" />
     <Compile Include="Shaders\BloomShader.cs" />
+    <Compile Include="Ships\Fleet.cs" />
     <Compile Include="Ships\Freighter.cs" />
     <Compile Include="Ships\Helper.cs" />
     <Compile Include="Ships\Military.cs" />
