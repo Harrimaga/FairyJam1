@@ -9,5 +9,6 @@ namespace FairyJam
     public static class Balance
     {
         public static double SuppliesPointBuy = 1000;
+        public static double RABCost = 100;
     }
 }

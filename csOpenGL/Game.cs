@@ -143,6 +143,11 @@ namespace FairyJam
 
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)
         {
+            if (Globals.currentUI != null)
+            {
+                Globals.currentUI.MouseDown(e, mx, my);
+            }
+            
             if (Globals.currentState == GameState.SYSTEMVIEW || Globals.currentState == GameState.MAPVIEW) MainHUD.MouseDown(e, mx, my);
             if (e.Button == MouseButton.Left)
             {
@@ -161,8 +166,6 @@ namespace FairyJam
             {
                 Globals.currentSystem.MouseDown(e, mx, my);
             }
-            
-
         }
 
         public void MouseUp(MouseButtonEventArgs e, int mx, int my)

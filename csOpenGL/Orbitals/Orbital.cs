@@ -1,4 +1,5 @@
-﻿using FairyJam.UI;
+﻿using FairyJam.Buildings;
+using FairyJam.UI;
 using OpenTK;
 using SixLabors.ImageSharp;
 using System;
@@ -28,13 +29,15 @@ namespace FairyJam.Orbitals
         public string Name { get; set; }
 
         public double maxPop;
-        public double[] materialsAvailable; // Food / Materials / Fuel
+        public double[] materialsAvailable, maxMaterialsAvailable, baseEfficiency; // Food / Materials / Fuel
 
         protected System.Drawing.Color Color { get; set; }
 
         public Orbital(Orbital parent, ulong radiusFromParent, float startingAngle, int radius, ulong mass, System.Drawing.Color color)
         {
             materialsAvailable = new double[3];
+            maxMaterialsAvailable = new double[3];
+            baseEfficiency = new double[3];
             this.parent = parent;
             this.radiusFromParent = radiusFromParent;
             this.angleFromParent = startingAngle;
@@ -51,6 +54,16 @@ namespace FairyJam.Orbitals
             timeToOrbit = (radiusFromParent * 2 * Math.PI) / velocity;
 
             Name = Globals.random.Next(10000, 99999).ToString();
+        }
+
+        public virtual void Build(Building b)
+        {
+            
+        }
+
+        public virtual int GetBuildingCount(int b)
+        {
+            return 0;
         }
 
         public virtual void OnClick()
@@ -102,5 +115,11 @@ namespace FairyJam.Orbitals
         {
 
         }
+
+        public virtual double GetEfficiency(int resource) 
+        {
+            return 0;
+        }
+
     }
 }

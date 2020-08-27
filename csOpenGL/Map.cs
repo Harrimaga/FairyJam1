@@ -33,10 +33,12 @@ namespace FairyJam
 
         public void Turn()
         {
+            Globals.PlayerNation.UpdateResources();
             foreach (Tile tile in grid)
             {
                 tile.Turn();
             }
+            Globals.PlayerNation.SetTurnResources();
         }
 
         public bool ConContains(Tile from, Tile to)

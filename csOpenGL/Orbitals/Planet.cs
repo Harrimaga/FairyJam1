@@ -26,6 +26,7 @@ namespace FairyJam.Orbitals
 
             ulong mr = mass / (ulong)radius;
 
+            // Food - Materials - Fuel
             if (!moon)
             {
                 // Gassy boi
@@ -39,6 +40,10 @@ namespace FairyJam.Orbitals
 
                     Color = System.Drawing.Color.SkyBlue;
 
+                    baseEfficiency[0] = 0;
+                    baseEfficiency[1] = 0;
+                    baseEfficiency[2] = 0.8 + Globals.random.NextDouble()*0.2;
+
                 }
                 else if (mr < 500000)
                 {
@@ -49,6 +54,9 @@ namespace FairyJam.Orbitals
                     type = PlanetType.NORMAL;
 
                     Color = System.Drawing.Color.Green;
+                    baseEfficiency[0] = 0.4 + Globals.random.NextDouble()*0.6;
+                    baseEfficiency[1] = 0.3 + Globals.random.NextDouble()*0.5;
+                    baseEfficiency[2] = 0.3 + Globals.random.NextDouble()*0.4;
                 }
                 else
                 {
@@ -59,6 +67,10 @@ namespace FairyJam.Orbitals
                     type = PlanetType.DENSE;
 
                     Color = System.Drawing.Color.Orange;
+
+                    baseEfficiency[0] = 0.2 + Globals.random.NextDouble()*0.3;
+                    baseEfficiency[1] = 0.6 + Globals.random.NextDouble()*0.4;
+                    baseEfficiency[2] = 0.4 + Globals.random.NextDouble()*0.4;
                 }
             }
             else
@@ -69,11 +81,68 @@ namespace FairyJam.Orbitals
                 maxPop = 0;
                 type = PlanetType.MOON;
             }
+            maxMaterialsAvailable[0] = materialsAvailable[0];
+            maxMaterialsAvailable[1] = materialsAvailable[1];
+            maxMaterialsAvailable[2] = materialsAvailable[2];
         }
 
         public override void OnClick()
         {
             base.OnClick();
+        }
+
+        public override void Build(Building b)
+        {
+            if (b is RAB)
+            {
+                if (Owner.Materials < Balance.RABCost)
+                {
+                    // TODO: popup
+                    return;
+                }
+
+                buildings.Add(b);
+                Owner.Materials -= Balance.RABCost;
+            }
+        }
+
+        public override int GetBuildingCount(int b)
+        {
+            switch (b)
+            {
+                case 0:
+                    int x = 0;
+                    foreach (Building building in buildings)
+                    {
+                        if (building is RAB)
+                        {
+                            x++;
+                        }
+                    }
+                    return x;
+                case 1:
+                    x = 0;
+                    foreach (Building building in buildings)
+                    {
+                        if (building is Shipyard)
+                        {
+                            x++;
+                        }
+                    }
+                    return x;
+                case 2:
+                    x = 0;
+                    foreach (Building building in buildings)
+                    {
+                        if (building is Housing)
+                        {
+                            x++;
+                        }
+                    }
+                    return x;
+                default:
+                    return 0;
+            }
         }
 
         public void GenerateMoons(int numMoons = 1)
@@ -125,6 +194,13 @@ namespace FairyJam.Orbitals
 
                 building.Turn(this);
             }
+        }
+
+        public override double GetEfficiency(int resource) 
+        {
+            if(maxMaterialsAvailable[resource] == 0) return 0;
+            double d = baseEfficiency[resource] * materialsAvailable[resource]/maxMaterialsAvailable[resource];
+            return d < 0.05 ? 0.05 : d;
         }
     }
 }

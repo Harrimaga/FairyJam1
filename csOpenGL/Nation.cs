@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenTK;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace FairyJam
         public double Happiness { get; set; }
         public double TechPoints { get; set; }
         public double Population { get; set; }
-
+        public double[] resourceChanges { get; set; }
         public List<Leader> leaders { get;}
         public List<Scientist> scientists { get;}
         public List<SupplyCompany> supplyCompanies { get;}
@@ -27,7 +28,7 @@ namespace FairyJam
 
         public Nation()
         {
-            Materials = 10;
+            Materials = 1000;
             Fuel = 10;
             Food = 10;
             Money = 10;
@@ -38,9 +39,36 @@ namespace FairyJam
             leaders = new List<Leader>();
             scientists = new List<Scientist>();
             supplyCompanies = new List<SupplyCompany>();
+            resourceChanges = new double[7];
         }
 
-        
+        public void UpdateResources()
+        {
+            resourceChanges = new double[7]
+            {
+                Money,
+                Materials,
+                Food,
+                Fuel,
+                Population,
+                Happiness,
+                TechPoints
+            };
+        }
+
+        public void SetTurnResources()
+        {
+            resourceChanges = new double[7]
+            {
+                -resourceChanges[0] + Money,
+                -resourceChanges[1] + Materials,
+                -resourceChanges[2] + Food,
+                -resourceChanges[3] + Fuel,
+                -resourceChanges[4] + Population,
+                -resourceChanges[5] + Happiness,
+                -resourceChanges[6] + TechPoints
+            };
+        }
 
         public void AddLeader(Leader l)
         {

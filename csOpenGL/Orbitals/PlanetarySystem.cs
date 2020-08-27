@@ -149,7 +149,6 @@ namespace FairyJam.Orbitals
                     }
                 }
             }
-            Globals.currentUI = null;
         }
 
         public void Turn()

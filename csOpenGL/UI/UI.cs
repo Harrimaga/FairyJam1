@@ -1,3 +1,4 @@
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,11 @@ namespace FairyJam.UI
         }
         
         public virtual void Draw()
+        {
+
+        }
+
+        public virtual void MouseDown(MouseButtonEventArgs e, int mx, int my)
         {
 
         }
