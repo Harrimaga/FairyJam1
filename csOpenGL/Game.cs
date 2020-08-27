@@ -188,6 +188,13 @@ namespace FairyJam
                     Globals.suppliesUI.Scroll(-2);
                 }
             }
+
+            if (Globals.currentUI is psUI)
+            {
+                psUI ui = (psUI)Globals.currentUI;
+
+                ui.Scroll(-2);
+            }
         }
 
         public void MouseWheelScrollDown()
@@ -206,6 +213,13 @@ namespace FairyJam
                 {
                     Globals.suppliesUI.Scroll(2);
                 }
+            }
+
+            if (Globals.currentUI is psUI)
+            {
+                psUI ui = (psUI)Globals.currentUI;
+
+                ui.Scroll(2);
             }
         }
 

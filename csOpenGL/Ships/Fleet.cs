@@ -9,15 +9,17 @@ namespace FairyJam.Ships
 {
     public class Fleet
     {
-        private List<Ship> ships;
+        public List<Ship> ships;
         private PlanetarySystem destination, next;
         private int turnsTillDestination;
-        private Nation owner;
+        public Nation owner;
+        public string Name { get; set; }
 
         public Fleet(Nation owner, List<Ship> ships)
         {
             this.ships = ships;
             this.owner = owner;
+            Name = "Fleet " + Globals.random.Next(100, 999);
         }
 
         public void AddToFleet(Ship s)

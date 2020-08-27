@@ -23,7 +23,7 @@ namespace FairyJam
         public List<Leader> leaders { get;}
         public List<Scientist> scientists { get;}
         public List<SupplyCompany> supplyCompanies { get;}
-
+        public string Name { get; }
         public System.Drawing.Color Color { get; }
 
         public Nation()
@@ -40,6 +40,7 @@ namespace FairyJam
             scientists = new List<Scientist>();
             supplyCompanies = new List<SupplyCompany>();
             resourceChanges = new double[7];
+            Name = "Kees";
         }
 
         public void UpdateResources()

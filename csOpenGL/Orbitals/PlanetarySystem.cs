@@ -24,21 +24,61 @@ namespace FairyJam.Orbitals
         public bool clockWise;
 
         public List<Fleet> fleets;
+        public List<Ship> ships;
 
         public Asteroid selectedAsteroid;
 
         public PlanetarySystem()
         {
             fleets = new List<Fleet>();
+            ships = new List<Ship>();
             planets = new List<Planet>();
             asteroids = new List<Asteroid>();
             selectedAsteroid = null;
             Owner = null;
         }
 
+        public int GetCount(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    return planets.Count;
+                case 1:
+                    int x = 0;
+                    foreach (Planet planet in planets)
+                    {
+                        x += planet.moons.Count;
+                    }
+                    return x;
+                case 2:
+                    return asteroids.Count;
+                default:
+                    return 0;
+            }
+        }
+
         public void ShowUI()
         {
-            new psUI();
+            new psUI(this);
+        }
+
+        public List<Fleet>[] GetFleets()
+        {
+            List<Fleet>[] res = new List<Fleet>[]{new List<Fleet>(), new List<Fleet>()};
+
+            foreach (Fleet f in fleets)
+            {
+                if (f.owner == Owner)
+                {
+                    res[0].Add(f);
+                }
+                else
+                {
+                    res[1].Add(f);
+                }
+            }
+            return res;
         }
 
         public void Generate(int planetAmount = 3)
@@ -83,6 +123,11 @@ namespace FairyJam.Orbitals
             //    planets.Add(new Planet(sun, (ulong)Globals.random.Next(100,1000), (float)Globals.random.NextDouble(), Globals.random.Next(10,100), (ulong)Globals.random.Next(1000, 10000000), System.Drawing.Color.FromArgb(Globals.random.Next(0,256), Globals.random.Next(0, 256), Globals.random.Next(0, 256))));
             //    planets.Last().GenerateMoons(Globals.random.Next(GenerationSettings.MinMoons, GenerationSettings.MaxMoons));
             //}
+        }
+
+        public string Name()
+        {
+            return sun.Name;
         }
 
         public void Draw()
