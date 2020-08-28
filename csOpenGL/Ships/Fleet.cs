@@ -101,6 +101,11 @@ namespace FairyJam.Ships
                     if(ps == to) 
                     {
                         psn.path.Enqueue(ps);
+                        psn.TotalDistance += Globals.getTurnDistance(ps, psn.ps, speed);
+                        if(owner.Fuel < psn.TotalDistance*ships.Count) {
+                            return null;
+                        }
+                        owner.Fuel -= psn.TotalDistance*ships.Count;
                         return psn.path;
                     }
                     if(ps.bfsVisited != r) 

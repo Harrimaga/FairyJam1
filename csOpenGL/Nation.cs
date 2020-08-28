@@ -1,4 +1,6 @@
-﻿using FairyJam.Ships;
+﻿using FairyJam.Equipment.SpecialEquipment;
+using FairyJam.Equipment.Weapons;
+using FairyJam.Ships;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -27,12 +29,15 @@ namespace FairyJam
         public string Name { get; }
         public System.Drawing.Color Color { get; }
         public List<Fleet> fleets;
+        public List<Ship> unlockedHulls, presets;
+        public List<Weapon> unlockedWeapons;
+        public List<SpecialEquipment> unlockedSpecials;
         public Nation()
         {
             Materials = 1000;
-            Fuel = 10;
+            Fuel = 1000;
             Food = 10;
-            Money = 10;
+            Money = 1000;
             Happiness = 10;
             TechPoints = 10;
             Population = 10;
@@ -41,6 +46,125 @@ namespace FairyJam
             scientists = new List<Scientist>();
             supplyCompanies = new List<SupplyCompany>();
             fleets = new List<Fleet>();
+            presets = new List<Ship>();
+            unlockedHulls = new List<Ship>()
+            {
+                new Military("MilitaryMk1", 10, 10, 10, 0, 0, 100, 1),
+                new Transportation("TransportMk1", 0, 0, 0, 100, 10, 2, 0),
+                new Freighter("FreighterMk1", 0, 0, 0, 0, 1000, 0, 0),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1)
+            };
+            unlockedWeapons = new List<Weapon>()
+            {
+                new BasicGun(),
+                new BasicLaser(),
+                new BasicPlasmaGun(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser(),
+                new BasicLaser()
+            };
+            unlockedSpecials = new List<SpecialEquipment>()
+            {
+                new Cloak(),
+                new EMP(),
+                new Nuke(),
+                new ResourceDetection(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice(),
+                new WormholeDevice()
+            };
             resourceChanges = new double[7];
             Name = "Kees";
         }

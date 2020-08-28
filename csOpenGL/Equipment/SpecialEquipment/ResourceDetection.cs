@@ -11,7 +11,7 @@ namespace FairyJam.Equipment.SpecialEquipment
 
         public ResourceDetection()
         {
-
+            Name = "Resource Detection";
         }
 
         public override void UseSpecial()

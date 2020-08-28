@@ -207,6 +207,7 @@
     <Compile Include="UI\PlanetUI.cs" />
     <Compile Include="UI\psUI.cs" />
     <Compile Include="UI\ScientistUI.cs" />
+    <Compile Include="UI\ShipBuildingUI.cs" />
     <Compile Include="UI\SuppliesUI.cs" />
     <Compile Include="UI\UI.cs" />
     <Compile Include="Equipment\Weapons\Weapon.cs" />

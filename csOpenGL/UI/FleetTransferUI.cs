@@ -1,6 +1,7 @@
 ﻿using FairyJam.Orbitals;
 using FairyJam.Ships;
 using OpenTK.Graphics.ES10;
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,19 +95,16 @@ namespace FairyJam.UI
                 Window.window.DrawText("Evasion: " + selectedShip.Evasiveness, 1920 / 2 - 195, 1080 / 2 - 215, 0, 0, 0, 1, true, Globals.buttonFont);
 
                 int offset = 0;
-
-                switch(selectedShip.Type)
+                double damage = 0;
+                foreach (Weapon weapon in selectedShip.WeaponList)
                 {
-                    case ShipType.MILITARY:
-                        double damage = 0;
-                        foreach (Weapon weapon in selectedShip.WeaponList)
-                        {
-                            damage += (weapon.MaxDamage + weapon.MinDamage) / 2;
-                        }
-                        Window.window.DrawText("Dmg: " + damage, 1920 / 2 + 5, 1080 / 2 - 275, 0, 0, 0, 1, true, Globals.buttonFont);
-                        Window.window.DrawText("Types: " + selectedShip.WeaponTypes(), 1920 / 2 + 5, 1080 / 2 - 255, 0, 0, 0, 1, true, Globals.buttonFont);
-                        offset = 2;
-                        break;
+                    damage += (weapon.MaxDamage + weapon.MinDamage) / 2;
+                }
+                Window.window.DrawText("Dmg: " + damage, 1920 / 2 + 5, 1080 / 2 - 275, 0, 0, 0, 1, true, Globals.buttonFont);
+                Window.window.DrawText("Types: " + selectedShip.WeaponTypes(), 1920 / 2 + 5, 1080 / 2 - 255, 0, 0, 0, 1, true, Globals.buttonFont);
+                offset = 2;
+                switch (selectedShip.Type)
+                {
                     case ShipType.FREIGHTER:
                         Window.window.DrawText("Cap: " + selectedShip.MaxResourceLoad, 1920 / 2 + 5, 1080 / 2 - 275, 0, 0, 0, 1, true, Globals.buttonFont);
                         offset = 1;
@@ -193,5 +191,15 @@ namespace FairyJam.UI
                 }
             }
         }
+        
+        public override bool MouseDown(MouseButtonEventArgs e, int mx, int my)
+        {
+            if(!Globals.checkCol(mx, my, 0, 0, 1920 / 2 - 200, 1080 / 2 - 300, 400, 600)) 
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }

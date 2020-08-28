@@ -11,7 +11,7 @@ namespace FairyJam.Equipment.SpecialEquipment
 
         public EMP()
         {
-
+            Name = "EMP";
         }
 
         public override void UseSpecial()

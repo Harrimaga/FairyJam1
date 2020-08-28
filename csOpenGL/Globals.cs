@@ -27,6 +27,8 @@ namespace FairyJam
         public static UI.UI currentUI;
         public static Nation PlayerNation;
         public static bool paused;
+        public static DrawnButton typing;
+        public static bool num;
         public static List<Nation> players;
 
         public static Timer timer;
