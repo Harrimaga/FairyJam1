@@ -27,7 +27,7 @@ namespace FairyJam.UI
 
             toResource = new DrawnButton("Resource Overview", 1920 / 2 - 195, 1080 / 2 + 55, 390, 77, () => { }, 0, 0, 1, true);
             toShipManagement = new DrawnButton("Ship Management", 1920 / 2 - 195, 1080 / 2 + 137, 390, 77, () => { }, 0, 0, 1, true);
-            toShipBuilding = new DrawnButton("Ship Building", 1920 / 2 - 195, 1080 / 2 + 219, 390, 77, () => { for (int i = 0; i < 10; i++) { Globals.currentSystem.ships.Add(new Military(Globals.random.Next(1000, 9999).ToString())); } }, 0, 0, 1, true);
+            toShipBuilding = new DrawnButton("Ship Building", 1920 / 2 - 195, 1080 / 2 + 219, 390, 77, () => { new ShipBuildingUI(this); }, 0, 0, 1, true);
 
             buttons.Add(rab);
             buttons.Add(shipyard);

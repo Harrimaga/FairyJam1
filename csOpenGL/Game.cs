@@ -30,6 +30,7 @@ namespace FairyJam
             this.window = window;
             Globals.timer = new Timer(60000);
             Globals.paused = false;
+            Globals.typing = null;
             OnLoad();
             ReadFiles();
         }
@@ -65,8 +66,20 @@ namespace FairyJam
                 if (Globals.timer.Expired() && TimerEnabled)
                 {
                     Globals.currentState = GameState.MAPVIEW;
+                    Globals.currentUI = null;
+                    Globals.eventHandler.events.Clear();
                     Globals.activeButtons = new List<DrawnButton>();
                 }
+            }
+            if (Globals.currentState == GameState.SYSTEMVIEW && !Globals.paused)
+            {
+                Globals.currentSystem.Update();
+            }
+            
+            if (Globals.typing != null)
+            {
+                Hotkey.Type();
+                return;
             }
 
             //if (timer.Expired())
@@ -75,10 +88,10 @@ namespace FairyJam
             //}
 
             //Updating logic
-            if (left.IsDown()) Window.camX -= (float)(10 * delta);
-            if (right.IsDown()) Window.camX += (float)(10 * delta);
-            if (up.IsDown()) Window.camY -= (float)(10 * delta);
-            if (down.IsDown()) Window.camY += (float)(10 * delta);
+            if (left.IsDown()) Window.camX -= (float)(25 * delta);
+            if (right.IsDown()) Window.camX += (float)(25 * delta);
+            if (up.IsDown()) Window.camY -= (float)(25 * delta);
+            if (down.IsDown()) Window.camY += (float)(25 * delta);
             if (pause.IsDown()) Globals.paused = !Globals.paused;
 
             if(Q.IsDown() && Globals.currentState == GameState.MAPVIEW)
@@ -94,10 +107,7 @@ namespace FairyJam
                 Globals.currentUI = null;
                 Globals.activeButtons = new List<DrawnButton>();
             }
-            if (Globals.currentState == GameState.SYSTEMVIEW && !Globals.paused)
-            {
-                Globals.currentSystem.Update();
-            }
+            
         }
 
         public static void switchViewToSystem(PlanetarySystem ps)
@@ -147,6 +157,10 @@ namespace FairyJam
         public void MouseDown(MouseButtonEventArgs e, int mx, int my)
         {
             
+            if(Globals.typing != null && !Globals.typing.IsInButton(mx, my)) 
+            {
+                Globals.typing = null;
+            }
             
             if (Globals.currentState == GameState.SYSTEMVIEW || Globals.currentState == GameState.MAPVIEW) MainHUD.MouseDown(e, mx, my);
             {
@@ -223,6 +237,12 @@ namespace FairyJam
 
                 ui.Scroll(-2);
             }
+            if (Globals.currentUI is ShipBuildingUI)
+            {
+                ShipBuildingUI ui = (ShipBuildingUI)Globals.currentUI;
+
+                ui.Scroll(-2);
+            }
         }
 
         public void MouseWheelScrollDown()
@@ -253,6 +273,12 @@ namespace FairyJam
             if (Globals.currentUI is FleetTransferUI)
             {
                 FleetTransferUI ui = (FleetTransferUI)Globals.currentUI;
+
+                ui.Scroll(2);
+            }
+            if (Globals.currentUI is ShipBuildingUI)
+            {
+                ShipBuildingUI ui = (ShipBuildingUI)Globals.currentUI;
 
                 ui.Scroll(2);
             }

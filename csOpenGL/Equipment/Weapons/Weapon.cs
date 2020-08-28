@@ -15,6 +15,8 @@ namespace FairyJam
         public int Accuracy { get; set; }
         public DamageType Type { get; set; }
 
+        public double Cost { get; set; }
+
         //Weapon slots this weapon occupies
         public int Slotsize { get; set; }
 
@@ -24,7 +26,7 @@ namespace FairyJam
             MinDamage = minDamage;
             MaxDamage = maxDamage;
             Accuracy = accuracy;
-
+            Cost = 10;
             Slotsize = slots;
         }
     }

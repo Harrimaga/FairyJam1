@@ -35,9 +35,10 @@ namespace FairyJam
         public double MaxResourceLoad { get; set; }
         List<Person> PeopleLoad;
         public int MaxPeopleLoad { get; set; }
-        
+        public int SpecialSlots { get; set; }
+        public double materialCost, moneyCost;
 
-        protected Ship(string name, double health, double damageBonus, double evasiveness, int speed, int maxWeaponSlots, int maxPeopleAmount, double maxResourceAmount)
+        protected Ship(string name, double health, double damageBonus, double evasiveness, int speed, int maxWeaponSlots, int maxPeopleAmount, double maxResourceAmount, int specialSlots)
         {
             Name = name;
             HealthPoints = health;
@@ -46,7 +47,9 @@ namespace FairyJam
             Evasiveness = evasiveness;
             Speed = speed;
             MaxSlots = maxWeaponSlots;
-
+            SpecialSlots = specialSlots;
+            materialCost = Globals.random.Next(10, 100);
+            moneyCost = Globals.random.Next(10, 100);
             WeaponList = new List<Weapon>();
             AllowedWeaponTypes = new Dictionary<Enums.WeaponType, bool>();
 
@@ -57,6 +60,8 @@ namespace FairyJam
         }
 
         protected abstract void AddWeaponTypes();
+
+        public abstract Ship CopyHull();
 
         /// <summary>
         ///     Add person to the ship

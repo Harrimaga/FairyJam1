@@ -10,10 +10,11 @@ namespace FairyJam.Equipment.SpecialEquipment
     {
         public string Name { get; set; }
         public bool passive { get; set; }
+        public double Cost { get; set; }
 
         protected SpecialEquipment()
         {
-
+            Cost = 100;
         }
 
         public abstract void UseSpecial();

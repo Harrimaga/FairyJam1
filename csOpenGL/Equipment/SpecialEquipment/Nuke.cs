@@ -11,7 +11,7 @@ namespace FairyJam.Equipment.SpecialEquipment
 
         public Nuke()
         {
-
+            Name = "Nuke";
         }
 
         public override void UseSpecial()

@@ -9,7 +9,7 @@ namespace FairyJam.Events
 {
     public class EventHandler
     {
-        List<Event> events;
+        public List<Event> events;
         DrawnButton optionA, optionB, optionC;
         List<DrawnButton> buttons = new List<DrawnButton>();
 

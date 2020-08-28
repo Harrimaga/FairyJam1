@@ -11,7 +11,7 @@ namespace FairyJam.Equipment.SpecialEquipment
 
         public Cloak()
         {
-
+            Name = "Cloak";
         }
 
         public override void UseSpecial()
