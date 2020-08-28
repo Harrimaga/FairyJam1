@@ -72,6 +72,7 @@ namespace FairyJam
                 drawX += Globals.TileWidth / 2;
             }
             //sprite.Draw(drawX, drawY);
+            //if (button != null) button.Draw();
             if (!HasSystem()) return; 
             ps.DrawMap(drawX + Globals.TileWidth / 2 + psOffsetX, drawY + Globals.TileWidth / 2 + psOffsetY);
         }

@@ -44,6 +44,10 @@ namespace FairyJam
             //buttons.Add(new DrawnButton("Bloom", 0, 210, 200, 100, () => { Window.window.ToggleShader(Shaders.bloom); }, 0.5f, 0.5f, 0.5f));
             Globals.currentState = GameState.MAINMENU;
             Globals.PlayerNation = new Nation();
+            Globals.players = new List<Nation>()
+            {
+                Globals.PlayerNation
+            };
 
             UI.MainHUD.Init();
 

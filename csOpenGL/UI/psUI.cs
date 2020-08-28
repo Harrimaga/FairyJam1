@@ -26,11 +26,13 @@ namespace FairyJam.UI
             if (ps.Owner == Globals.PlayerNation)
             {
                 createFleet = new DrawnButton("Create Fleet", 1920 / 2 - 195, 1080 / 2 + 195, 190, 100, () => { ps.fleets.Add(new Fleet(ps.Owner, new List<Ship>())); new FleetTransferUI(this, ps.fleets.Last(), ps); }, 0, 0.5f, 0.5f, true);
-                sendFleet = new DrawnButton("Send Fleet", 1920 / 2 + 5, 1080 / 2 + 195, 190, 100, () => { if (selected.Count > 0) { new FleetDestinationUI(selected, ps); } }, 0, 0.5f, 0.5f, true);
-                buttons.Add(createFleet);
-                buttons.Add(sendFleet);
+                buttons.Add(createFleet);  
             }
-            for(int j=0;j<buttonAmount;j++)
+
+            sendFleet = new DrawnButton("Send Fleet", 1920 / 2 + 5, 1080 / 2 + 195, 190, 100, () => { if (selected.Count > 0) { new FleetDestinationUI(selected, ps); } }, 0, 0.5f, 0.5f, true);
+            buttons.Add(sendFleet);
+
+            for (int j=0;j<buttonAmount;j++)
             {
                 int k = j;
                 buttons.Add(new DrawnButton("", 1920/2 - 195, 1080/2 - 155 + 20 * j, 190, 20, () => { List<Fleet> fl = ps.GetFleets()[0]; if (fl.Count <= k + scrollFriendly) { return; } SelectFleet(fl[k + scrollFriendly]); }, 1, 1, 1, false, () => { List<Fleet> fl = ps.GetFleets()[0]; if(fl.Count <= k + scrollFriendly) {return; } new FleetTransferUI(this, fl[k + scrollFriendly], ps); }));

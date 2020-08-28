@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using FairyJam.Ships;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,7 +26,7 @@ namespace FairyJam
         public List<SupplyCompany> supplyCompanies { get;}
         public string Name { get; }
         public System.Drawing.Color Color { get; }
-
+        public List<Fleet> fleets;
         public Nation()
         {
             Materials = 1000;
@@ -39,6 +40,7 @@ namespace FairyJam
             leaders = new List<Leader>();
             scientists = new List<Scientist>();
             supplyCompanies = new List<SupplyCompany>();
+            fleets = new List<Fleet>();
             resourceChanges = new double[7];
             Name = "Kees";
         }
@@ -91,6 +93,16 @@ namespace FairyJam
             scientists.Remove(s);
         }
 
+        public void AddFleet(Fleet f) 
+        {
+            fleets.Add(f);
+        }
+
+        public void RemoveFleet(Fleet f) 
+        {
+            fleets.Remove(f);
+        }
+
         public void AddSupplyCompany(SupplyCompany s)
         {
             supplyCompanies.Add(s);
@@ -111,7 +123,7 @@ namespace FairyJam
             Population -= s.Population;
         }
 
-        public void Update()
+        public void Turn()
         {
             for(int i = leaders.Count() - 1; i >= 0; i--)
             {
@@ -122,6 +134,11 @@ namespace FairyJam
             {
                 Scientist l = scientists[i];
                 l.Update(() => scientists.Remove(l));
+            }
+            for(int i = fleets.Count() - 1; i >= 0; i--)
+            {
+                Fleet l = fleets[i];
+                l.Turn();
             }
         }
 

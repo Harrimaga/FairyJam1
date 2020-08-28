@@ -30,6 +30,5 @@ namespace FairyJam.UI
             // Alt F4
             buttons.Add(new DrawnButton("Quit", 1920 / 2 - 100, 1080 / 2 + 300, 200, 100, () => { Window.window.Exit(); }, 0.5f, 0.5f, 0.5f));
         }
-        
     }
 }

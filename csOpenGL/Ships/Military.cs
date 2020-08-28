@@ -12,7 +12,7 @@ namespace FairyJam.Ships
     {
         private const int minHealth = 80, maxHealth = 110;
         private const int minEvasion = 10, maxEvasion = 20;
-        private const int minSpeed = 2, maxSpeed = 3;
+        private const int minSpeed = 300, maxSpeed = 500;
         private const int maxPeople = 1, maxResource = 0;
         private const int weaponSlots = 3;
 

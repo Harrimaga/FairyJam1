@@ -11,6 +11,7 @@ namespace FairyJam
     public class StarConnection
     {
         public Tile from, to;
+        public PlanetarySystem psFrom, psTo;
         public bool oneway;
         public Vector2 origin, end;
         private Sprite sprite;
@@ -19,7 +20,10 @@ namespace FairyJam
         {
             this.from = from;
             this.to = to;
-            this.oneway = oneway;            
+            this.oneway = oneway;
+
+            psFrom = from.ps;
+            psTo = to.ps;
 
             origin = new Vector2(from.x * Globals.TileWidth - 2 * from.x + Globals.TileWidth / 2 + from.psOffsetX, from.y * Globals.TileHeight + Globals.TileWidth / 2 + from.psOffsetY);
             end = new Vector2(to.x * Globals.TileWidth - 2 * to.x + Globals.TileWidth / 2 + to.psOffsetX, to.y * Globals.TileHeight + Globals.TileWidth / 2 + to.psOffsetY);
