@@ -31,7 +31,7 @@ namespace FairyJam.UI
             buttonAmount = 10;
             buttons.Add(new DrawnButton("Back", 1920 - 300, 1080 - 150, 200, 50, () => { prev.reSelect(); }, 0, 0.5f, 0.5f, true));
             buttons.Add(new DrawnButton("Build!", 1920 - 600, 1080 - 150, 200, 50, () => { BuildShip(); }, 0, 0.5f, 0.5f, true));
-            buttons.Add(new DrawnButton("Add Preset", 1920 - 600, 225, 200, 50, () => { Globals.PlayerNation.presets.Add(selectedHull.CopyHull());Globals.PlayerNation.presets.Last().Name = name;  Globals.PlayerNation.presets.Last().WeaponList = new List<Weapon>(selectedWeapons); }, 0, 0.5f, 0.5f, true));
+            buttons.Add(new DrawnButton("Add Preset", 1920 - 600, 225, 200, 50, () => { if (selectedHull == null) { return; } Globals.PlayerNation.presets.Add(selectedHull.CopyHull());Globals.PlayerNation.presets.Last().Name = name;  Globals.PlayerNation.presets.Last().WeaponList = new List<Weapon>(selectedWeapons); }, 0, 0.5f, 0.5f, true));
             nameBox = new DrawnButton("Type Name", 105, 155, 200, 50, () => { nameBox.Text = ""; Globals.num = false;Globals.typing = nameBox; }, 0, 0.5f, 0.5f, true);
             quantity = new DrawnButton("Quantity", 310, 155, 200, 50, () => { quantity.Text = ""; Globals.num = true;Globals.typing = quantity; }, 0, 0.5f, 0.5f, true);
             buttons.Add(nameBox);
