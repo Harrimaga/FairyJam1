@@ -26,7 +26,7 @@ namespace FairyJam.UI
             this.prev = prev;
             this.ps = ps;
             selectedShip = null;
-            buttons.Add(new DrawnButton("Back", 1920/2-195, 1080/2+245, 390, 50, () => { prev.reSelect(); if (f.ships.Count == 0) { ps.fleets.Remove(f); } }, 0, 0.5f, 0.5f, true));
+            buttons.Add(new DrawnButton("Back", 1920/2-195, 1080/2+245, 390, 50, () => { prev.reSelect(); if (f.ships.Count == 0) { f.owner.fleets.Remove(f); ps.fleets.Remove(f); } }, 0, 0.5f, 0.5f, true));
 
             for (int i = 0; i < buttonAmount; i++)
             {

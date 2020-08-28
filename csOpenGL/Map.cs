@@ -15,7 +15,7 @@ namespace FairyJam
         public int mapWidth {get; }
         public int mapHeight { get; }
         private Tile[,] grid;
-        private List<StarConnection> connections;
+        public List<StarConnection> connections;
 
         public Map(int mapWidth, int mapHeight)
         {
@@ -40,6 +40,11 @@ namespace FairyJam
                 tile.Turn();
             }
             Globals.PlayerNation.SetTurnResources();
+
+            foreach (Nation nation in Globals.players)
+            {
+                nation.Turn();
+            }
         }
 
         public List<DrawnButton> GetButtons()
@@ -88,6 +93,7 @@ namespace FairyJam
             }
             foreach (var hex in grid)
             {
+                if (hex.ps == null) continue;
                 // Find if even/uneven:
                 if (hex.y % 2 == 1)
                 {
@@ -102,6 +108,7 @@ namespace FairyJam
                     // Find neighbours
                     if (hex.y - 1 >= 0)
                     {
+                        hex.ps.AddNeighbour(grid[hex.x, hex.y - 1].ps);
                         // Add if connection doesn't exist
                         if (!ConContains(hex, grid[hex.x, hex.y - 1]))
                         {
@@ -112,6 +119,7 @@ namespace FairyJam
 
                     if (hex.y - 1 >= 0 && hex.x + 1 < grid.GetLength(0))
                     {
+                        hex.ps.AddNeighbour(grid[hex.x + 1, hex.y - 1].ps);
                         if (!ConContains(hex, grid[hex.x + 1, hex.y - 1]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y - 1], false);
@@ -121,6 +129,7 @@ namespace FairyJam
 
                     if (hex.x + 1 < grid.GetLength(0))
                     {
+                        hex.ps.AddNeighbour(grid[hex.x + 1, hex.y].ps);
                         if (!ConContains(hex, grid[hex.x + 1, hex.y]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y], false);
@@ -130,6 +139,7 @@ namespace FairyJam
 
                     if (hex.y + 1 < grid.GetLength(1) && hex.x + 1 < grid.GetLength(0))
                     {
+                        hex.ps.AddNeighbour(grid[hex.x + 1, hex.y + 1].ps);
                         if (!ConContains(hex, grid[hex.x + 1, hex.y + 1]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y + 1], false);
@@ -139,6 +149,7 @@ namespace FairyJam
 
                     if (hex.y + 1 < grid.GetLength(1))
                     {
+                        hex.ps.AddNeighbour(grid[hex.x, hex.y + 1].ps);
                         if (!ConContains(hex, grid[hex.x, hex.y + 1]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x, hex.y + 1], false);
@@ -148,6 +159,7 @@ namespace FairyJam
 
                     if (hex.x - 1 >= 0)
                     {
+                        hex.ps.AddNeighbour(grid[hex.x - 1, hex.y].ps);
                         if (!ConContains(hex, grid[hex.x - 1, hex.y]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y], false);
@@ -167,6 +179,7 @@ namespace FairyJam
 
                     if (hex.y - 1 >= 0 && hex.x - 1 >= 0)
                     {
+                        hex.ps.AddNeighbour(grid[hex.x - 1, hex.y - 1].ps);
                         if (!ConContains(hex, grid[hex.x - 1, hex.y - 1]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y - 1], false);
@@ -176,6 +189,7 @@ namespace FairyJam
 
                     if (hex.y - 1 >= 0)
                     {
+                        hex.ps.AddNeighbour(grid[hex.x, hex.y - 1].ps);
                         if (!ConContains(hex, grid[hex.x, hex.y - 1]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x, hex.y - 1], false);
@@ -185,6 +199,7 @@ namespace FairyJam
 
                     if (hex.x + 1 < grid.GetLength(0))
                     {
+                        hex.ps.AddNeighbour(grid[hex.x + 1, hex.y].ps);
                         if (!ConContains(hex, grid[hex.x + 1, hex.y]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x + 1, hex.y], false);
@@ -194,6 +209,7 @@ namespace FairyJam
 
                     if (hex.y + 1 < grid.GetLength(0))
                     {
+                        hex.ps.AddNeighbour(grid[hex.x, hex.y + 1].ps);
                         if (!ConContains(hex, grid[hex.x, hex.y + 1]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x, hex.y + 1], false);
@@ -203,6 +219,7 @@ namespace FairyJam
 
                     if (hex.x - 1 >= 0 && hex.y + 1 < grid.GetLength(0))
                     {
+                        hex.ps.AddNeighbour(grid[hex.x - 1, hex.y + 1].ps);
                         if (!ConContains(hex, grid[hex.x - 1, hex.y + 1]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y + 1], false);
@@ -212,6 +229,7 @@ namespace FairyJam
 
                     if (hex.x - 1 >= 0)
                     {
+                        hex.ps.AddNeighbour(grid[hex.x - 1, hex.y].ps);
                         if (!ConContains(hex, grid[hex.x - 1, hex.y]))
                         {
                             StarConnection c = new StarConnection(hex, grid[hex.x - 1, hex.y], false);
@@ -219,8 +237,6 @@ namespace FairyJam
                         }
                     }
                 }
-
-
             }
         }
 

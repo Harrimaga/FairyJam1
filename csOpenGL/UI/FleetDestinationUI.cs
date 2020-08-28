@@ -30,7 +30,7 @@ namespace FairyJam.UI
             for (int i = buttons.Count - 1; i >= 0; i--)
             {
                 DrawnButton button = buttons[i];
-                if (button != null && button.IsInButton(mx, my))
+                if (button != null && button.IsInButton(mx + Window.camX, my + Window.camY))
                 {
                     if (e.Button == MouseButton.Left)
                     {

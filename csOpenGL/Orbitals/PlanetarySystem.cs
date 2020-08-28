@@ -20,6 +20,8 @@ namespace FairyJam.Orbitals
         private Vector2 position = new Vector2(1920 / 2, 1080 / 2);
         private Sprite mapSprite = new Sprite(25, 25, 0, Textures.Get(Textures.circle));
         public Nation Owner { get; set; }
+        public Vector2 drawnPosition;
+        public int bfsVisited = 0;
 
         public bool clockWise;
 
@@ -28,12 +30,15 @@ namespace FairyJam.Orbitals
 
         public Asteroid selectedAsteroid;
 
+        public List<PlanetarySystem> neighbours;
+
         public PlanetarySystem()
         {
             fleets = new List<Fleet>();
             ships = new List<Ship>();
             planets = new List<Planet>();
             asteroids = new List<Asteroid>();
+            neighbours = new List<PlanetarySystem>();
             selectedAsteroid = null;
             Owner = null;
         }
@@ -69,7 +74,7 @@ namespace FairyJam.Orbitals
 
             foreach (Fleet f in fleets)
             {
-                if (f.owner == Owner)
+                if (f.owner == Globals.PlayerNation)
                 {
                     res[0].Add(f);
                 }
@@ -79,6 +84,11 @@ namespace FairyJam.Orbitals
                 }
             }
             return res;
+        }
+
+        public void AddNeighbour(PlanetarySystem ps)
+        {
+            if (!neighbours.Contains(ps) && ps != null) neighbours.Add(ps);
         }
 
         public void Generate(int planetAmount = 3)
@@ -153,7 +163,7 @@ namespace FairyJam.Orbitals
             {
                 mapSprite.Draw(x - 25 / 2, y - 25 / 2, true, 0, 0.1f, 0.1f, 0.1f);
             }
-            
+            drawnPosition = new Vector2(x - 25 / 2, y - 25 / 2);
         }
 
         public void Update()
@@ -211,6 +221,11 @@ namespace FairyJam.Orbitals
             foreach (Planet planet in planets)
             {
                 planet.Turn();
+            }
+
+            for (int i = fleets.Count - 1; i >= 0; i--)
+            {
+                fleets[i].Turn();
             }
         }
     }

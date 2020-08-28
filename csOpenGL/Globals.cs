@@ -27,6 +27,7 @@ namespace FairyJam
         public static UI.UI currentUI;
         public static Nation PlayerNation;
         public static bool paused;
+        public static List<Nation> players;
 
         public static Timer timer;
 
@@ -41,5 +42,13 @@ namespace FairyJam
         {
             return x1 - w2 < x2 && x1 + w1 > x2 && y1 - h2 < y2 && y1 + h1 > y2;
         }
+
+        public static int getTurnDistance(PlanetarySystem ps1, PlanetarySystem ps2, double speed) 
+        {
+            if(speed <= 0) return 9999999;
+            int distance = 1 + (int)(Math.Sqrt((ps1.drawnPosition.X-ps2.drawnPosition.X)*(ps1.drawnPosition.X-ps2.drawnPosition.X) + (ps1.drawnPosition.Y-ps2.drawnPosition.Y)*(ps1.drawnPosition.Y-ps2.drawnPosition.Y))/speed);
+            return distance; 
+        }
+
     }
 }
