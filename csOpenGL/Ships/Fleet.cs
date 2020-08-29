@@ -55,24 +55,22 @@ namespace FairyJam.Ships
             // Find path from current -> origin
             // Return next node in path
 
-            if(queue != null) 
+            if(queue != null && turnsTillDestination == 0 && next != null) 
             {
-                if (turnsTillDestination == 0)
+                current.fleets.Remove(this);
+                current = next;
+                current.fleets.Add(this);
+                if (queue.Count > 0)
                 {
-                    if(next != null) 
+                    next = queue.Dequeue();
+                    turnsTillDestination = Globals.getTurnDistance(current, next, GetSpeed());
+                }
+                else 
+                {
+                    next = null;
+                    if (current.Owner != owner && !current.EnemyFleetsPresent(owner))
                     {
-                        current.fleets.Remove(this);
-                        current = next;
-                        current.fleets.Add(this);
-                        if (queue.Count > 0)
-                        {
-                            next = queue.Dequeue();
-                            turnsTillDestination = Globals.getTurnDistance(current, next, GetSpeed());
-                        }
-                        else 
-                        {
-                            next = null;
-                        }
+                        current.Owner = owner;
                     }
                 }
             }
@@ -102,10 +100,10 @@ namespace FairyJam.Ships
                     {
                         psn.path.Enqueue(ps);
                         psn.TotalDistance += Globals.getTurnDistance(ps, psn.ps, speed);
-                        if(owner.Fuel < psn.TotalDistance*ships.Count) {
+                        if(owner.Fuel < psn.TotalDistance*ships.Count*owner.getMod(Enums.Modifier.FuelEfficiency)) {
                             return null;
                         }
-                        owner.Fuel -= psn.TotalDistance*ships.Count;
+                        owner.Fuel -= psn.TotalDistance*ships.Count*owner.getMod(Enums.Modifier.FuelEfficiency);
                         return psn.path;
                     }
                     if(ps.bfsVisited != r) 

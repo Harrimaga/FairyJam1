@@ -1,5 +1,6 @@
 ﻿using FairyJam.Equipment.SpecialEquipment;
 using FairyJam.Equipment.Weapons;
+using FairyJam.Orbitals;
 using FairyJam.Ships;
 using OpenTK;
 using System;
@@ -32,13 +33,16 @@ namespace FairyJam
         public List<Ship> unlockedHulls, presets;
         public List<Weapon> unlockedWeapons;
         public List<SpecialEquipment> unlockedSpecials;
+        public double[] modifiers = new double[Enums.modAmount];
+
+
         public Nation()
         {
             Materials = 1000;
             Fuel = 1000;
             Food = 10;
             Money = 1000;
-            Happiness = 10;
+            Happiness = 0;
             TechPoints = 10;
             Population = 10;
             Color = Color.FromArgb(255, Globals.random.Next(256), Globals.random.Next(256), Globals.random.Next(256));
@@ -49,50 +53,50 @@ namespace FairyJam
             presets = new List<Ship>();
             unlockedHulls = new List<Ship>()
             {
-                new Military("MilitaryMk1", 10, 10, 10, 0, 0, 100, 1),
-                new Transportation("TransportMk1", 0, 0, 0, 100, 10, 2, 0),
-                new Freighter("FreighterMk1", 0, 0, 0, 0, 1000, 0, 0),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper("HelperMk1", 0, 0, 10, 0, 100, 100, 1)
+                new Military(this, "MilitaryMk1", 10, 10, 10, 0, 0, 100, 1),
+                new Transportation(this, "TransportMk1", 0, 0, 0, 100, 10, 2, 0),
+                new Freighter(this, "FreighterMk1", 0, 0, 0, 0, 1000, 0, 0),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
+                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1)
             };
             unlockedWeapons = new List<Weapon>()
             {
@@ -167,6 +171,41 @@ namespace FairyJam
             };
             resourceChanges = new double[7];
             Name = "Kees";
+        }
+
+        public void addToMod(double a, Enums.Modifier mod) 
+        {
+            modifiers[(int)mod] += a;
+        }
+
+        public void multiplyToMod(double a, Enums.Modifier mod) 
+        {
+            modifiers[(int)mod] *= a;
+        }
+
+        public double getMod(Enums.Modifier mod) 
+        {
+            return modifiers[(int)mod];
+        }
+
+
+        public double PopCap() 
+        {
+            double res = 0;
+            for(int i=0;i<Globals.map.mapWidth;i++)
+            {
+                for(int j=0;j<Globals.map.mapHeight;j++)
+                {
+                    if(Globals.map.grid[i,j].ps != null && Globals.map.grid[i,j].ps.Owner == this) 
+                    {
+                        foreach(Planet p in Globals.map.grid[i,j].ps.planets) 
+                        {
+                            res += p.PopCap;
+                        }
+                    }
+                }
+            }
+            return res;
         }
 
         public void UpdateResources()
@@ -247,25 +286,74 @@ namespace FairyJam
             Population -= s.Population;
         }
 
+        public void UpdateHappiness(double i)
+        {
+            Happiness += i;
+            if (Happiness < -100)
+            {
+                Happiness = -100;
+            }
+            else if (Happiness > 100)
+            {
+                Happiness = 100;
+            }
+        }
+
         public void Turn()
         {
+            for(int i=0;i<Enums.modAmount;i++)
+            {
+                modifiers[i] = 1;
+            }
             for(int i = leaders.Count() - 1; i >= 0; i--)
             {
                 Leader l = leaders[i];
-                l.Update(() => leaders.Remove(l));
+                l.Turn(() => {}, this);//leaders.Remove(l)
             }
             for(int i = scientists.Count() - 1; i >= 0; i--)
             {
                 Scientist l = scientists[i];
-                l.Update(() => scientists.Remove(l));
+                l.Turn(() => {}, this); //scientists.Remove(l)
             }
+
+            double popCap = PopCap();
+
+            // Convert people into money
+            Money += Population * Balance.MoneyPerPop;
+
+            // Update Population
+            // If not enough food
+            if (Population * Balance.FoodPerPop > Food)
+            {
+                UpdateHappiness(10*(Food - Population * Balance.FoodPerPop) / (popCap * Balance.FoodPerPop));
+                Population--;
+                Population *= 0.9;
+                if(Population < 0) 
+                {
+                    Population = 0;
+                }
+                Food = 0;
+            }
+            // If enough
+            else 
+            {
+                Food -= Population*Balance.FoodPerPop;
+                UpdateHappiness(1);
+                Population *= (getMod(Enums.Modifier.PopulationGrowth) + Happiness * Balance.HappinessPopGrowth);
+            }
+
+            // Check if pop is over cap
+            if (Population > popCap)
+            {
+                Population = popCap;
+            }
+
+            
             for(int i = fleets.Count() - 1; i >= 0; i--)
             {
                 Fleet l = fleets[i];
                 l.Turn();
             }
         }
-
     }
-
 }

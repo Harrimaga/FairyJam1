@@ -15,7 +15,21 @@ namespace FairyJam.Orbitals
         public List<Planet> moons;
         public List<Building> buildings;
         public PlanetType type;
-
+        public double PopCap 
+        { get
+            {
+                double res = maxPop;
+                foreach (Building building in buildings)
+                {
+                    if (building is Housing)
+                    {
+                        Housing h = (Housing)building;
+                        res += h.cap;
+                    }
+                }
+                return res;
+            }
+        }
 
         public Planet(Orbital parent, ulong radiusFromParent, float startingAngle, int radius, ulong mass, System.Drawing.Color color, bool moon) : base(parent, radiusFromParent, startingAngle, radius, mass, color)
         {
@@ -25,6 +39,7 @@ namespace FairyJam.Orbitals
             Name = moon ? "Moon" : "Planet";
 
             ulong mr = mass / (ulong)radius;
+
 
             // Food - Materials - Fuel
             if (!moon)
@@ -103,6 +118,28 @@ namespace FairyJam.Orbitals
 
                 buildings.Add(b);
                 Owner.Materials -= Balance.RABCost;
+            }
+            if (b is Shipyard)
+            {
+                if (Owner.Materials < Balance.ShipyardCost)
+                {
+                    // TODO: popup
+                    return;
+                }
+
+                buildings.Add(b);
+                Owner.Materials -= Balance.ShipyardCost;
+            }
+            if (b is Housing)
+            {
+                if (Owner.Materials < Balance.HousingCost)
+                {
+                    // TODO: popup
+                    return;
+                }
+
+                buildings.Add(b);
+                Owner.Materials -= Balance.HousingCost;
             }
         }
 

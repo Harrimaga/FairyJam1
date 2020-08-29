@@ -32,13 +32,13 @@ namespace FairyJam.UI
             for (int i = 0; i < buttonAmount; i++)
             {
                 int k = i;
-                buttons.Add(new DrawnButton("", 1920 / 2 - 195, 1080 / 2 - 155 + 20 * i, 190, 20, () => { OnSelectRemove(f.ships[k + scrollA]); }, 1, 1, 1, false,  () => { if(f.ships.Count <= k+scrollA) {return;}OnSelectRemove(f.ships[k + scrollA], true); }));
+                buttons.Add(new DrawnButton("", 1920 / 2 - 195, 1080 / 2 - 155 + 20 * i, 190, 20, () => { if(ps.ships.Count <= k+scrollU) {return;} OnSelectRemove(f.ships[k + scrollA]); }, 1, 1, 1, false,  () => { if(f.ships.Count <= k+scrollA) {return;}OnSelectRemove(f.ships[k + scrollA], true); }));
             }
 
             for (int j = 0; j < buttonAmount; j++)
             {
                 int k = j;
-                buttons.Add(new DrawnButton("", 1920 / 2 + 5, 1080 / 2 - 155 + 20 * j, 190, 20, () => { OnSelectAdd(ps.ships[k + scrollU]); }, 1, 1, 1, false, () => { if(ps.ships.Count <= k+scrollU) {return;} OnSelectAdd(ps.ships[k + scrollU], true); }));
+                buttons.Add(new DrawnButton("", 1920 / 2 + 5, 1080 / 2 - 155 + 20 * j, 190, 20, () => { if(ps.ships.Count <= k+scrollU) {return;} OnSelectAdd(ps.ships[k + scrollU]); }, 1, 1, 1, false, () => { if(ps.ships.Count <= k+scrollU) {return;} OnSelectAdd(ps.ships[k + scrollU], true); }));
             }
         }
 

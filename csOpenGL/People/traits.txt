@@ -1,13 +1,31 @@
 {
 name = less sexy
-population_growth = 1.5
+population_growth = 0.15
 sprite = 4
 description = Dit is de description van een van de traits ofzo
 blablabla
 }
 {
 name = sexy
-population_growth = 2
+population_growth = 0.2
 sprite = 3
 description = Nog meer test text
+}
+{
+name = Geologist
+material_gain = 10
+sprite = 9
+description = A master of Geology finds random materials laying around everywhere
+}
+{
+name = Happy Feat
+happiness_gain = 0.5
+sprite = 3
+description = People around this Leader are inspired to be more happy
+}
+{
+name = Navigator
+fuel_efficiency = 0.9
+sprite = 11
+description = This Leader can navigate your fleets more efficiently, lowering the fuel cost
 }

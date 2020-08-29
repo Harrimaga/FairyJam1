@@ -24,7 +24,7 @@ namespace FairyJam
             Hired = false;
         }
 
-        public virtual void Update(OnDeath onDeath)
+        public virtual void Turn(OnDeath onDeath, Nation n)
         {
             // Check if you are unhealthy enough to die
             if (Globals.random.Next(101) > Healthiness)

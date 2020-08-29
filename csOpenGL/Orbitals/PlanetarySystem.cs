@@ -15,7 +15,7 @@ namespace FairyJam.Orbitals
     public class PlanetarySystem
     {
         private Sun sun; //pls maar 1 sun
-        private List<Planet> planets;
+        public List<Planet> planets;
         private List<Asteroid> asteroids;
         private Vector2 position = new Vector2(1920 / 2, 1080 / 2);
         private Sprite mapSprite = new Sprite(25, 25, 0, Textures.Get(Textures.circle));
@@ -84,6 +84,25 @@ namespace FairyJam.Orbitals
                 }
             }
             return res;
+        }
+
+        public bool EnemyFleetsPresent(Nation owner)
+        {
+            foreach (Fleet fleet in fleets)
+            {
+                if (fleet.owner != owner)
+                {
+                    return true;
+                }
+            }
+            foreach (Ship ship in ships)
+            {
+                if (ship.Owner != owner)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void AddNeighbour(PlanetarySystem ps)

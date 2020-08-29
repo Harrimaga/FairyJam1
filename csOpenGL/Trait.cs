@@ -11,7 +11,7 @@ namespace FairyJam
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Action> Actions { get; set; } // All effects
-        public delegate void Action();
+        public delegate void Action(Nation n);
 
         public Sprite sprite { get; set; }
 
@@ -32,11 +32,11 @@ namespace FairyJam
             return Name;
         }
 
-        public void Update()
+        public void Turn(Nation n)
         {
             foreach(Action action in Actions)
             {
-                action();
+                action(n);
             }
         }
     }

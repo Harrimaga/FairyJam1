@@ -37,8 +37,9 @@ namespace FairyJam
         public int MaxPeopleLoad { get; set; }
         public int SpecialSlots { get; set; }
         public double materialCost, moneyCost;
+        public Nation Owner { get; set; }
 
-        protected Ship(string name, double health, double damageBonus, double evasiveness, int speed, int maxWeaponSlots, int maxPeopleAmount, double maxResourceAmount, int specialSlots)
+        protected Ship(string name, double health, double damageBonus, double evasiveness, int speed, int maxWeaponSlots, int maxPeopleAmount, double maxResourceAmount, int specialSlots, Nation owner)
         {
             Name = name;
             HealthPoints = health;

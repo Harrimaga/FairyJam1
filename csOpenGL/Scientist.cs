@@ -16,13 +16,13 @@ namespace FairyJam
             Traits = traits;
         }
 
-        public override void Update(OnDeath onDeath)
+        public override void Turn(OnDeath onDeath, Nation n)
         {
-            base.Update(onDeath);
+            base.Turn(onDeath, n);
             // Still get the bonusses this turn if they died this turn, they'll fade next turn
             foreach (Trait trait in Traits)
             {
-                trait.Update();
+                trait.Turn(n);
             }
         }
     }

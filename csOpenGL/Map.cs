@@ -14,7 +14,7 @@ namespace FairyJam
 
         public int mapWidth {get; }
         public int mapHeight { get; }
-        private Tile[,] grid;
+        public Tile[,] grid;
         public List<StarConnection> connections;
 
         public Map(int mapWidth, int mapHeight)
@@ -35,16 +35,17 @@ namespace FairyJam
         public void Turn()
         {
             Globals.PlayerNation.UpdateResources();
+
             foreach (Tile tile in grid)
             {
                 tile.Turn();
             }
-            Globals.PlayerNation.SetTurnResources();
-
             foreach (Nation nation in Globals.players)
             {
                 nation.Turn();
             }
+
+            Globals.PlayerNation.SetTurnResources();
         }
 
         public List<DrawnButton> GetButtons()

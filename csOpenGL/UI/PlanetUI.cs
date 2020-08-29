@@ -1,6 +1,7 @@
 ﻿using FairyJam.Buildings;
 using FairyJam.Orbitals;
 using FairyJam.Ships;
+using OpenTK.Graphics.ES10;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
@@ -64,9 +65,20 @@ namespace FairyJam.UI
 
 
             // RAB building button:
-
+            Window.window.DrawTextCentered(Balance.RABCost + " Materials", 1920 / 2 - 133, 1080 / 2 - 50, true, Globals.buttonFont);
+            Window.window.DrawTextCentered("Resource\nAcquisition\nBuilding", 1920 / 2 - 133, 1080 / 2 - 25, true, Globals.buttonFont);
             Window.window.DrawText(o.GetBuildingCount(0).ToString(), 1920 / 2 - 190, 1080 / 2 + 25, true, Globals.buttonFont);
+
+
+            // Shipyard building button:
+            Window.window.DrawTextCentered(Balance.ShipyardCost + " Materials", 1920 / 2, 1080 / 2 - 50, true, Globals.buttonFont);
+            Window.window.DrawTextCentered("Shipyard", 1920 / 2, 1080 / 2 - 25, true, Globals.buttonFont);
             Window.window.DrawText(o.GetBuildingCount(1).ToString(), 1920 / 2 - 57, 1080 / 2 + 25, true, Globals.buttonFont);
+
+
+            // Housing building button:
+            Window.window.DrawTextCentered(Balance.HousingCost + " Materials", 1920 / 2 + 133, 1080 / 2 - 50, true, Globals.buttonFont);
+            Window.window.DrawTextCentered("Housing", 1920 / 2 + 133, 1080 / 2 - 25, true, Globals.buttonFont);
             Window.window.DrawText(o.GetBuildingCount(2).ToString(), 1920 / 2 + 74, 1080 / 2 + 25, true, Globals.buttonFont);
         }
 

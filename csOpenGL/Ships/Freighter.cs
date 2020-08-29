@@ -14,7 +14,7 @@ namespace FairyJam.Ships
         private const int maxPeople = 3, maxResource = 100;
         private const int weaponSlots = 1;
 
-        public Freighter(string name = "Freighter", int healthBonus = 0, int damageBonus = 0, int evasionBonus = 0, int maxPeopleAmountBonus = 0, int maxResourceAmountBonus = 0, int speedBonus = 0, int specialSlots = 0)
+        public Freighter(Nation owner, string name = "Freighter", int healthBonus = 0, int damageBonus = 0, int evasionBonus = 0, int maxPeopleAmountBonus = 0, int maxResourceAmountBonus = 0, int speedBonus = 0, int specialSlots = 0)
             : base(
                   name,
                   Globals.random.Next(minHealth + healthBonus, maxHealth + healthBonus),
@@ -24,7 +24,8 @@ namespace FairyJam.Ships
                   weaponSlots,
                   maxPeople + maxPeopleAmountBonus,
                   maxResource + maxResourceAmountBonus,
-                  specialSlots
+                  specialSlots,
+                  owner
                   )
         {
             AddWeaponTypes();
@@ -42,7 +43,7 @@ namespace FairyJam.Ships
 
         public override Ship CopyHull() 
         {
-            Ship s = new Freighter();
+            Ship s = new Freighter(Owner);
             s.MaxHealth = MaxHealth;
             s.HealthPoints = maxHealth;
             s.Evasiveness = Evasiveness;

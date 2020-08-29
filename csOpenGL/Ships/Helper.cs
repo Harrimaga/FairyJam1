@@ -14,7 +14,7 @@ namespace FairyJam.Ships
         private const int maxPeople = 2, maxResource = 400;
         private const int weaponSlots = 1;
 
-        public Helper(string name = "Helper", int healthBonus = 0, int damageBonus = 0, int evasionBonus = 0, int maxPeopleAmountBonus = 0, int maxResourceAmountBonus = 0, int speedBonus = 0, int specialSlots = 0)
+        public Helper(Nation owner, string name = "Helper", int healthBonus = 0, int damageBonus = 0, int evasionBonus = 0, int maxPeopleAmountBonus = 0, int maxResourceAmountBonus = 0, int speedBonus = 0, int specialSlots = 0)
             : base(
                   name,
                   Globals.random.Next(minHealth + healthBonus, maxHealth + healthBonus),
@@ -24,7 +24,8 @@ namespace FairyJam.Ships
                   weaponSlots,
                   maxPeople + maxPeopleAmountBonus,
                   maxResource + maxResourceAmountBonus,
-                  specialSlots
+                  specialSlots,
+                  owner
                   )
         {
             AddWeaponTypes();
@@ -40,7 +41,7 @@ namespace FairyJam.Ships
 
         public override Ship CopyHull() 
         {
-            Ship s = new Helper();
+            Ship s = new Helper(Owner);
             s.MaxHealth = MaxHealth;
             s.HealthPoints = maxHealth;
             s.Evasiveness = Evasiveness;

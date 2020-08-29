@@ -69,6 +69,32 @@ namespace FairyJam
                     Globals.currentUI = null;
                     Globals.eventHandler.events.Clear();
                     Globals.activeButtons = new List<DrawnButton>();
+
+                    // Randomly select starting planet
+
+                    bool success = false;
+                    while (!success)
+                    {
+                        int rndX = Globals.random.Next(Globals.map.mapWidth);
+                        int rndY = Globals.random.Next(Globals.map.mapHeight);
+
+                        Tile tile = Globals.map.grid[rndX,rndY];
+                        if (tile.ps != null)
+                        {
+                            success = true;
+                            tile.ps.Owner = Globals.PlayerNation;
+
+                            int drawX = tile.x * Globals.TileWidth - 2 * tile.x + Globals.TileWidth/2 + tile.psOffsetX;
+                            int drawY = tile.y * Globals.TileHeight + Globals.TileWidth / 2 + tile.psOffsetY;
+                            if (tile.y % 2 == 1)
+                            {
+                                drawX += Globals.TileWidth / 2;
+                            }
+
+                            Window.camX = drawX - 960;
+                            Window.camY = drawY - 540;
+                        }
+                    }
                 }
             }
             if (Globals.currentState == GameState.SYSTEMVIEW && !Globals.paused)
@@ -118,7 +144,6 @@ namespace FairyJam
             Window.camY = 0;
             Globals.currentState = GameState.SYSTEMVIEW;
             Globals.currentSystem = ps;
-            ps.Owner = Globals.PlayerNation;
             Globals.currentUI = null;
             ps.Draw();
             ps.Update();
@@ -139,7 +164,6 @@ namespace FairyJam
             {
                 Globals.currentUI.Draw();
             }
-
 
             foreach (DrawnButton button in Globals.activeButtons)
             {
@@ -326,6 +350,7 @@ namespace FairyJam
                 else
                 {
                     string[] words = line.Split('=');
+                    double num;
                     switch (words[0].Trim())
                     {
                         case "name":
@@ -335,7 +360,20 @@ namespace FairyJam
                             trait.Description = words[1].Trim();
                             break;
                         case "population_growth":
-                            Globals.logger.Log("Trait action `" + words[0] + "` is not yet implemented", LogLevel.INFO);
+                            num = double.Parse(words[1]);
+                            trait.Actions.Add((Nation n) => { n.addToMod(num, Enums.Modifier.PopulationGrowth);});
+                            break;
+                        case "material_gain":
+                            num = double.Parse(words[1]);
+                            trait.Actions.Add((Nation n) => { n.Materials += num;});
+                            break;
+                        case "happiness_gain":
+                            num = double.Parse(words[1]);
+                            trait.Actions.Add((Nation n) => { n.Happiness += num;});
+                            break;
+                        case "fuel_efficiency":
+                            num = double.Parse(words[1]);
+                            trait.Actions.Add((Nation n) => { n.addToMod(num, Enums.Modifier.FuelEfficiency);});
                             break;
                         case "sprite":
                             trait.sprite = new Sprite(25, 25, 0, Textures.Get(int.Parse(words[1].Trim())));

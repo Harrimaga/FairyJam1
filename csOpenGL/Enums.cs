@@ -22,6 +22,12 @@ namespace FairyJam
         {
             Bullet, Laser, Plasma
         }
+        public enum Modifier 
+        {
+            PopulationGrowth = 0,
+            FuelEfficiency = 1
+        }
+        public const int modAmount = 2; 
     }
     public enum GameState
     {
@@ -58,4 +64,6 @@ namespace FairyJam
         DENSE,
         MOON
     }
+
+
 }
