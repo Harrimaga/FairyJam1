@@ -195,7 +195,7 @@ namespace FairyJam.UI
                 Window.window.DrawText("Hull: " + selectedHull.MaxHealth, 105, 700, 0, 0, 0, 1, true, Globals.buttonFont);
                 Window.window.DrawText("Speed: " + selectedHull.Speed, 105, 720, 0, 0, 0, 1, true, Globals.buttonFont);
                 Window.window.DrawText("Evasion: " + selectedHull.Evasiveness, 105, 740, 0, 0, 0, 1, true, Globals.buttonFont);
-                Window.window.DrawText("Cost: \n" + selectedHull.materialCost + " Materials\n" + selectedHull.moneyCost + " Money", 105, 760, 0, 0, 0, 1, true, Globals.buttonFont);
+                Window.window.DrawText("Cost: \n" + selectedHull.materialCost.ToString("N2") + " Materials\n" + selectedHull.moneyCost.ToString("N2") + " Money", 105, 760, 0, 0, 0, 1, true, Globals.buttonFont);
             }
 
             // Weapon stats
@@ -209,14 +209,14 @@ namespace FairyJam.UI
                 Window.window.DrawText("Damage: " + selectedWeapon.MinDamage + " - " + selectedWeapon.MaxDamage, 310, 700, 0, 0, 0, 1, true, Globals.buttonFont);
                 Window.window.DrawText("Type: " + selectedWeapon.Type.ToString(), 310, 720, 0, 0, 0, 1, true, Globals.buttonFont);
                 Window.window.DrawText("Size: " + selectedWeapon.Slotsize, 310, 740, 0, 0, 0, 1, true, Globals.buttonFont);
-                Window.window.DrawText("Cost: " + selectedWeapon.Cost + " Money", 310, 760, 0, 0, 0, 1, true, Globals.buttonFont);
+                Window.window.DrawText("Cost: " + selectedWeapon.Cost.ToString("N2") + " Money", 310, 760, 0, 0, 0, 1, true, Globals.buttonFont);
             }
 
             // Special stats
             if (special != null)
             {
                 Window.window.DrawText(special.Name, 517, 680, 0, 0, 0, 1, true, Globals.buttonFont);
-                Window.window.DrawText("Cost: " + special.Cost + " Money", 517, 760, 0, 0, 0, 1, true, Globals.buttonFont);
+                Window.window.DrawText("Cost: " + special.Cost.ToString("N2") + " Money", 517, 760, 0, 0, 0, 1, true, Globals.buttonFont);
             }
 
             // Ship stats

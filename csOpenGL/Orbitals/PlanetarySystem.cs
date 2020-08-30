@@ -19,6 +19,8 @@ namespace FairyJam.Orbitals
         private List<Asteroid> asteroids;
         private Vector2 position = new Vector2(1920 / 2, 1080 / 2);
         private Sprite mapSprite = new Sprite(25, 25, 0, Textures.Get(Textures.circle));
+        private Sprite fleetSprite = new Sprite(31, 31, 0, Textures.Get(Textures.circle));
+        private Sprite blackSprite = new Sprite(29, 29, 0, Textures.Get(Textures.circle));
         public Nation Owner { get; set; }
         public Vector2 drawnPosition;
         public int bfsVisited = 0;
@@ -174,7 +176,13 @@ namespace FairyJam.Orbitals
 
         public void DrawMap(int x, int y)
         {
-            if(Owner != null) 
+
+            if (EnemyFleetsPresent(Globals.SpacePirates))
+            {
+                fleetSprite.Draw(x - 31 / 2, y - 31 / 2);
+                blackSprite.Draw(x - 29 / 2, y - 29 / 2, true, 0, 0.05f, 0.05f, 0.05f, 1);
+            }
+            if (Owner != null) 
             {
                 mapSprite.Draw(x - 25 / 2, y - 25 / 2, true, 0, Owner.Color.R/ 255f, Owner.Color.G/ 255f, Owner.Color.B/ 255f);
             }
@@ -183,6 +191,8 @@ namespace FairyJam.Orbitals
                 mapSprite.Draw(x - 25 / 2, y - 25 / 2, true, 0, 0.1f, 0.1f, 0.1f);
             }
             drawnPosition = new Vector2(x - 25 / 2, y - 25 / 2);
+
+            
         }
 
         public void Update()

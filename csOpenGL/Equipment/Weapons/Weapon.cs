@@ -26,7 +26,7 @@ namespace FairyJam
             MinDamage = minDamage;
             MaxDamage = maxDamage;
             Accuracy = accuracy;
-            Cost = 10;
+            Cost = 15*slots*(1+Globals.random.NextDouble());
             Slotsize = slots;
         }
     }

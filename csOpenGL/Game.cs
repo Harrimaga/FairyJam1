@@ -38,7 +38,7 @@ namespace FairyJam
 
         public void OnLoad()
         {
-            Globals.map = new Map(20, 20);
+            Globals.map = new Map(10, 10);
             //buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
             //buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
             //buttons.Add(new DrawnButton("Bloom", 0, 210, 200, 100, () => { Window.window.ToggleShader(Shaders.bloom); }, 0.5f, 0.5f, 0.5f));
@@ -123,11 +123,6 @@ namespace FairyJam
             if (down.IsDown()) Window.camY += (float)(25 * delta);
             if (pause.IsDown()) Globals.paused = !Globals.paused;
 
-            if(Q.IsDown() && Globals.currentState == GameState.MAPVIEW)
-            {
-                um.reSelect();
-                Globals.currentState = GameState.MAINMENU;
-            }
             if (Q.IsDown() && Globals.currentState == GameState.SYSTEMVIEW)
             {
                 Globals.currentState = GameState.MAPVIEW;

@@ -260,6 +260,11 @@ namespace FairyJam
                         }
                     }
                 }
+
+                if (hex.ps.neighbours.Count == 0)
+                {
+                    hex.ps = null;
+                }
             }
         }
 

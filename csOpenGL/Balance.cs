@@ -20,6 +20,6 @@ namespace FairyJam
         public static int HostileFleetSpawnChance = 20;
         public static int HostileFleetSizeChance = 80;
         public static int HostileFleetGrowthChance = 10;
-        
+        public static double FuelCost = 3;
     }
 }
