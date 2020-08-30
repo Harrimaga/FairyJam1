@@ -291,7 +291,7 @@ namespace FairyJam.UI
                 {
                     moneyCost += weapon.Cost;
                 }
-                Window.window.DrawText("Cost per ship:\n" + materialCost + " Materials\n" + moneyCost + " Money", 1620 - 50, 1080 / 2 - 135 + offset * 20, 0, 0, 0, 1, true, Globals.buttonFont);
+                Window.window.DrawText("Cost per ship:\n" + materialCost.ToString("N2") + " Materials\n" + moneyCost.ToString("N2") + " Money", 1620 - 50, 1080 / 2 - 135 + offset * 20, 0, 0, 0, 1, true, Globals.buttonFont);
 
                 if (int.TryParse(quantity.Text, out int q))
                 {
@@ -299,7 +299,7 @@ namespace FairyJam.UI
                     materialCost *= q;
                 }
 
-                Window.window.DrawText("Total Cost:\n" + materialCost + " Materials\n" + moneyCost + " Money", 1620 - 50, 1080 / 2 - 55 + offset * 20, 0, 0, 0, 1, true, Globals.buttonFont);
+                Window.window.DrawText("Total Cost:\n" + materialCost.ToString("N2") + " Materials\n" + moneyCost.ToString("N2") + " Money", 1620 - 50, 1080 / 2 - 55 + offset * 20, 0, 0, 0, 1, true, Globals.buttonFont);
 
             }
 
