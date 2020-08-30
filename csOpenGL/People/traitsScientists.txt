@@ -1,0 +1,48 @@
+﻿{
+name = Great Scientist
+techpoint_gain = 0.1
+sprite = 10
+description = This Scientist improves the rate at which you gain technology by 0.1
+}
+{
+name = Greatest Scientist
+techpoint_gain = 0.2
+sprite = 10
+description = This Scientist improves the rate at which you gain technology by 0.2
+}
+{
+name = Not So Great Scientist
+techpoint_gain = -0.1
+sprite = 10
+description = This Scientist improves the rate at which you gain technology by -0.1
+}
+{
+name = Very Bad Scientist
+techpoint_gain = -0.2
+sprite = 10
+description = This Scientist improves the rate at which you gain technology by -0.2
+}
+{
+name = Geologist
+material_gain = 5
+sprite = 9
+description = A master of Geology finds random materials laying around everywhere. 5
+}
+{
+name = Great Geologist
+material_gain = 10
+sprite = 9
+description = A master of Geology finds random materials laying around everywhere. 10
+}
+{
+name = Bad Geologist
+material_gain = -5
+sprite = 9
+description = A master of Geology finds random materials laying around everywhere. -5
+}
+{
+name = Who taught this guy
+material_gain = -10
+sprite = 9
+description = A master of Geology finds random materials laying around everywhere. -10
+}

@@ -1,0 +1,55 @@
+{
+name = less sexy
+population_growth = 0.15
+sprite = 4
+description = Dit is de description van een van de traits ofzo
+blablabla
+}
+{
+name = sexy
+population_growth = 0.2
+sprite = 3
+description = Nog meer test text
+}
+{
+name = Happy Feat
+happiness_gain = 0.5
+sprite = 3
+description = People around this Leader are inspired to be more happy
+}
+{
+name = Sad Feat
+happiness_gain = -0.5
+sprite = 3
+description = People around this Leader are inspired to be less happy
+}
+{
+name = Really Happy Feat
+happiness_gain = 1
+sprite = 3
+description = People around this Leader are inspired to be more happy
+}
+{
+name = Very Sad Feat
+happiness_gain = -1
+sprite = 3
+description = People around this Leader are inspired to be less happy
+}
+{
+name = Navigator
+fuel_efficiency = 0.9
+sprite = 11
+description = This Leader can navigate your fleets more efficiently, lowering the fuel cost
+}
+{
+name = Camper Liam
+fuel_efficiency = 1.1
+sprite = 11
+description = This Leader can navigate your fleets about ten thousand lightyears before you face Brock
+}
+{
+name = Falkner
+fuel_efficiency = 1.2
+sprite = 11
+description = With this leader you won't get anywhere, even though he specializes in flying
+}

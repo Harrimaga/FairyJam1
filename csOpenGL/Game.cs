@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Secretary;
 using System.Drawing.Design;
+using System.Globalization;
 
 namespace FairyJam
 {
@@ -326,8 +327,17 @@ namespace FairyJam
         {
             try
             {
-                string[] traitLines = FileHandler.Read("People/traits.txt");
-                Globals.possibleTraits = ParseTraits(traitLines);
+                string[] traitLines = FileHandler.Read("People/traitsLeaders.txt");
+                Globals.possibleTraitsLeader = ParseTraits(traitLines);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            try
+            {
+                string[] traitLines = FileHandler.Read("People/traitsScientists.txt");
+                Globals.possibleTraitsScientist = ParseTraits(traitLines);
             }
             catch (Exception e)
             {
@@ -374,23 +384,23 @@ namespace FairyJam
                             trait.Description = words[1].Trim();
                             break;
                         case "population_growth":
-                            num = double.Parse(words[1]);
+                            num = double.Parse(words[1], CultureInfo.InvariantCulture);
                             trait.Actions.Add((Nation n) => { n.addToMod(num, Enums.Modifier.PopulationGrowth);});
                             break;
                         case "material_gain":
-                            num = double.Parse(words[1]);
+                            num = double.Parse(words[1], CultureInfo.InvariantCulture);
                             trait.Actions.Add((Nation n) => { n.Materials += num;});
                             break;
                         case "happiness_gain":
-                            num = double.Parse(words[1]);
+                            num = double.Parse(words[1], CultureInfo.InvariantCulture);
                             trait.Actions.Add((Nation n) => { n.Happiness += num;});
                             break;
                         case "fuel_efficiency":
-                            num = double.Parse(words[1]);
+                            num = double.Parse(words[1], CultureInfo.InvariantCulture);
                             trait.Actions.Add((Nation n) => { n.multiplyToMod(num, Enums.Modifier.FuelEfficiency);});
                             break;
                         case "techpoint_gain":
-                            num = double.Parse(words[1]);
+                            num = double.Parse(words[1], CultureInfo.InvariantCulture);
                             trait.Actions.Add((Nation n) => { n.addToMod(num, Enums.Modifier.TechGrowth);});
                             break;
                         case "sprite":

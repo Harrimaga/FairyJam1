@@ -31,16 +31,16 @@ namespace FairyJam.UI
             for (int i = 0; i < 250; i++)
             {
                 namelist.Next();
-                Trait trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)]; // Gets a random existing trait
+                Trait trait = Globals.possibleTraitsLeader[Globals.random.Next(Globals.possibleTraitsLeader.Length)]; // Gets a random existing trait
                 List<Trait> traitsToAdd = new List<Trait> { trait };
                 if (Globals.random.Next(0,100) > 50)
                 {
-                    trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)];
+                    trait = Globals.possibleTraitsLeader[Globals.random.Next(Globals.possibleTraitsLeader.Length)];
                     traitsToAdd.Add(trait);
 
                     if (Globals.random.Next(0, 100) > 50)
                     {
-                        trait = Globals.possibleTraits[Globals.random.Next(Globals.possibleTraits.Length)];
+                        trait = Globals.possibleTraitsLeader[Globals.random.Next(Globals.possibleTraitsLeader.Length)];
                         traitsToAdd.Add(trait);
                     }
                 }

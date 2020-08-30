@@ -20,7 +20,7 @@ namespace FairyJam
         public static QFont buttonFont = new QFont("Fonts/arial.ttf", 16, new QuickFont.Configuration.QFontBuilderConfiguration(true));
         public static Random random = new Random();
         public static Logger logger = new Logger("logs/log.txt");
-        public static Trait[] possibleTraits= { };
+        public static Trait[] possibleTraitsLeader = { }, possibleTraitsScientist = {};
         public static Namelist[] nameLists = { };
         public static PlanetarySystem currentSystem;
         public static float mapCamX, mapCamY;
