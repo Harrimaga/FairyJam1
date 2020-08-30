@@ -194,6 +194,103 @@ namespace FairyJam.Ships
             return e;
         }
 
+        public void FightFleet(Fleet otherFleet)
+        {
+            //Copy of all fleet ships
+            List<Ship> yourFleet = ships;
+            List<Ship> enemyfleet = otherFleet.ships; 
+
+            //Iterate through both as long 1 list is not empty
+            while(yourFleet.Count > 0 && enemyfleet.Count > 0)
+            {
+                int total = yourFleet.Count + enemyfleet.Count;
+                int nr = Globals.random.Next(0, total);
+                Ship selectedShip;
+                bool mine;
+                if (nr > yourFleet.Count)
+                {
+                    selectedShip = yourFleet[nr];
+                    mine = true;
+                }
+                else
+                {
+                    selectedShip = enemyfleet[nr - yourFleet.Count];
+                    mine = false;
+                }
+
+                foreach (Weapon weapon in selectedShip.WeaponList)
+                {
+                    Ship targetShip;
+                    if (mine)
+                    {
+                        if (otherFleet.ships.Count == 0)
+                            break;
+                        targetShip = otherFleet.ships[Globals.random.Next(0, otherFleet.ships.Count)];
+                    }
+                    else
+                    {
+                        if (ships.Count == 0)
+                            break;
+                        targetShip = ships[Globals.random.Next(0, ships.Count)];
+                    }
+
+                    selectedShip.AttackShip(targetShip, weapon);
+
+                    if(targetShip.HealthPoints <= 0)
+                        if(mine)
+                        {
+                            otherFleet.ships.Remove(targetShip);
+                            enemyfleet.Remove(targetShip);
+                        }
+                        else
+                        {
+
+                            ships.Remove(targetShip);
+                            yourFleet.Remove(targetShip);
+                        } 
+                }
+            }
+
+            //Iterate through yourfleet if it is not empty yet and enemy fleet still has ships left
+            //YOUR fleet still has ships left to attack
+            while (yourFleet.Count > 0 && otherFleet.ships.Count > 0)
+            {
+                Ship selectedShip = yourFleet[Globals.random.Next(0, yourFleet.Count)];
+
+                foreach (Weapon weapon in selectedShip.WeaponList)
+                {
+                    Ship targetShip = otherFleet.ships[Globals.random.Next(0, otherFleet.ships.Count)];
+                    selectedShip.AttackShip(targetShip, weapon);
+
+                    if (targetShip.HealthPoints <= 0)
+                    {
+                        otherFleet.ships.Remove(targetShip);
+                        enemyfleet.Remove(targetShip);
+                    }
+                }
+            }
+
+            //Iterate through enemyfleet if it is not empty yet and your fleet still has ships left
+            //ENEMY fleet still has ships left to attack
+            while (enemyfleet.Count > 0 && ships.Count > 0)
+            {
+                Ship selectedShip = enemyfleet[Globals.random.Next(0, enemyfleet.Count)];
+
+                foreach (Weapon weapon in selectedShip.WeaponList)
+                {
+                    Ship targetShip = ships[Globals.random.Next(0, otherFleet.ships.Count)];
+                    selectedShip.AttackShip(targetShip, weapon);
+
+                    if (targetShip.HealthPoints <= 0)
+                    {
+                        ships.Remove(targetShip);
+                        yourFleet.Remove(targetShip);
+                    }
+                }
+            }
+            
+        }
+
     }
 
     public class PsNode : IHeapItem, IComparable<PsNode> 

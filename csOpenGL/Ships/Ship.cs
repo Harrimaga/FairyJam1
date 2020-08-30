@@ -22,6 +22,7 @@ namespace FairyJam
         public double Evasiveness { get; set; }
         public int Speed { get; set; }
 
+        public bool Cloaked { get; set; }
         public int MaxSlots { get; set; }
         public ShipType Type { get; set; }
 
@@ -47,6 +48,7 @@ namespace FairyJam
             DamageBonus = damageBonus;
             Evasiveness = evasiveness;
             Speed = speed;
+            Cloaked = false;
             MaxSlots = maxWeaponSlots;
             SpecialSlots = specialSlots;
             materialCost = Globals.random.Next(10, 100);
