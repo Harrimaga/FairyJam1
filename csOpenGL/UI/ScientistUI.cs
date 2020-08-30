@@ -21,7 +21,7 @@ namespace FairyJam.UI
                 scrolledButtons.Add(new ScientistEntry(l));
             }
             selectedScientist = possibleScientists[0];
-            hireButton = new DrawnButton(selectedScientist.Hired ? "FIRE" : "HIRE", 1600, 800, 320, 100, () => { HireFire(); }, 0.5f, 0.5f, 0.5f);
+            hireButton = new DrawnButton(selectedScientist.Hired ? "FIRE" : "HIRE", 1600, 850, 320, 100, () => { HireFire(); }, 0.5f, 0.5f, 0.5f);
             buttons.Add(hireButton);
         }
 

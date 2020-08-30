@@ -68,13 +68,13 @@ namespace FairyJam.Orbitals
             new psUI(this);
         }
 
-        public List<Fleet>[] GetFleets()
+        public List<Fleet>[] GetFleets(Nation n)
         {
             List<Fleet>[] res = new List<Fleet>[]{new List<Fleet>(), new List<Fleet>()};
 
             foreach (Fleet f in fleets)
             {
-                if (f.owner == Globals.PlayerNation)
+                if (f.owner == n)
                 {
                     res[0].Add(f);
                 }
@@ -242,10 +242,10 @@ namespace FairyJam.Orbitals
                 planet.Turn();
             }
 
-            for (int i = fleets.Count - 1; i >= 0; i--)
-            {
-                fleets[i].Turn();
-            }
+            // for (int i = fleets.Count - 1; i >= 0; i--)
+            // {
+            //     fleets[i].Turn();
+            // }
         }
     }
 }

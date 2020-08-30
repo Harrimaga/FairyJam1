@@ -45,7 +45,7 @@ namespace FairyJam.Ships
         {
             Ship s = new Military(Owner);
             s.MaxHealth = MaxHealth;
-            s.HealthPoints = maxHealth;
+            s.HealthPoints = MaxHealth;
             s.Evasiveness = Evasiveness;
             s.Speed = Speed;
             s.MaxSlots = MaxSlots;

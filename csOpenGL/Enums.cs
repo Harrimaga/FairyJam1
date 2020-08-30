@@ -25,9 +25,10 @@ namespace FairyJam
         public enum Modifier 
         {
             PopulationGrowth = 0,
-            FuelEfficiency = 1
+            FuelEfficiency = 1,
+            TechGrowth = 2
         }
-        public const int modAmount = 2; 
+        public const int modAmount = 3; 
     }
     public enum GameState
     {
@@ -38,7 +39,9 @@ namespace FairyJam
         PAUSED,
         PLAYING,
         MAPVIEW,
-        SYSTEMVIEW
+        SYSTEMVIEW,
+        LOST,
+        WON
     }
 
     public enum ShipType

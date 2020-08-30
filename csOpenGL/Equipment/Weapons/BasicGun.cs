@@ -10,9 +10,9 @@ namespace FairyJam.Equipment.Weapons
     {
         private const string name = "Basic Gun";
         private const int minDamage = 20, maxDamage = 30;
-        private const int accuracy = 100;
-        private const int slotSize = 1;
-        public BasicGun() : base(name, minDamage, maxDamage, accuracy, slotSize)
+        private const int accuracy = 80;
+        private const int slotSize = 2;
+        public BasicGun() : base(name, minDamage + Globals.random.Next(10), maxDamage + Globals.random.Next(10), accuracy + Globals.random.Next(21), slotSize)
         {
             Type = DamageType.PHYSICAL;
         }

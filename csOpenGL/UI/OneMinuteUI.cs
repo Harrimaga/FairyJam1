@@ -57,7 +57,7 @@ namespace FairyJam.UI
                 scrolledButtons[scroll+i].Draw(i);
             }
 
-            Window.window.DrawText("Leaders:", 1500, 25, false, Globals.buttonFont);
+            Window.window.DrawText("Leaders: (" + Globals.PlayerNation.leaders.Count + "/10)", 1500, 25, false, Globals.buttonFont);
             if (Globals.PlayerNation.leaders.Count == 0)
             {
                 Window.window.DrawText("None", 1525, 60, false, Globals.buttonFont);
@@ -78,7 +78,7 @@ namespace FairyJam.UI
                 offset = 1;
             }
 
-            Window.window.DrawText("Scientists:", 1500, 85 + offset * 25, false, Globals.buttonFont);
+            Window.window.DrawText("Scientists: (" + Globals.PlayerNation.scientists.Count + "/10)", 1500, 85 + offset * 25, false, Globals.buttonFont);
             if (Globals.PlayerNation.scientists.Count == 0)
             {
                 Window.window.DrawText("None", 1525, 120 + offset * 25, false, Globals.buttonFont);
@@ -100,7 +100,7 @@ namespace FairyJam.UI
             }
             offset += Globals.PlayerNation.scientists.Count;
 
-            Window.window.DrawText("Supplies:", 1500, 145 + offset * 25, false, Globals.buttonFont);
+            Window.window.DrawText("Supplies: (" + Globals.PlayerNation.supplyCompanies.Count + "/10)", 1500, 145 + offset * 25, false, Globals.buttonFont);
             Window.window.DrawText("Materials: " + Globals.PlayerNation.Materials, 1525, 180 + (0 + offset) * 25, false, Globals.buttonFont);
             Window.window.DrawText("Food: " + Globals.PlayerNation.Food, 1525, 180 + (1 + offset) * 25, false, Globals.buttonFont);
             Window.window.DrawText("Fuel: " + Globals.PlayerNation.Fuel, 1525, 180 + (2 + offset) * 25, false, Globals.buttonFont);

@@ -29,3 +29,9 @@ fuel_efficiency = 0.9
 sprite = 11
 description = This Leader can navigate your fleets more efficiently, lowering the fuel cost
 }
+{
+name = Navigator
+techpoint_gain = 0.1
+sprite = 10
+description = This Scientist improves the rate at which you gain technology
+}

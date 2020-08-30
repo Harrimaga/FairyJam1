@@ -9,10 +9,10 @@ namespace FairyJam.Equipment.Weapons
     public class BasicLaser : Weapon
     {
         private const string name = "Basic Laser";
-        private const int minDamage = 30, maxDamage = 40;
+        private const int minDamage = 30, maxDamage = 45;
         private const int accuracy = 70;
-        private const int slotSize = 1;
-        public BasicLaser() : base(name, minDamage, maxDamage, accuracy, slotSize)
+        private const int slotSize = 3;
+        public BasicLaser() : base(name, minDamage + Globals.random.Next(15), maxDamage + Globals.random.Next(20), accuracy +  + Globals.random.Next(25), slotSize)
         {
             Type = DamageType.LASER;
         }

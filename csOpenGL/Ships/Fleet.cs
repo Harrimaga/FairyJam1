@@ -60,6 +60,21 @@ namespace FairyJam.Ships
                 current.fleets.Remove(this);
                 current = next;
                 current.fleets.Add(this);
+                if (current.EnemyFleetsPresent(owner))
+                {
+                    List<Fleet> enemies = current.GetFleets(owner)[1];
+                    foreach (Fleet fleet in enemies)
+                    {
+                        if (ships.Count > 0)
+                        {
+                            FightFleet(fleet);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
                 if (queue.Count > 0)
                 {
                     next = queue.Dequeue();
@@ -207,7 +222,7 @@ namespace FairyJam.Ships
                 int nr = Globals.random.Next(0, total);
                 Ship selectedShip;
                 bool mine;
-                if (nr > yourFleet.Count)
+                if (nr < yourFleet.Count)
                 {
                     selectedShip = yourFleet[nr];
                     mine = true;
@@ -237,20 +252,32 @@ namespace FairyJam.Ships
                     selectedShip.AttackShip(targetShip, weapon);
 
                     if(targetShip.HealthPoints <= 0)
+                    {
                         if(mine)
                         {
-                            otherFleet.ships.Remove(targetShip);
                             enemyfleet.Remove(targetShip);
                         }
                         else
                         {
 
                             ships.Remove(targetShip);
-                            yourFleet.Remove(targetShip);
                         } 
+                    }
                 }
             }
 
+            if (ships.Count == 0)
+            {
+                current.fleets.Remove(this);
+                owner.fleets.Remove(this);
+            }
+            if (enemyfleet.Count == 0)
+            {
+                current.fleets.Remove(otherFleet);
+                otherFleet.owner.fleets.Remove(otherFleet);
+            }
+
+            // Idk what this does, ngl
             //Iterate through yourfleet if it is not empty yet and enemy fleet still has ships left
             //YOUR fleet still has ships left to attack
             while (yourFleet.Count > 0 && otherFleet.ships.Count > 0)
@@ -288,14 +315,11 @@ namespace FairyJam.Ships
                     }
                 }
             }
-            
         }
-
     }
 
     public class PsNode : IHeapItem, IComparable<PsNode> 
     {
-
         public PlanetarySystem ps;
         public int TotalDistance;
         public long heapIndex;
@@ -325,14 +349,12 @@ namespace FairyJam.Ships
         {
             return TotalDistance.CompareTo(p.TotalDistance);
         }
-
     }
 
     public interface IHeapItem { void SetHeapIndex(long index); }
 
     public class MinHeap<T> where T : IComparable<T>, IHeapItem
     {
-
         private long maxSize, size;
         private T[] data;
 

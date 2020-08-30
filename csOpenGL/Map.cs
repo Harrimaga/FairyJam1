@@ -46,6 +46,28 @@ namespace FairyJam
             }
 
             Globals.PlayerNation.SetTurnResources();
+
+            bool won = true;
+            foreach (Nation nation in Globals.players)
+            {
+                if (nation != Globals.PlayerNation && nation.fleets.Count > 0)
+                {
+                    won = false;
+                    break;
+                }
+            }
+            if(won) 
+            {
+                // Won
+                Globals.currentState = GameState.WON;
+            }
+
+            if (Globals.PlayerNation.Population == 0)
+            {
+                // Lost
+                Globals.currentState = GameState.LOST;
+            }
+
         }
 
         public List<DrawnButton> GetButtons()

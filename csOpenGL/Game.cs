@@ -38,17 +38,18 @@ namespace FairyJam
         public void OnLoad()
         {
             Globals.map = new Map(20, 20);
-            Globals.map.Generate();
-
             //buttons.Add(new DrawnButton("test", 0, 0, 200, 100, () => { Window.window.ToggleShader(Shaders.basic); }, 0.5f, 0.5f, 0.5f));
             //buttons.Add(new DrawnButton("test2", 0, 105, 200, 100, () => { Window.window.ToggleShader(Shaders.blur); }, 0.5f, 0.5f, 0.5f));
             //buttons.Add(new DrawnButton("Bloom", 0, 210, 200, 100, () => { Window.window.ToggleShader(Shaders.bloom); }, 0.5f, 0.5f, 0.5f));
             Globals.currentState = GameState.MAINMENU;
-            Globals.PlayerNation = new Nation();
+            Globals.PlayerNation = new Nation("Player");
+            Globals.SpacePirates = new Nation("Space Pirates");
             Globals.players = new List<Nation>()
             {
-                Globals.PlayerNation
+                Globals.PlayerNation,
+                Globals.SpacePirates
             };
+            Globals.map.Generate();
 
             UI.MainHUD.Init();
 
@@ -83,6 +84,7 @@ namespace FairyJam
                         {
                             success = true;
                             tile.ps.Owner = Globals.PlayerNation;
+                            tile.ps.fleets = new List<Ships.Fleet>();
 
                             int drawX = tile.x * Globals.TileWidth - 2 * tile.x + Globals.TileWidth/2 + tile.psOffsetX;
                             int drawY = tile.y * Globals.TileHeight + Globals.TileWidth / 2 + tile.psOffsetY;
@@ -151,6 +153,18 @@ namespace FairyJam
 
         public void Draw()
         {
+            if(Globals.currentState == GameState.WON) 
+            {
+                Window.window.DrawTextCentered("You won!", 960, 540, 1, 1, 1, 1);
+                return;
+            }
+
+            if (Globals.currentState == GameState.LOST)
+            {
+                Window.window.DrawTextCentered("You lost!", 960, 540, 1, 1, 1, 1);
+                return;
+            }
+
             //Do all you draw calls here
             if (Globals.currentState == GameState.MAPVIEW)
             {
@@ -373,7 +387,11 @@ namespace FairyJam
                             break;
                         case "fuel_efficiency":
                             num = double.Parse(words[1]);
-                            trait.Actions.Add((Nation n) => { n.addToMod(num, Enums.Modifier.FuelEfficiency);});
+                            trait.Actions.Add((Nation n) => { n.multiplyToMod(num, Enums.Modifier.FuelEfficiency);});
+                            break;
+                        case "techpoint_gain":
+                            num = double.Parse(words[1]);
+                            trait.Actions.Add((Nation n) => { n.addToMod(num, Enums.Modifier.TechGrowth);});
                             break;
                         case "sprite":
                             trait.sprite = new Sprite(25, 25, 0, Textures.Get(int.Parse(words[1].Trim())));

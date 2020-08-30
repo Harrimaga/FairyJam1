@@ -36,14 +36,14 @@ namespace FairyJam
         public double[] modifiers = new double[Enums.modAmount];
 
 
-        public Nation()
+        public Nation(string name)
         {
             Materials = 1000;
             Fuel = 1000;
             Food = 10;
             Money = 1000;
             Happiness = 0;
-            TechPoints = 10;
+            TechPoints = 0;
             Population = 10;
             Color = Color.FromArgb(255, Globals.random.Next(256), Globals.random.Next(256), Globals.random.Next(256));
             leaders = new List<Leader>();
@@ -53,124 +53,19 @@ namespace FairyJam
             presets = new List<Ship>();
             unlockedHulls = new List<Ship>()
             {
-                new Military(this, "MilitaryMk1", 10, 10, 10, 0, 0, 100, 1),
-                new Transportation(this, "TransportMk1", 0, 0, 0, 100, 10, 2, 0),
-                new Freighter(this, "FreighterMk1", 0, 0, 0, 0, 1000, 0, 0),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1),
-                new Helper(this, "HelperMk1", 0, 0, 10, 0, 100, 100, 1)
+                new Military(this, "MilitaryMk0", 10, 10, 10, 0, 0, 100, 1)
             };
             unlockedWeapons = new List<Weapon>()
             {
                 new BasicGun(),
-                new BasicLaser(),
-                new BasicPlasmaGun(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser(),
-                new BasicLaser()
+                new BasicPlasmaGun()
             };
             unlockedSpecials = new List<SpecialEquipment>()
             {
-                new Cloak(),
-                new EMP(),
-                new Nuke(),
-                new ResourceDetection(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice(),
-                new WormholeDevice()
+                new Cloak()
             };
             resourceChanges = new double[7];
-            Name = "Kees";
+            Name = name;
         }
 
         public void addToMod(double a, Enums.Modifier mod) 
@@ -301,6 +196,26 @@ namespace FairyJam
 
         public void Turn()
         {
+            // Enemy fleet growth
+            if (this != Globals.PlayerNation)
+            {
+                foreach (Fleet fleet in fleets)
+                {
+                    if (Globals.random.Next(100) < Balance.HostileFleetGrowthChance)
+                    {
+                        for (int i = Globals.random.Next(1, 4); i > 0; i--)
+                        {
+                            Ship s = new Military(this);
+                            for (int x = Globals.random.Next(1, 5); x > 0; x--)
+                            {
+                                s.AddWeapon(new BasicGun());
+                            }
+                            fleet.AddToFleet(s);
+                        }
+                    }
+                }
+            }
+
             for(int i=0;i<Enums.modAmount;i++)
             {
                 modifiers[i] = 1;
@@ -347,6 +262,9 @@ namespace FairyJam
             {
                 Population = popCap;
             }
+
+            // Techpoints gain
+            TechPoints += Balance.TechpointsPerTurn * getMod(Enums.Modifier.TechGrowth);
 
             
             for(int i = fleets.Count() - 1; i >= 0; i--)

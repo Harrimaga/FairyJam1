@@ -1,4 +1,6 @@
-﻿using OpenTK.Input;
+﻿using FairyJam.Equipment.Weapons;
+using FairyJam.Ships;
+using OpenTK.Input;
 using QuickFont;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,7 @@ namespace FairyJam.UI
         public static QFont ResourceFontTop, ResourceFontBot;
 
         public static List<DrawnButton> buttons;
-        public static DrawnButton pauseButton, turnButton;
+        public static DrawnButton pauseButton, turnButton, hullButton, weaponButton;
         public static Sprite[] sprites;
 
         public static void Init() 
@@ -37,10 +39,14 @@ namespace FairyJam.UI
 
             pauseButton = new DrawnButton("", 1920 - 245, 5, 240, 60, () => { Globals.paused = !Globals.paused; }, 0, 0, 1, true);
             turnButton = new DrawnButton("", 1920 - 240, 1080 - 80, 240, 80, () => { Globals.map.Turn(); }, 1, 0, 0, true);
+            hullButton = new DrawnButton("New Hull", 1920 - 450, 5, 200, 60, () => { AddHull(); }, 0, 0, 1, true);
+            weaponButton = new DrawnButton("New Weapon", 1920 - 655, 5, 200, 60, () => AddWeapon(), 0, 0, 1, true);
             buttons = new List<DrawnButton>()
             {
                 pauseButton,
-                turnButton
+                turnButton,
+                hullButton,
+                weaponButton
             };
 
             ResourceFontTop = new QFont("Fonts/times.ttf", 16, new QuickFont.Configuration.QFontBuilderConfiguration());
@@ -50,6 +56,37 @@ namespace FairyJam.UI
         public static string Round(double x)
         {
             return Math.Truncate((x * 100) / 100).ToString();
+        }
+
+        public static void AddHull()
+        {
+            if (Globals.PlayerNation.TechPoints > 50)
+            {
+                Military s = new Military(Globals.PlayerNation, "MilitaryMk" + Globals.PlayerNation.unlockedHulls.Count, Globals.random.Next(Globals.PlayerNation.unlockedHulls.Count), Globals.random.Next(Globals.PlayerNation.unlockedHulls.Count), Globals.random.Next(Globals.PlayerNation.unlockedHulls.Count), 0, 0, Globals.random.Next(Globals.PlayerNation.unlockedHulls.Count), Globals.random.Next(0, 2));
+                Globals.PlayerNation.unlockedHulls.Add(s);
+                Globals.PlayerNation.TechPoints -= 50;
+            }
+        }
+
+        public static void AddWeapon()
+        {
+            if (Globals.PlayerNation.TechPoints > 50)
+            {
+                int r = Globals.random.Next(3);
+                switch(r) 
+                {
+                case 0:
+                    Globals.PlayerNation.unlockedWeapons.Add(new BasicGun());
+                    break;
+                case 1:
+                    Globals.PlayerNation.unlockedWeapons.Add(new BasicLaser());
+                    break;
+                case 2:
+                    Globals.PlayerNation.unlockedWeapons.Add(new BasicPlasmaGun());
+                    break;
+                }
+                Globals.PlayerNation.TechPoints -= 50;
+            }
         }
 
         public static void Draw()
@@ -113,7 +150,8 @@ namespace FairyJam.UI
             //  - Pause BG/turn number
             pauseButton.Draw();
 
-
+            hullButton.Draw();
+            weaponButton.Draw();
 
             // Bottom
             //  - Minimap

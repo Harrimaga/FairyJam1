@@ -1,4 +1,6 @@
-﻿using FairyJam.Orbitals;
+﻿using FairyJam.Equipment.Weapons;
+using FairyJam.Orbitals;
+using FairyJam.Ships;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
@@ -41,6 +43,27 @@ namespace FairyJam
             }
             ps = new PlanetarySystem();
             ps.Generate(Globals.random.Next(GenerationSettings.MinPlanets, GenerationSettings.MaxPlanets));
+
+            // Give random enemy fleet
+            if (Globals.random.Next(100) < Balance.HostileFleetSpawnChance)
+            {
+                // Create enemy fleet
+                Fleet f = new Fleet(Globals.SpacePirates, new List<Ship>());
+                f.Name = "Military Fleet";
+
+                do
+                {
+                    Ship s = new Military(Globals.SpacePirates);
+                    s.AddWeapon(new BasicGun());
+                    s.AddWeapon(new BasicGun());
+                    f.AddToFleet(s);
+                }
+                while (Globals.random.Next(100) < Balance.HostileFleetSizeChance);
+
+                ps.fleets.Add(f);
+                ps.Owner = Globals.SpacePirates;
+            }
+
             psOffsetX = Globals.random.Next(-Globals.TileWidth / 4, Globals.TileWidth / 4);
             psOffsetY = Globals.random.Next(-Globals.TileWidth / 4, Globals.TileWidth / 4);
 

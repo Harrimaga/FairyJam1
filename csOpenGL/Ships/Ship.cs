@@ -60,6 +60,7 @@ namespace FairyJam
             MaxResourceLoad = maxResourceAmount;
 
             PeopleLoad = new List<Person>();
+            Owner = owner;
         }
 
         protected abstract void AddWeaponTypes();
@@ -120,7 +121,12 @@ namespace FairyJam
             bool hit = Globals.random.Next(0, weapon.Accuracy) >= Evasiveness;
 
             if (hit)
-                enemy.HealthPoints -= Globals.random.Next(weapon.MinDamage, weapon.MaxDamage);
+            {
+                int damage = Globals.random.Next(weapon.MinDamage, weapon.MaxDamage);
+                enemy.HealthPoints -= damage;
+                Console.WriteLine(Owner.Name + "'s ship " + Name + " did " + damage + " damage to " + enemy.Owner.Name + "'s ship " + enemy.Name);
+            }
+                
         }
 
         /// <summary>

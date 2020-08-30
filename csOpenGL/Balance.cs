@@ -16,5 +16,10 @@ namespace FairyJam
         public static double FoodPerPop = 0.01;
         public static double MoneyPerPop = 0.01;
         public static double HappinessPopGrowth = 0.002;
+        public static double TechpointsPerTurn = 5;
+        public static int HostileFleetSpawnChance = 20;
+        public static int HostileFleetSizeChance = 80;
+        public static int HostileFleetGrowthChance = 10;
+        
     }
 }

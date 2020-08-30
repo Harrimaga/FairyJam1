@@ -43,7 +43,7 @@ namespace FairyJam.Ships
         {
             Ship s = new Helper(Owner);
             s.MaxHealth = MaxHealth;
-            s.HealthPoints = maxHealth;
+            s.HealthPoints = MaxHealth;
             s.Evasiveness = Evasiveness;
             s.Speed = Speed;
             s.MaxSlots = MaxSlots;

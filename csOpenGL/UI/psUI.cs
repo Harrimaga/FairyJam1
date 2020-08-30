@@ -35,7 +35,7 @@ namespace FairyJam.UI
             for (int j=0;j<buttonAmount;j++)
             {
                 int k = j;
-                buttons.Add(new DrawnButton("", 1920/2 - 195, 1080/2 - 155 + 20 * j, 190, 20, () => { List<Fleet> fl = ps.GetFleets()[0]; if (fl.Count <= k + scrollFriendly) { return; } SelectFleet(fl[k + scrollFriendly]); }, 1, 1, 1, false, () => { List<Fleet> fl = ps.GetFleets()[0]; if(fl.Count <= k + scrollFriendly) {return; } new FleetTransferUI(this, fl[k + scrollFriendly], ps); }));
+                buttons.Add(new DrawnButton("", 1920/2 - 195, 1080/2 - 155 + 20 * j, 190, 20, () => { List<Fleet> fl = ps.GetFleets(Globals.PlayerNation)[0]; if (fl.Count <= k + scrollFriendly) { return; } SelectFleet(fl[k + scrollFriendly]); }, 1, 1, 1, false, () => { List<Fleet> fl = ps.GetFleets(Globals.PlayerNation)[0]; if(fl.Count <= k + scrollFriendly) {return; } new FleetTransferUI(this, fl[k + scrollFriendly], ps); }));
             }
         }
 
@@ -66,7 +66,7 @@ namespace FairyJam.UI
             Window.window.DrawText("Unassigned Ships: " + ps.ships.Count, 1920 / 2 - 195, 1080 / 2 - 185, 0, 0, 0, 1, true, Globals.buttonFont);
 
             // Owned Fleets in System:
-            List<Fleet>[] fleets = ps.GetFleets();
+            List<Fleet>[] fleets = ps.GetFleets(Globals.PlayerNation);
 
             for (int i = scrollFriendly; i < (buttonAmount + scrollFriendly < fleets[0].Count ? buttonAmount + scrollFriendly : fleets[0].Count); i++)
             {
@@ -94,7 +94,7 @@ namespace FairyJam.UI
         public void Scroll(int val)
         {
             // If in owned fleets
-            List<Fleet>[] fleets = ps.GetFleets();
+            List<Fleet>[] fleets = ps.GetFleets(Globals.PlayerNation);
             if (Globals.checkCol(Window.window.mouseX, Window.window.mouseY, 0, 0, 1920 / 2 - 195, 1080 / 2 - 155, 190, 20 * buttonAmount))
             {
                 scrollFriendly += val;
